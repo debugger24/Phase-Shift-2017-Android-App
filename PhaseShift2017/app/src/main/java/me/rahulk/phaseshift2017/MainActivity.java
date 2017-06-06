@@ -11,9 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import me.rahulk.phaseshift2017.About.AboutAppWebTeamFragment;
+import me.rahulk.phaseshift2017.About.AboutCoreCommitteeFragment;
 import me.rahulk.phaseshift2017.About.AboutFragment;
+import me.rahulk.phaseshift2017.About.AboutPhaseShiftFragment;
+import me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment;
 
-public class MainActivity extends AppCompatActivity implements NewsfeedFragment.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements NewsfeedFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener, AboutPhaseShiftFragment.OnFragmentInteractionListener,
+        AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener{
 
     Fragment fragment = null;
     Class fragmentClass = null;

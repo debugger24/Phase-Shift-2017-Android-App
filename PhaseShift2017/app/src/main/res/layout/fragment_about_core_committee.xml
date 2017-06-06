@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment">
+    tools:context="me.rahulk.phaseshift2017.About.AboutCoreCommitteeFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Newsfeed" />
+        android:text="About Core Committee" />
 
 </FrameLayout>
