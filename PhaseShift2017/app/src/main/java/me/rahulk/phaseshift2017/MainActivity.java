@@ -1,30 +1,48 @@
 package me.rahulk.phaseshift2017;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import me.rahulk.phaseshift2017.About.AboutFragment;
 
+public class MainActivity extends AppCompatActivity implements NewsfeedFragment.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
+
+    Fragment fragment = null;
+    Class fragmentClass = null;
     private TextView mTextMessage;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_about);
-                    return true;
+                    fragmentClass = NewsfeedFragment.class;
+                    break;
+                case R.id.navigation_about:
+                    fragmentClass = AboutFragment.class;
+                    break;
             }
-            return false;
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.mainContainer, fragment).commit();
+
+            return true;
         }
 
     };
@@ -34,9 +52,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        View view = navigation.findViewById(R.id.navigation_home);
+        view.performClick();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
