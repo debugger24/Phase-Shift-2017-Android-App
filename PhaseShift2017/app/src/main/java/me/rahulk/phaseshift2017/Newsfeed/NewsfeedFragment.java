@@ -1,4 +1,4 @@
-package me.rahulk.phaseshift2017;
+package me.rahulk.phaseshift2017.Newsfeed;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import me.rahulk.phaseshift2017.R;
 
 
 /**
