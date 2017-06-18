@@ -15,11 +15,15 @@ import me.rahulk.phaseshift2017.About.AboutAppWebTeamFragment;
 import me.rahulk.phaseshift2017.About.AboutCoreCommitteeFragment;
 import me.rahulk.phaseshift2017.About.AboutFragment;
 import me.rahulk.phaseshift2017.About.AboutPhaseShiftFragment;
+import me.rahulk.phaseshift2017.Event.EventFragment;
+import me.rahulk.phaseshift2017.Map.MapFragment;
 import me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment;
+import me.rahulk.phaseshift2017.Schedule.ScheduleFragment;
 
 public class MainActivity extends AppCompatActivity implements NewsfeedFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener, AboutPhaseShiftFragment.OnFragmentInteractionListener,
-        AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener{
+        AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener,
+        ScheduleFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener {
 
     Fragment fragment = null;
     Class fragmentClass = null;
@@ -31,8 +35,17 @@ public class MainActivity extends AppCompatActivity implements NewsfeedFragment.
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             switch (item.getItemId()) {
+                case R.id.navigation_schedule:
+                    fragmentClass = ScheduleFragment.class;
+                    break;
+                case R.id.navigation_events:
+                    fragmentClass = EventFragment.class;
+                    break;
                 case R.id.navigation_home:
                     fragmentClass = NewsfeedFragment.class;
+                    break;
+                case R.id.navigation_map:
+                    fragmentClass = MapFragment.class;
                     break;
                 case R.id.navigation_about:
                     fragmentClass = AboutFragment.class;
