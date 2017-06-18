@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        app:srcCompat="@drawable/email"
-        android:padding="16dp"
         android:id="@+id/emailButton"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:layout_weight="1"/>
-
-    <ImageView
         android:layout_width="0dp"
         android:layout_height="72dp"
-        app:srcCompat="@drawable/facebook_box"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
         android:padding="16dp"
+        app:srcCompat="@drawable/email" />
+
+    <ImageView
         android:id="@+id/fbButton"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:layout_weight="1"/>
-
-    <ImageView
         android:layout_width="0dp"
         android:layout_height="72dp"
-        app:srcCompat="@drawable/twitter_box"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
         android:padding="16dp"
+        app:srcCompat="@drawable/facebook_box" />
+
+    <ImageView
         android:id="@+id/twitterButton"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:layout_weight="1"/>
-
-    <ImageView
         android:layout_width="0dp"
         android:layout_height="72dp"
-        app:srcCompat="@drawable/instagram"
-        android:padding="16dp"
-        android:id="@+id/instaButton"
+        android:layout_weight="1"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:layout_weight="1"/>
+        android:padding="16dp"
+        app:srcCompat="@drawable/twitter_box" />
+
+    <ImageView
+        android:id="@+id/instaButton"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:padding="16dp"
+        app:srcCompat="@drawable/instagram" />
 </LinearLayout>
