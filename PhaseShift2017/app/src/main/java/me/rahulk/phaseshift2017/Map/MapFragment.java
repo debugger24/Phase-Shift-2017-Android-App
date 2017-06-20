@@ -3,6 +3,9 @@ package me.rahulk.phaseshift2017.Map;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -16,8 +19,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import me.rahulk.phaseshift2017.R;
@@ -40,7 +46,7 @@ public class MapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private GoogleMap googleMap;
+    private GoogleMap mMap;
 
     private OnFragmentInteractionListener mListener;
 
@@ -94,10 +100,10 @@ public class MapFragment extends Fragment {
 
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
+            public void onMapReady(GoogleMap googleMap) {
 
-                // For showing a move to my location button
+                mMap = googleMap;
+
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -108,19 +114,48 @@ public class MapFragment extends Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                googleMap.setMyLocationEnabled(true);
 
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                // Add a marker in Sydney, Australia, and move the camera.
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(12.9418, 77.5661))
+                        .zoom(17).build();
 
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                mMap.getUiSettings().setZoomControlsEnabled(true);
+                mMap.getUiSettings().setCompassEnabled(true);
+                mMap.setMyLocationEnabled(true);
+
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+
+                /* BUILDINGS */
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941670, 77.565803)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("PG Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942307, 77.565921)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("ECE Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942255, 77.566306)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("Classroom Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942337, 77.565457)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("Mechanical Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942289, 77.566662)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_library))).title("Library Auditorium")).showInfoWindow();
+
+                /* PARKING */
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941946, 77.566838)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942285, 77.566471)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
+
+                /* FOOD */
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940435, 77.565830)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942581, 77.566466)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941485, 77.566267)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
+
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
 
         return rootView;
+    }
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
