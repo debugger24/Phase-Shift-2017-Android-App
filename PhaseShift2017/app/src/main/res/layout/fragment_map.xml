@@ -4,11 +4,9 @@
     android:layout_height="match_parent"
     tools:context="me.rahulk.phaseshift2017.Map.MapFragment">
 
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Map\nComing Soon"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
