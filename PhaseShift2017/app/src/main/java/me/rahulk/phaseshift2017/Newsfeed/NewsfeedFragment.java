@@ -1,13 +1,35 @@
 package me.rahulk.phaseshift2017.Newsfeed;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.MainActivity;
 import me.rahulk.phaseshift2017.R;
 
 
@@ -24,12 +46,16 @@ public class NewsfeedFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static final String TAG = MainActivity.class.getSimpleName();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+    private ListView listView;
+    private FeedListAdapter listAdapter;
+    private List<FeedItem> feedItems;
+    private String URL_FEED = "http://www.rahulk.me/PS2017/api/getNewsFeed.php";
+    private SwipeRefreshLayout swipeContainer;
 
     public NewsfeedFragment() {
         // Required empty public constructor
@@ -66,7 +92,128 @@ public class NewsfeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_newsfeed, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_newsfeed, container, false);
+
+        listView = (ListView) rootView.findViewById(R.id.list);
+        feedItems = new ArrayList<FeedItem>();
+
+        listAdapter = new FeedListAdapter(getActivity(), feedItems);
+        listView.setAdapter(listAdapter);
+
+        swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                if (isNetworkAvailable()) {
+                    refreshData();
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    swipeContainer.setRefreshing(false);
+                }
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        // We first check for cached request
+        Cache cache = AppController.getInstance().getRequestQueue().getCache();
+        Cache.Entry entry = cache.get(URL_FEED);
+        // fetch the data from cache
+        if (entry != null) {
+            try {
+                String data = new String(entry.data, "UTF-8");
+                try {
+                    parseJsonFeed(new JSONObject(data));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // making fresh volley request and getting json
+            if (isNetworkAvailable()) {
+                refreshData();
+            } else {
+                Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        return rootView;
+    }
+
+    private void refreshData() {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,
+                URL_FEED, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                VolleyLog.d(TAG, "Response: " + response.toString());
+                if (response != null) {
+                    parseJsonFeed(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        });
+
+        // Adding request to volley request queue
+        AppController.getInstance().addToRequestQueue(jsonReq);
+    }
+
+    /**
+     * Parsing json reponse and passing the data to feed view list adapter
+     */
+    private void parseJsonFeed(JSONObject response) {
+        try {
+            JSONArray feedArray = response.getJSONArray("feed");
+            feedItems.clear();
+            for (int i = 0; i < feedArray.length(); i++) {
+                JSONObject feedObj = (JSONObject) feedArray.get(i);
+
+                FeedItem item = new FeedItem();
+                item.setId(feedObj.getInt("ID"));
+                item.setName(feedObj.getString("UserName"));
+
+                // Image might be null sometimes
+                String image = feedObj.getString("Image").equals("") ? null : ("http://bmscephaseshift.com/api/img/event/" + feedObj
+                        .getString("Image") + ".jpg");
+                item.setImge(image);
+                item.setStatus(feedObj.getString("Message"));
+                item.setProfilePic("http://bmscephaseshift.com/api/img/pro/" + feedObj.getString("ProfilePic") + ".jpg");
+                item.setTimeStamp(feedObj.getString("TimeStamp"));
+
+                // url might be null sometimes
+                String feedUrl = (feedObj.isNull("URL") || feedObj.getString("URL").equals("")) ? null : feedObj
+                        .getString("URL");
+                item.setUrl(feedUrl);
+                feedItems.add(item);
+            }
+
+            // notify data changes to list adapater
+            listAdapter.notifyDataSetChanged();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            swipeContainer.setRefreshing(false);
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
