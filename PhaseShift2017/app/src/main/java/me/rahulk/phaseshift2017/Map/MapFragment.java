@@ -25,6 +25,11 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.kml.KmlLayer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 import me.rahulk.phaseshift2017.R;
 
@@ -143,6 +148,15 @@ public class MapFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941485, 77.566267)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
 
                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                try {
+                    KmlLayer layer = new KmlLayer(mMap, R.raw.bmsce, getActivity());
+                    layer.addLayerToMap();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
