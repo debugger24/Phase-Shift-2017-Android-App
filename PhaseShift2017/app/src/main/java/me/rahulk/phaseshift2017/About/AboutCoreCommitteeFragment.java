@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import me.rahulk.phaseshift2017.R;
 
@@ -66,7 +69,23 @@ public class AboutCoreCommitteeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_core_committee, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_about_core_committee, container, false);
+
+        ArrayList<Person> coreList = new ArrayList<>();
+
+        coreList.add(new Person("Prajwal Damodar Prabhu", "+91 9538471925", null, R.drawable.prajwal));
+        coreList.add(new Person("Akshay R Deogiri", "+91 9481310600", null, R.drawable.akshay));
+        coreList.add(new Person("Nihal M Navada", "+91 9448905422", null, R.drawable.nihal));
+        coreList.add(new Person("T Mithun", "+91 9535262771", null, R.drawable.mithun));
+        coreList.add(new Person("Saagari S", "+91 9035024581", null, R.drawable.saagari));
+        coreList.add(new Person("G G Nagasayee", "+91 8553402559", null, R.drawable.nagasayee));
+        coreList.add(new Person("Akash Ashok Patil", "+91 8861397071", null, R.drawable.akash));
+
+        ListView listView = (ListView) rootView.findViewById(R.id.coreCommitteeList);
+        PersonAdapter contactCoreAdapter = new PersonAdapter(getContext(), coreList);
+        listView.setAdapter(contactCoreAdapter);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
