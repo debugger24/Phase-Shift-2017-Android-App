@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class NewsfeedFragment extends Fragment {
     private ListView listView;
     private FeedListAdapter listAdapter;
     private List<FeedItem> feedItems;
-    private String URL_FEED = "http://www.rahulk.me/PS2017/api/getNewsFeed.php";
+    private String URL_FEED = "http://192.168.0.5/~debugger24/ps/feed.php";
     private SwipeRefreshLayout swipeContainer;
 
     public NewsfeedFragment() {
@@ -124,8 +125,8 @@ public class NewsfeedFragment extends Fragment {
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get(URL_FEED);
-        // fetch the data from cache
         if (entry != null) {
+            // fetch the data from cache
             try {
                 String data = new String(entry.data, "UTF-8");
                 try {
@@ -182,21 +183,26 @@ public class NewsfeedFragment extends Fragment {
                 JSONObject feedObj = (JSONObject) feedArray.get(i);
 
                 FeedItem item = new FeedItem();
+
                 item.setId(feedObj.getInt("ID"));
-                item.setName(feedObj.getString("UserName"));
+
+                item.setName(feedObj.getString("Name"));
 
                 // Image might be null sometimes
-                String image = feedObj.getString("Image").equals("") ? null : ("http://bmscephaseshift.com/api/img/event/" + feedObj
-                        .getString("Image") + ".jpg");
+                String image = (feedObj.isNull("Image") || feedObj.getString("Image").equals("")) ? null : feedObj.getString("Image");
                 item.setImge(image);
+
                 item.setStatus(feedObj.getString("Message"));
-                item.setProfilePic("http://bmscephaseshift.com/api/img/pro/" + feedObj.getString("ProfilePic") + ".jpg");
-                item.setTimeStamp(feedObj.getString("TimeStamp"));
+
+                item.setProfilePic(feedObj.getString("ProfilePic"));
+
+                // Timestamp will be in UNIX TimeStamp
+                item.setTimeStamp(feedObj.getString("Timestamp"));
 
                 // url might be null sometimes
-                String feedUrl = (feedObj.isNull("URL") || feedObj.getString("URL").equals("")) ? null : feedObj
-                        .getString("URL");
+                String feedUrl = (feedObj.isNull("URL") || feedObj.getString("URL").equals("")) ? null : feedObj.getString("URL");
                 item.setUrl(feedUrl);
+
                 feedItems.add(item);
             }
 

@@ -19,6 +19,8 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.Newsfeed.FeedImageView;
+import me.rahulk.phaseshift2017.Newsfeed.FeedItem;
 import me.rahulk.phaseshift2017.R;
 
 /**
@@ -55,8 +57,8 @@ public class FeedListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (inflater == null)
-            inflater = (LayoutInflater) activity
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         if (convertView == null)
             convertView = inflater.inflate(R.layout.item_feed, null);
 
@@ -64,15 +66,11 @@ public class FeedListAdapter extends BaseAdapter {
             imageLoader = AppController.getInstance().getImageLoader();
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
-        TextView timestamp = (TextView) convertView
-                .findViewById(R.id.timestamp);
-        TextView statusMsg = (TextView) convertView
-                .findViewById(R.id.txtStatusMsg);
+        TextView timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+        TextView statusMsg = (TextView) convertView.findViewById(R.id.txtStatusMsg);
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
-        NetworkImageView profilePic = (NetworkImageView) convertView
-                .findViewById(R.id.profilePic);
-        FeedImageView feedImageView = (FeedImageView) convertView
-                .findViewById(R.id.feedImage1);
+        NetworkImageView profilePic = (NetworkImageView) convertView.findViewById(R.id.profilePic);
+        FeedImageView feedImageView = (FeedImageView) convertView.findViewById(R.id.feedImage1);
 
         FeedItem item = feedItems.get(position);
 
@@ -94,8 +92,7 @@ public class FeedListAdapter extends BaseAdapter {
 
         // Checking for null feed url
         if (item.getUrl() != null) {
-            url.setText(Html.fromHtml("<a href=\"" + item.getUrl() + "\">"
-                    + item.getUrl() + "</a> "));
+            url.setText(Html.fromHtml("<a href=\"" + item.getUrl() + "\">" + item.getUrl() + "</a> "));
 
             // Making url clickable
             url.setMovementMethod(LinkMovementMethod.getInstance());
