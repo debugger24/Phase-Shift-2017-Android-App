@@ -16,7 +16,7 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
  * Created by debugger24 on 22/06/17.
  */
 
-public class FeedImageView extends ImageView {
+public class FeedImageView extends android.support.v7.widget.AppCompatImageView {
 
     private ResponseObserver mObserver;
     /**
