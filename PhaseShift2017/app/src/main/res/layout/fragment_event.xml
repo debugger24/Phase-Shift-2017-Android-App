@@ -4,11 +4,10 @@
     android:layout_height="match_parent"
     tools:context="me.rahulk.phaseshift2017.Event.EventFragment">
 
-    <TextView
+    <ListView
+        android:id="@+id/eventCategories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Events\nComing Soon"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        android:divider="@null"/>
 
 </FrameLayout>

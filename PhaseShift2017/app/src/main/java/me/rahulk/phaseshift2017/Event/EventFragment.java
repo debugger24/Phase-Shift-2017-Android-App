@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.Arrays;
 
 import me.rahulk.phaseshift2017.R;
 
@@ -28,6 +31,20 @@ public class EventFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private CategoryAdapter categoryAdapter;
+
+    Category[] categories = {
+            new Category("Mission Possible", "Quest Events", R.drawable.cat01),
+            new Category("Across the Panorama", "General Events", R.drawable.cat02),
+            new Category("Ingenuity", "Creative Events", R.drawable.cat03),
+            new Category("Semicolon Redefined", "Coding Events", R.drawable.cat04),
+            new Category("Maze Break", "Circuit Events", R.drawable.cat05),
+            new Category("Automatons", "Robotics Events", R.drawable.cat06),
+            new Category("Grease Monkey", "Mech Events", R.drawable.cat07),
+            new Category("Not so FAQ", "Quizzing Events", R.drawable.cat08),
+            new Category("Pioneer", "Innovation Events", R.drawable.cat09)
+    };
 
     private OnFragmentInteractionListener mListener;
 
@@ -66,7 +83,14 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+
+        categoryAdapter = new CategoryAdapter(getActivity(), Arrays.asList(categories));
+
+        ListView listView = (ListView) rootView.findViewById(R.id.eventCategories);
+        listView.setAdapter(categoryAdapter);
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
