@@ -58,15 +58,18 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
         final String OWM_Department = "Department";
         final String OWM_BMSCE = "BMSCE";
         final String OWM_Full = "Full";
-        final String OWM_RegFees = "RegFees";
+        final String OWM_Participation = "Participation";
         final String OWM_Prize1 = "Prize1";
         final String OWM_Prize2 = "Prize2";
-        final String OWM_Venue = "Venue";
-        final String OWM_Date = "Date";
-        final String OWM_Time = "Time";
+        final String OWM_Prize3 = "Prize3";
         final String OWM_Name = "Name";
         final String OWM_Number = "Number";
+        final String OWM_RegFees = "RegFees";
+        final String OWM_Date = "Date";
+        final String OWM_Time = "Time";
         final String OWM_Description = "Description";
+        final String OWM_Rules = "Rules";
+        final String OWM_Venue = "Venue";
 
         try {
             JSONObject jsonObject = new JSONObject(jsonResponse);
@@ -83,15 +86,18 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT, event.getString(OWM_Department));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE, event.getString(OWM_BMSCE));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL, event.getString(OWM_Full));
-                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FEES, event.getString(OWM_RegFees));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION, event.getString(OWM_Participation));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE1, event.getString(OWM_Prize1));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE2, event.getString(OWM_Prize2));
-                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE, event.getString(OWM_Venue));
-                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DATE, event.getString(OWM_Date));
-                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TIME, event.getString(OWM_Time));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE3, event.getString(OWM_Prize3));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON, event.getString(OWM_Name));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON_NUMBER, event.getString(OWM_Number));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FEES, event.getString(OWM_RegFees));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DATE, event.getString(OWM_Date));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TIME, event.getString(OWM_Time));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION, event.getString(OWM_Description));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES, event.getString(OWM_Rules));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE, event.getString(OWM_Venue));
                 cVVector.add(eventValues);
             }
 

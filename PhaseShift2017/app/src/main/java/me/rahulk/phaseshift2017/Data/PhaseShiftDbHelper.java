@@ -21,15 +21,17 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String SQL_CREATE_EVENT_TABLE =  "CREATE TABLE " + PhaseShiftContract.EventEntry.TABLE_NAME + " ("
+        String SQL_CREATE_EVENT_TABLE = "CREATE TABLE " + PhaseShiftContract.EventEntry.TABLE_NAME + " ("
                 + PhaseShiftContract.EventEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " TEXT NOT NULL UNIQUE, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE + " INTEGER NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL + " INTEGER NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE1 + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE2 + " TEXT NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE3 + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON_NUMBER + " TEXT NOT NULL, "
@@ -37,6 +39,7 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DATE + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TIME + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION + " TEXT NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES + " TEXT NOT NULL, "
                 + "UNIQUE (" + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + ") ON CONFLICT REPLACE);";
 
         Log.v("CREAET TABLE QUERY ", SQL_CREATE_EVENT_TABLE);

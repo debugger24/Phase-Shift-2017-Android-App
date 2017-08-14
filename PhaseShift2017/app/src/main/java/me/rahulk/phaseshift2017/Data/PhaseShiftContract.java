@@ -28,8 +28,10 @@ public class PhaseShiftContract {
         public static final String COLUMNS_EVENT_TYPE = "type";
         public static final String COLUMNS_EVENT_BMSCE = "bmsce";
         public static final String COLUMNS_EVENT_FULL = "full";
+        public static final String COLUMNS_EVENT_PARTICIPATION = "participation";
         public static final String COLUMNS_EVENT_PRIZE1 = "prize1";
         public static final String COLUMNS_EVENT_PRIZE2 = "prize2";
+        public static final String COLUMNS_EVENT_PRIZE3 = "prize3";
         public static final String COLUMNS_EVENT_VENUE = "venue";
         public static final String COLUMNS_EVENT_PERSON = "person";
         public static final String COLUMNS_EVENT_PERSON_NUMBER = "personNumber";
@@ -37,6 +39,7 @@ public class PhaseShiftContract {
         public static final String COLUMNS_EVENT_DATE = "date";
         public static final String COLUMNS_EVENT_TIME = "time";
         public static final String COLUMNS_EVENT_DESCRIPTION = "description";
+        public static final String COLUMNS_EVENT_RULES = "rules";
 
         public static Uri buildEventDetailUri(long id) {
             Uri myURI = CONTENT_URI.buildUpon().appendPath(Long.toString(id)).build();
