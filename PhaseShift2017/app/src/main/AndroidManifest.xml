@@ -30,6 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".Data.PhaseShiftProvider"
+            android:authorities="me.rahulk.phaseshift2017.app" />
     </application>
 
 </manifest>
