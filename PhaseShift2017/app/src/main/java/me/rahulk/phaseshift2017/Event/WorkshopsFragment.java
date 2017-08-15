@@ -1,6 +1,7 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.LoaderManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
@@ -96,6 +98,18 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
         eventCursorAdapter = new EventCursorAdapter(getActivity(), null, 0);
 
         listView.setAdapter(eventCursorAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Cursor cursor = (Cursor) adapterView.getItemAtPosition(position);
+                if (cursor != null) {
+                    Intent intent = new Intent(getActivity(), EventDetails.class).setData(PhaseShiftContract.EventEntry.buildEventDetailUri(cursor.getLong(COL_EVENT_ID)));
+                    startActivity(intent);
+                }
+            }
+        });
 
         return rootView;
     }
