@@ -55,6 +55,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
         final String OWM_ID = "ID";
         final String OWM_Title = "Title";
         final String OWM_Type = "Type";
+        final String OWM_Category = "Category";
         final String OWM_Department = "Department";
         final String OWM_BMSCE = "BMSCE";
         final String OWM_Full = "Full";
@@ -83,6 +84,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 ContentValues eventValues = new ContentValues();
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE, event.getString(OWM_Title));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE, event.getString(OWM_Type));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY, event.getString(OWM_Category));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT, event.getString(OWM_Department));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE, event.getString(OWM_BMSCE));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL, event.getString(OWM_Full));

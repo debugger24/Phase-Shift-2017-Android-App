@@ -13,7 +13,7 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
 
     public static final String LOG_TAG = PhaseShiftDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "phaseshift.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public PhaseShiftDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,6 +26,7 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " TEXT NOT NULL UNIQUE, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " TEXT NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE + " INTEGER NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL + " INTEGER NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION + " TEXT NOT NULL, "

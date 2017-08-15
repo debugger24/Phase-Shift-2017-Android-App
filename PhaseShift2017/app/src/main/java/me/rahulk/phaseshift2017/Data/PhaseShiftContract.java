@@ -26,6 +26,7 @@ public class PhaseShiftContract {
         public static final String COLUMNS_EVENT_TITLE = "title";
         public static final String COLUMNS_EVENT_DEPARTMENT = "department";
         public static final String COLUMNS_EVENT_TYPE = "type";
+        public static final String COLUMNS_EVENT_CATEGORY = "category";
         public static final String COLUMNS_EVENT_BMSCE = "bmsce";
         public static final String COLUMNS_EVENT_FULL = "full";
         public static final String COLUMNS_EVENT_PARTICIPATION = "participation";
