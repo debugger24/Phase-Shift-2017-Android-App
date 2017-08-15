@@ -153,10 +153,10 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
 
         /* Prize 3 */
         if (data.getString(COL_EVENT_PRIZE3).equals("null") || data.getString(COL_EVENT_PRIZE3).equals("")) {
-            viewPrize2.setVisibility(View.GONE);
+            viewPrize3.setVisibility(View.GONE);
         } else {
-            viewPrize2.setVisibility(View.VISIBLE);
-            txtPrize2.setText("2nd Runner Up\n" + data.getString(COL_EVENT_PRIZE3));
+            viewPrize3.setVisibility(View.VISIBLE);
+            txtPrize3.setText("2nd Runner Up\n" + data.getString(COL_EVENT_PRIZE3));
         }
 
         /* Venue */
