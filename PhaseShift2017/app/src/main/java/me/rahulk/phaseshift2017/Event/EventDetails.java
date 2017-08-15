@@ -17,14 +17,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.R;
 
 public class EventDetails extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtVenue, txtCal, txtCoordinator, txtFees, txtDesctiption;
-    private View layoutPrize1, layoutPrize2;
-    View forBMSCE, fullEvent;
+    private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation;
+    private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
     private String shareMessage = "Shared using PhaseShift App";
 
     private static final int DETAIL_LOADER = 0;
@@ -34,6 +35,7 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE1,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE2,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE3,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE,
@@ -42,6 +44,8 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PERSON_NUMBER,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_FEES
     };
 
@@ -50,15 +54,18 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     static final int COL_EVENT_DEPARTMENT = 2;
     static final int COL_EVENT_PRIZE1 = 3;
     static final int COL_EVENT_PRIZE2 = 4;
-    static final int COL_EVENT_BMSCE = 5;
-    static final int COL_EVENT_FULL = 6;
-    static final int COL_EVENT_VENUE = 7;
-    static final int COL_EVENT_DATE = 8;
-    static final int COL_EVENT_TIME = 9;
-    static final int COL_EVENT_PERSON = 10;
-    static final int COL_EVENT_PERSON_NUMBER = 11;
-    static final int COL_EVENT_DESCRIPTION = 12;
-    static final int COL_EVENT_FEES = 13;
+    static final int COL_EVENT_PRIZE3 = 5;
+    static final int COL_EVENT_BMSCE = 6;
+    static final int COL_EVENT_FULL = 7;
+    static final int COL_EVENT_VENUE = 8;
+    static final int COL_EVENT_DATE = 9;
+    static final int COL_EVENT_TIME = 10;
+    static final int COL_EVENT_PERSON = 11;
+    static final int COL_EVENT_PERSON_NUMBER = 12;
+    static final int COL_EVENT_DESCRIPTION = 13;
+    static final int COL_EVENT_RULES = 14;
+    static final int COL_EVENT_PARTICIPATION = 15;
+    static final int COL_EVENT_FEES = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,17 +80,28 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         txtDepartment = (TextView) findViewById(R.id.txtDepartment);
         txtPrize1 = (TextView) findViewById(R.id.txtPrize1);
         txtPrize2 = (TextView) findViewById(R.id.txtPrize2);
+        txtPrize3 = (TextView) findViewById(R.id.txtPrize3);
         txtVenue = (TextView) findViewById(R.id.txtVenue);
-        txtCal = (TextView) findViewById(R.id.txtCal);
+        txtSchedule = (TextView) findViewById(R.id.txtSchedule);
+        txtParticipation = (TextView) findViewById(R.id.txtParticipation);
         txtCoordinator = (TextView) findViewById(R.id.txtCoordinator);
         txtFees = (TextView) findViewById(R.id.txtFees);
         txtDesctiption = (TextView) findViewById(R.id.txtDescription);
+        txtRules = (TextView) findViewById(R.id.txtRules);
 
-        layoutPrize1 = (View) findViewById(R.id.layoutPrize1);
-        layoutPrize2 = (View) findViewById(R.id.layoutPrize2);
 
-        forBMSCE = (View) findViewById(R.id.forBMSCE);
-        fullEvent = (View) findViewById(R.id.fullEvent);
+        viewPrize1 = (View) findViewById(R.id.viewPrize1);
+        viewPrize2 = (View) findViewById(R.id.viewPrize2);
+        viewPrize3 = (View) findViewById(R.id.viewPrize3);
+
+        viewVenue = (View) findViewById(R.id.viewVenue);
+        viewSchedule = (View) findViewById(R.id.viewSchedule);
+
+        viewDescription = (View) findViewById(R.id.viewDescription);
+        viewRules = (View) findViewById(R.id.viewRules);
+
+        viewForBMSCE = (View) findViewById(R.id.viewForBMSCE);
+        viewFullEvent = (View) findViewById(R.id.viewFullEvent);
 
         if (ContextCompat.checkSelfPermission(EventDetails.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -117,43 +135,84 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         txtTitle.setText(data.getString(COL_EVENT_TITLE));
         txtDepartment.setText(data.getString(COL_EVENT_DEPARTMENT));
 
-        if (!data.getString(COL_EVENT_PRIZE1).equals("NA")) {
-            layoutPrize1.setVisibility(View.VISIBLE);
+        /* Prize 1 */
+        if (data.getString(COL_EVENT_PRIZE1).equals("null") || data.getString(COL_EVENT_PRIZE1).equals("")) {
+            viewPrize1.setVisibility(View.GONE);
+        } else {
+            viewPrize1.setVisibility(View.VISIBLE);
             txtPrize1.setText("Winner\n" + data.getString(COL_EVENT_PRIZE1));
-        } else {
-            layoutPrize1.setVisibility(View.GONE);
         }
 
-        if (!data.getString(COL_EVENT_PRIZE2).equals("NA")) {
-            layoutPrize2.setVisibility(View.VISIBLE);
-            txtPrize2.setText("Runner Up\n" + data.getString(COL_EVENT_PRIZE2));
+        /* Prize 2 */
+        if (data.getString(COL_EVENT_PRIZE2).equals("null") || data.getString(COL_EVENT_PRIZE2).equals("")) {
+            viewPrize2.setVisibility(View.GONE);
         } else {
-            layoutPrize2.setVisibility(View.GONE);
+            viewPrize2.setVisibility(View.VISIBLE);
+            txtPrize2.setText("1st Runner Up\n" + data.getString(COL_EVENT_PRIZE2));
         }
 
-        txtVenue.setText(data.getString(COL_EVENT_VENUE));
-        txtCal.setText(data.getString(COL_EVENT_DATE) + "\n" + data.getString(COL_EVENT_TIME));
+        /* Prize 3 */
+        if (data.getString(COL_EVENT_PRIZE3).equals("null") || data.getString(COL_EVENT_PRIZE3).equals("")) {
+            viewPrize2.setVisibility(View.GONE);
+        } else {
+            viewPrize2.setVisibility(View.VISIBLE);
+            txtPrize2.setText("2nd Runner Up\n" + data.getString(COL_EVENT_PRIZE3));
+        }
 
+        /* Venue */
+        if (data.getString(COL_EVENT_VENUE).equals("null") || data.getString(COL_EVENT_VENUE).equals("")) {
+            viewVenue.setVisibility(View.GONE);
+        } else {
+            viewVenue.setVisibility(View.VISIBLE);
+            txtVenue.setText(data.getString(COL_EVENT_VENUE));
+        }
+
+        /* Schedule */
+        txtSchedule.setText(data.getString(COL_EVENT_DATE) + "\n" + data.getString(COL_EVENT_TIME));
+
+        /* Coordinators */
         txtCoordinator.setText("Coordinator" + "\n" + data.getString(COL_EVENT_PERSON) + "\n" + data.getString(COL_EVENT_PERSON_NUMBER));
+
+        /* Event Fees */
         txtFees.setText("Registration Fees" + "\n" + data.getString(COL_EVENT_FEES));
 
-        txtDesctiption.setText(data.getString(COL_EVENT_DESCRIPTION));
+        /* Participation Type */
+        txtParticipation.setText("Participation" + "\n" + data.getString(COL_EVENT_PARTICIPATION));
 
+        /* Description */
+        if (data.getString(COL_EVENT_DESCRIPTION).equals("null") || data.getString(COL_EVENT_DESCRIPTION).equals("")) {
+            viewDescription.setVisibility(View.GONE);
+        } else {
+            viewDescription.setVisibility(View.VISIBLE);
+            txtDesctiption.setText(data.getString(COL_EVENT_DESCRIPTION));
+        }
+
+        /* Rules */
+        if (data.getString(COL_EVENT_RULES).equals("null") || data.getString(COL_EVENT_RULES).equals("")) {
+            viewRules.setVisibility(View.GONE);
+        } else {
+            viewRules.setVisibility(View.VISIBLE);
+            txtRules.setText(data.getString(COL_EVENT_RULES));
+        }
+
+        /* BMSCE Exclusive Event */
         if (data.getInt(COL_EVENT_BMSCE) == 1) {
             Log.v("DATA BMSCE", String.valueOf(data.getInt(COL_EVENT_BMSCE)));
-            forBMSCE.setVisibility(View.VISIBLE);
+            viewForBMSCE.setVisibility(View.VISIBLE);
         } else {
             Log.v("DATA BMSCE", String.valueOf(data.getInt(COL_EVENT_BMSCE)));
-            forBMSCE.setVisibility(View.GONE);
+            viewForBMSCE.setVisibility(View.GONE);
         }
 
+        /* Event is Full */
         if (data.getInt(COL_EVENT_FULL) == 1) {
-            fullEvent.setVisibility(View.VISIBLE);
+            viewFullEvent.setVisibility(View.VISIBLE);
             Log.v("EVENT FULL", "EVENT FULL");
         } else {
-            fullEvent.setVisibility(View.GONE);
+            viewFullEvent.setVisibility(View.GONE);
         }
 
+        /* Coordinator Call */
         txtCoordinator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,9 +227,14 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
+        /* Set Activity Title */
         this.setTitle(data.getString(COL_EVENT_TITLE));
 
-        shareMessage = data.getString(COL_EVENT_TITLE) + "\n\n" + data.getString(COL_EVENT_DESCRIPTION) + "\n\nContact : " + data.getString(COL_EVENT_PERSON) + " (" + data.getString(COL_EVENT_PERSON_NUMBER) + ")\n\nShared using PhaseShift App\n#PhaseShift2017";
+        /* Event Share Message */
+        shareMessage = data.getString(COL_EVENT_TITLE) + "\n\n" +
+                data.getString(COL_EVENT_DESCRIPTION) + "\n\n" +
+                "Contact : " + data.getString(COL_EVENT_PERSON) + " (" + data.getString(COL_EVENT_PERSON_NUMBER) + ")\n\n" +
+                "Shared using PhaseShift App\n#PhaseShift2017";
     }
 
     @Override
