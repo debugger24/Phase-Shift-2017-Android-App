@@ -15,11 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="" />
-
 
         <activity
             android:name=".MainActivity"
@@ -30,6 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".Data.PhaseShiftProvider"
+            android:authorities="me.rahulk.phaseshift2017.app" />
+
+        <activity android:name=".Event.EventDetails"></activity>
     </application>
 
 </manifest>

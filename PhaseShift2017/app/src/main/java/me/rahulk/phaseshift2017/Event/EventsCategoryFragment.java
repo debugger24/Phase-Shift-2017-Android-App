@@ -1,34 +1,32 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
-import me.rahulk.phaseshift2017.Data.FetchEventTask;
+import me.rahulk.phaseshift2017.MainActivity;
 import me.rahulk.phaseshift2017.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link EventFragment.OnFragmentInteractionListener} interface
+ * {@link EventsCategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EventFragment#newInstance} factory method to
+ * Use the {@link EventsCategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventFragment extends Fragment {
+public class EventsCategoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,9 +36,23 @@ public class EventFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private CategoryAdapter categoryAdapter;
+
+    Category[] categories = {
+            new Category("Mission Possible", "Quest Events", R.drawable.cat01),
+            new Category("Across the Panorama", "General Events", R.drawable.cat02),
+            new Category("Ingenuity", "Creative Events", R.drawable.cat03),
+            new Category("Semicolon Redefined", "Coding Events", R.drawable.cat04),
+            new Category("Maze Break", "Circuit Events", R.drawable.cat05),
+            new Category("Automatons", "Robotics Events", R.drawable.cat06),
+            new Category("Grease Monkey", "Mech Events", R.drawable.cat07),
+            new Category("Not so FAQ", "Quizzing Events", R.drawable.cat08),
+            new Category("Pioneer", "Innovation Events", R.drawable.cat09)
+    };
+
     private OnFragmentInteractionListener mListener;
 
-    public EventFragment() {
+    public EventsCategoryFragment() {
         // Required empty public constructor
     }
 
@@ -50,11 +62,11 @@ public class EventFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EventFragment.
+     * @return A new instance of fragment EventsCategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventFragment newInstance(String param1, String param2) {
-        EventFragment fragment = new EventFragment();
+    public static EventsCategoryFragment newInstance(String param1, String param2) {
+        EventsCategoryFragment fragment = new EventsCategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,15 +87,20 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_events_category, container, false);
 
-        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getContext()));
+        categoryAdapter = new CategoryAdapter(getActivity(), Arrays.asList(categories));
 
-        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        ListView listView = (ListView) rootView.findViewById(R.id.eventCategories);
+        listView.setAdapter(categoryAdapter);
 
-        refreshData();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // MainActivity will replace fragment
+                ((MainActivity) getActivity()).loadEventsFragment(categories[position].categoryTitle);
+            }
+        });
 
         return rootView;
     }
@@ -125,21 +142,5 @@ public class EventFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    private void refreshData() {
-        Toast.makeText(getContext(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
-        if (isNetworkAvailable()) {
-            new FetchEventTask(getActivity()).execute();
-        } else {
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
