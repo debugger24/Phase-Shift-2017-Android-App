@@ -98,7 +98,7 @@ public class EventsCategoryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // MainActivity will replace fragment
-                ((MainActivity)getActivity()).loadEventsFragment(categories[position].categoryTitle);
+                ((MainActivity) getActivity()).loadEventsFragment(categories[position].categoryTitle);
             }
         });
 

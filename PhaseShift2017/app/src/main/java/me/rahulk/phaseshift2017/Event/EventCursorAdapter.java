@@ -17,6 +17,7 @@ import me.rahulk.phaseshift2017.R;
 
 public class EventCursorAdapter extends CursorAdapter {
     private int bmsce;
+
     public EventCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
@@ -39,10 +40,9 @@ public class EventCursorAdapter extends CursorAdapter {
 
         ImageView alert1 = (ImageView) view.findViewById(R.id.alert1);
 
-        if(bmsce == 1) {
+        if (bmsce == 1) {
             alert1.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             alert1.setVisibility(View.GONE);
         }
     }
