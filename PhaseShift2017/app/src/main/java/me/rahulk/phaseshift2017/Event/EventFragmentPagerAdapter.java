@@ -24,7 +24,7 @@ public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if (position == 0) {
             Log.v("Changing Fragment", "Event Fragment");
-            return new EventsFragment();
+            return new EventsCategoryFragment();
         } else {
             Log.v("Changing Fragment", "Workshop Fragment");
             return new WorkshopsFragment();

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.Arrays;
@@ -17,12 +18,12 @@ import me.rahulk.phaseshift2017.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link EventsFragment.OnFragmentInteractionListener} interface
+ * {@link EventsCategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EventsFragment#newInstance} factory method to
+ * Use the {@link EventsCategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventsFragment extends Fragment {
+public class EventsCategoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,7 +49,7 @@ public class EventsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public EventsFragment() {
+    public EventsCategoryFragment() {
         // Required empty public constructor
     }
 
@@ -58,11 +59,11 @@ public class EventsFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EventsFragment.
+     * @return A new instance of fragment EventsCategoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsFragment newInstance(String param1, String param2) {
-        EventsFragment fragment = new EventsFragment();
+    public static EventsCategoryFragment newInstance(String param1, String param2) {
+        EventsCategoryFragment fragment = new EventsCategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,12 +84,19 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_events_category, container, false);
 
         categoryAdapter = new CategoryAdapter(getActivity(), Arrays.asList(categories));
 
         ListView listView = (ListView) rootView.findViewById(R.id.eventCategories);
         listView.setAdapter(categoryAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Make a Intent Call
+            }
+        });
 
         return rootView;
     }

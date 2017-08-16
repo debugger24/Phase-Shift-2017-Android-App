@@ -16,7 +16,7 @@ import me.rahulk.phaseshift2017.About.AboutCoreCommitteeFragment;
 import me.rahulk.phaseshift2017.About.AboutFragment;
 import me.rahulk.phaseshift2017.About.AboutPhaseShiftFragment;
 import me.rahulk.phaseshift2017.Event.EventFragment;
-import me.rahulk.phaseshift2017.Event.EventsFragment;
+import me.rahulk.phaseshift2017.Event.EventsCategoryFragment;
 import me.rahulk.phaseshift2017.Event.WorkshopsFragment;
 import me.rahulk.phaseshift2017.Map.MapFragment;
 import me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NewsfeedFragment.
         AboutFragment.OnFragmentInteractionListener, AboutPhaseShiftFragment.OnFragmentInteractionListener,
         AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener,
         ScheduleFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener,
-        EventsFragment.OnFragmentInteractionListener, WorkshopsFragment.OnFragmentInteractionListener {
+        EventsCategoryFragment.OnFragmentInteractionListener, WorkshopsFragment.OnFragmentInteractionListener {
 
     Fragment fragment = null;
     Class fragmentClass = null;
