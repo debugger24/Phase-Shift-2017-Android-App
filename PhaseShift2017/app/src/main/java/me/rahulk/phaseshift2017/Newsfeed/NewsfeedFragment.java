@@ -95,6 +95,8 @@ public class NewsfeedFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_newsfeed, container, false);
 
+        getActivity().setTitle("Feeds");
+
         listView = (ListView) rootView.findViewById(R.id.list);
         feedItems = new ArrayList<FeedItem>();
 

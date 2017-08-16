@@ -77,6 +77,8 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_event, container, false);
 
+        getActivity().setTitle("Events and Workshops");
+
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getContext()));
 
