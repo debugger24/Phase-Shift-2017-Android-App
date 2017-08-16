@@ -75,6 +75,10 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_event_details);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         getSupportLoaderManager().initLoader(DETAIL_LOADER, null, this);
 
 
