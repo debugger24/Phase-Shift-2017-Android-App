@@ -30,7 +30,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, parent, false);
         }
 
-        convertView.findViewById(R.id.viewCard).setBackgroundResource(category.categoryImage);
+//        convertView.findViewById(R.id.viewCard).setBackgroundResource(category.categoryImage);
+        convertView.findViewById(R.id.viewCard).setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
 
         TextView versionNameView = (TextView) convertView.findViewById(R.id.txtCategoryTitle);
         versionNameView.setText(category.categoryTitle);
