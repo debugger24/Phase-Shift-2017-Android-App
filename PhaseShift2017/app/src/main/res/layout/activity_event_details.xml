@@ -67,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="Winner\n3500 INR"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="1st Runner Up\n2500 INR"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -109,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="2nd Runner Up\n2500 INR"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -138,7 +138,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="BSN Hall"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -159,7 +159,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="24th Sep 2016\n10:00 AM"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -186,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="Participation\nIndividual"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -206,7 +206,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:text="Registration Fees\n300 per team (IEEE)\n400 per team (Non IEEE)"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorPrimary" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:text="Coordinator\nRahul Kumar\n9066533802"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
