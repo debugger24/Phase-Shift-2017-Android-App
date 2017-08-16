@@ -33,6 +33,8 @@ import me.rahulk.phaseshift2017.AppController;
 import me.rahulk.phaseshift2017.MainActivity;
 import me.rahulk.phaseshift2017.R;
 
+import static me.rahulk.phaseshift2017.AppConfig.URL_NEWSFEEDS;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +57,6 @@ public class NewsfeedFragment extends Fragment {
     private ListView listView;
     private FeedListAdapter listAdapter;
     private List<FeedItem> feedItems;
-    private String URL_FEED = "http://192.168.0.5/~debugger24/ps/feed.php";
     private SwipeRefreshLayout swipeContainer;
 
     public NewsfeedFragment() {
@@ -126,7 +127,7 @@ public class NewsfeedFragment extends Fragment {
 
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
-        Cache.Entry entry = cache.get(URL_FEED);
+        Cache.Entry entry = cache.get(URL_NEWSFEEDS);
         if (entry != null) {
             // fetch the data from cache
             try {
@@ -153,7 +154,7 @@ public class NewsfeedFragment extends Fragment {
 
     private void refreshData() {
         JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,
-                URL_FEED, null, new Response.Listener<JSONObject>() {
+                URL_NEWSFEEDS, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
