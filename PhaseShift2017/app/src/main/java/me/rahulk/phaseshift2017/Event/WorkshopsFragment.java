@@ -1,5 +1,6 @@
 package me.rahulk.phaseshift2017.Event;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -49,6 +50,7 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_ICON,
     };
 
     static final int COL_EVENT_ID = 0;
@@ -56,6 +58,7 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
     static final int COL_EVENT_DEPARTMENT = 2;
     static final int COL_EVENT_BMSCE = 3;
     static final int COL_EVENT_FULL = 4;
+    static final int COL_EVENT_ICON = 5;
 
     public WorkshopsFragment() {
         // Required empty public constructor
@@ -121,9 +124,8 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
         }
     }
 
-    @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach((Activity) context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
