@@ -18,28 +18,43 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
 
 public class FeedImageView extends android.support.v7.widget.AppCompatImageView {
 
+    public interface ResponseObserver {
+        public void onError();
+
+        public void onSuccess();
+    }
+
     private ResponseObserver mObserver;
+
+    public void setResponseObserver(ResponseObserver observer) {
+        mObserver = observer;
+    }
+
     /**
      * The URL of the network image to load
      */
     private String mUrl;
+
     /**
      * Resource ID of the image to be used as a placeholder until the network
      * image is loaded.
      */
     private int mDefaultImageId;
+
     /**
      * Resource ID of the image to be used if the network response fails.
      */
     private int mErrorImageId;
+
     /**
      * Local copy of the ImageLoader.
      */
     private ImageLoader mImageLoader;
+
     /**
      * Current ImageContainer. (either in-flight or finished)
      */
-    private ImageLoader.ImageContainer mImageContainer;
+    private ImageContainer mImageContainer;
 
     public FeedImageView(Context context) {
         this(context, null);
@@ -54,10 +69,19 @@ public class FeedImageView extends android.support.v7.widget.AppCompatImageView 
         super(context, attrs, defStyle);
     }
 
-    public void setResponseObserver(ResponseObserver observer) {
-        mObserver = observer;
-    }
-
+    /**
+     * Sets URL of the image that should be loaded into this view. Note that
+     * calling this will immediately either set the cached image (if available)
+     * or the default image specified by
+     * {@link VolleyImageView#setDefaultImageResId(int)} on the view.
+     * <p>
+     * NOTE: If applicable, {@link VolleyImageView#setDefaultImageResId(int)}
+     * and {@link VolleyImageView#setErrorImageResId(int)} should be called
+     * prior to calling this function.
+     *
+     * @param url         The URL that should be loaded into this ImageView.
+     * @param imageLoader ImageLoader that will be used to make the request.
+     */
     public void setImageUrl(String url, ImageLoader imageLoader) {
         mUrl = url;
         mImageLoader = imageLoader;
@@ -236,11 +260,5 @@ public class FeedImageView extends android.support.v7.widget.AppCompatImageView 
         params.width = swidth;
         params.height = new_height;
         setLayoutParams(params);
-    }
-
-    public interface ResponseObserver {
-        public void onError();
-
-        public void onSuccess();
     }
 }
