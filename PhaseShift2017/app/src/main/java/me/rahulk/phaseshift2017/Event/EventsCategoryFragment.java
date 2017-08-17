@@ -39,15 +39,15 @@ public class EventsCategoryFragment extends Fragment {
     private CategoryAdapter categoryAdapter;
 
     Category[] categories = {
-            new Category("Mission Possible", "Quest Events", R.drawable.cat01),
-            new Category("Across the Panorama", "General Events", R.drawable.cat02),
-            new Category("Ingenuity", "Creative Events", R.drawable.cat03),
-            new Category("Semicolon Redefined", "Coding Events", R.drawable.cat04),
-            new Category("Maze Break", "Circuit Events", R.drawable.cat05),
-            new Category("Automatons", "Robotics Events", R.drawable.cat06),
-            new Category("Grease Monkey", "Mech Events", R.drawable.cat07),
-            new Category("Not so FAQ", "Quizzing Events", R.drawable.cat08),
-            new Category("Pioneer", "Innovation Events", R.drawable.cat09)
+            new Category("Mission Possible", "Quest Events", R.drawable.cat_quest),
+            new Category("Across the Panorama", "General Events", R.drawable.cat_general),
+            new Category("Ingenuity", "Creative Events", R.drawable.cat_inno),
+            new Category("Semicolon Redefined", "Coding Events", R.drawable.cat_code),
+            new Category("Maze Break", "Circuit Events", R.drawable.cat_circuit),
+            new Category("Automatons", "Robotics Events", R.drawable.cat_robot),
+            new Category("Grease Monkey", "Mech Events", R.drawable.cat_gear),
+            new Category("Not so FAQ", "Quizzing Events", R.drawable.cat_quiz),
+            new Category("Pioneer", "Innovation Events", R.drawable.cat_innovate)
     };
 
     private OnFragmentInteractionListener mListener;
@@ -112,9 +112,8 @@ public class EventsCategoryFragment extends Fragment {
         }
     }
 
-    @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach(getActivity());
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

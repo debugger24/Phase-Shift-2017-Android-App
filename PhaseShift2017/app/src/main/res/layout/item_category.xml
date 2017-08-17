@@ -11,7 +11,16 @@
         android:layout_marginLeft="@dimen/feed_item_margin"
         android:layout_marginRight="@dimen/feed_item_margin"
         android:layout_marginTop="@dimen/feed_item_margin"
-        android:background="@drawable/bg_parent_rounded_corner">
+        android:background = "@drawable/bg_parent_round_corner_event_category">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/txtCategoryTitle"
@@ -22,7 +31,7 @@
             android:paddingLeft="8dp"
             android:text="Category Name"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold" />
 
         <TextView
@@ -33,8 +42,10 @@
             android:layout_alignParentLeft="true"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:text="Description of the event"
             android:textColor="@color/white" />
+
     </RelativeLayout>
 
 </LinearLayout>
