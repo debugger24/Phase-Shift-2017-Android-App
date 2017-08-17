@@ -2,6 +2,7 @@ package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,21 @@ public class EventCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.event_icon);
+        Context imageContext = imageView.getContext();
+        int id;
+        Log.v("TAG", cursor.getString(cursor.getColumnIndexOrThrow("icon")));
+
+        if (cursor.getString(cursor.getColumnIndexOrThrow("icon")).equals("") || cursor.getString(cursor.getColumnIndexOrThrow("icon")) == null
+                || cursor.getString(cursor.getColumnIndexOrThrow("icon")).equals("null")) {
+            id = imageContext.getResources().getIdentifier("ps_logo", "drawable", context.getPackageName());
+        } else {
+            id = imageContext.getResources().getIdentifier(cursor.getString(cursor.getColumnIndexOrThrow("icon")), "drawable", context.getPackageName());
+        }
+        imageView.setImageResource(id);
+
+
         TextView eventTitle = (TextView) view.findViewById(R.id.title);
         eventTitle.setText(cursor.getString(cursor.getColumnIndexOrThrow("title")));
 
