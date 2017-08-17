@@ -13,4 +13,6 @@
     <color name="timestamp">#a0a3a7</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="event_Logo">#004d40</color>
 </resources>
