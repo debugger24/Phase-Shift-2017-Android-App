@@ -1,10 +1,12 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.app.Activity;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, parent, false);
         }
 
-//        convertView.findViewById(R.id.viewCard).setBackgroundResource(category.categoryImage);
-        convertView.findViewById(R.id.viewCard).setBackgroundColor(getContext().getResources().getColor(R.color.colorAccent));
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
+        imageView.setImageResource(category.categoryImage);
 
         TextView versionNameView = (TextView) convertView.findViewById(R.id.txtCategoryTitle);
         versionNameView.setText(category.categoryTitle);

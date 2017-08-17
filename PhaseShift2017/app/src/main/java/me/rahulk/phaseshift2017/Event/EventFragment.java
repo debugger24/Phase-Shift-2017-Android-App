@@ -80,7 +80,7 @@ public class EventFragment extends Fragment {
         getActivity().setTitle("Events and Workshops");
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
-        viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getContext()));
+        viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getActivity()));
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -97,9 +97,9 @@ public class EventFragment extends Fragment {
         }
     }
 
-    @Override
+
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach(getActivity());
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -130,11 +130,11 @@ public class EventFragment extends Fragment {
     }
 
     private void refreshData() {
-        Toast.makeText(getContext(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
         if (isNetworkAvailable()) {
             new FetchEventTask(getActivity()).execute();
         } else {
-            Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
     }
