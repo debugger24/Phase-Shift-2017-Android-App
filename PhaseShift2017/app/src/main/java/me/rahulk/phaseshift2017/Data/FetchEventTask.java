@@ -54,6 +54,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
         Vector<ContentValues> cVVector;
         final String OWM_ID = "ID";
         final String OWM_Title = "Title";
+        final String OWM_Icon = "Icon";
         final String OWM_Type = "Type";
         final String OWM_Category = "Category";
         final String OWM_Department = "Department";
@@ -83,6 +84,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 event = eventList.getJSONObject(i);
                 ContentValues eventValues = new ContentValues();
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE, event.getString(OWM_Title));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_ICON, event.getString(OWM_Icon));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE, event.getString(OWM_Type));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY, event.getString(OWM_Category));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT, event.getString(OWM_Department));
@@ -154,7 +156,6 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 urlConnection.disconnect();
             }
             if (inputStream != null) {
-                // function must handle java.io.IOException here
                 inputStream.close();
             }
         }
