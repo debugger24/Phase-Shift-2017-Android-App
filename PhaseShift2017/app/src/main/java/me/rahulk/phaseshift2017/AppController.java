@@ -17,19 +17,21 @@ import me.rahulk.phaseshift2017.Newsfeed.LruBitmapCache;
 public class AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();
-    private static AppController mInstance;
-    LruBitmapCache mLruBitmapCache;
+
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    LruBitmapCache mLruBitmapCache;
 
-    public static synchronized AppController getInstance() {
-        return mInstance;
-    }
+    private static AppController mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+    }
+
+    public static synchronized AppController getInstance() {
+        return mInstance;
     }
 
     public RequestQueue getRequestQueue() {
