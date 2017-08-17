@@ -25,7 +25,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -33,7 +32,18 @@
             android:name=".Data.PhaseShiftProvider"
             android:authorities="me.rahulk.phaseshift2017.app" />
 
-        <activity android:name=".Event.EventDetails"></activity>
+        <activity android:name=".Event.EventDetails" />
+        <activity
+            android:name=".SplashScreen.SplashScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
