@@ -1,5 +1,6 @@
 package me.rahulk.phaseshift2017.Newsfeed;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -114,7 +115,7 @@ public class NewsfeedFragment extends Fragment {
                 if (isNetworkAvailable()) {
                     refreshData();
                 } else {
-                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                     swipeContainer.setRefreshing(false);
                 }
             }
@@ -145,7 +146,7 @@ public class NewsfeedFragment extends Fragment {
             if (isNetworkAvailable()) {
                 refreshData();
             } else {
-                Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -153,8 +154,7 @@ public class NewsfeedFragment extends Fragment {
     }
 
     private void refreshData() {
-        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET,
-                URL_NEWSFEEDS, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET, URL_NEWSFEEDS, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -232,9 +232,8 @@ public class NewsfeedFragment extends Fragment {
         }
     }
 
-    @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach((Activity) context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

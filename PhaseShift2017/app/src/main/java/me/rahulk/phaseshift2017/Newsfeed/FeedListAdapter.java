@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -69,8 +72,9 @@ public class FeedListAdapter extends BaseAdapter {
         TextView timestamp = (TextView) convertView.findViewById(R.id.timestamp);
         TextView statusMsg = (TextView) convertView.findViewById(R.id.txtStatusMsg);
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
-        NetworkImageView profilePic = (NetworkImageView) convertView.findViewById(R.id.profilePic);
-        FeedImageView feedImageView = (FeedImageView) convertView.findViewById(R.id.feedImage1);
+        ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
+
+        ImageView feedImageView = (ImageView) convertView.findViewById(R.id.feedImage1);
 
         FeedItem item = feedItems.get(position);
 
@@ -103,22 +107,31 @@ public class FeedListAdapter extends BaseAdapter {
         }
 
         // user profile pic
-        profilePic.setImageUrl(item.getProfilePic(), imageLoader);
+        Glide.with(activity).load(item.getProfilePic())
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(profilePic);
 
         // Feed image
         if (item.getImge() != null) {
-            feedImageView.setImageUrl(item.getImge(), imageLoader);
-            feedImageView.setVisibility(View.VISIBLE);
-            feedImageView
-                    .setResponseObserver(new FeedImageView.ResponseObserver() {
-                        @Override
-                        public void onError() {
-                        }
-
-                        @Override
-                        public void onSuccess() {
-                        }
-                    });
+            Glide.with(activity).load(item.getImge())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(feedImageView);
+//            feedImageView.setImageUrl(item.getImge(), imageLoader);
+//            feedImageView.setVisibility(View.VISIBLE);
+//            feedImageView
+//                    .setResponseObserver(new FeedImageView.ResponseObserver() {
+//                        @Override
+//                        public void onError() {
+//                        }
+//
+//                        @Override
+//                        public void onSuccess() {
+//                        }
+//                    });
         } else {
             feedImageView.setVisibility(View.GONE);
         }
