@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="50dp"
+    android:height="50dp"
+    android:viewportHeight="50"
+    android:viewportWidth="50">
+    <path
+        android:fillColor="@color/event_Logo"
+        android:pathData="M32.41,2H7v46h23v-0.1c-0.52-0.58-0.99-1.22-1.38-1.9H9V4h22v10h10v11h2V12.59L32.41,2z M33,12V5.41L39.59,12H33z M20,24h-6 v-6h6V24z M16,22h2v-2h-2V22z M20,32h-6v-6h6V32z M16,30h2v-2h-2V30z M20,40h-6v-6h6V40z M16,38h2v-2h-2V38z M36,22H22v-2h14V22z M22,36h5.69c-0.23,0.64-0.41,1.31-0.52,2H22V36z M35,28v0.7c-0.92,0.32-1.79,0.76-2.6,1.3H22v-2H35z M40,30.05V29h1v-2h-4v2h1v1.05 c-5.04,0.5-9,4.78-9,9.95c0,5.51,4.49,10,10,10s10-4.49,10-10C49,34.83,45.04,30.55,40,30.05z M39,48c-4.41,0-8-3.59-8-8 c0-4.41,3.59-8,8-8s8,3.59,8,8C47,44.41,43.41,48,39,48z M48.293,33.636l-2.828-2.828l1.414-1.414l2.828,2.828L48.293,33.636z M35.6,43.8L34.4,42.2l3.6-2.7V34h2v6.5L35.6,43.8z" />
+</vector>
