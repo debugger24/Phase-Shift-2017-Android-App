@@ -129,25 +129,38 @@ public class MapFragment extends Fragment {
                 mMap.getUiSettings().setCompassEnabled(true);
                 mMap.setMyLocationEnabled(true);
 
-                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+
 
                 /* BUILDINGS */
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941670, 77.565803)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("PG Block")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942307, 77.565921)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("ECE Block")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942255, 77.566306)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("Classroom Block")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942337, 77.565457)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_building))).title("Mechanical Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941670, 77.565803)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("PG Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942307, 77.565921)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("ECE Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942255, 77.566306)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Classroom Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942337, 77.565457)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Mechanical Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942637, 77.566075)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Telecom Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940679, 77.564932)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Science Block")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940187, 77.565375)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Multipurpose Hall")).showInfoWindow();
+
+                /* SPECIAL AREAS */
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942289, 77.566662)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_library))).title("Library Auditorium")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941089, 77.566137)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Department & Company Stalls")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940917, 77.565415)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_danger))).title("Danger : Construction Area")).showInfoWindow();
 
                 /* PARKING */
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941946, 77.566838)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942285, 77.566471)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942111, 77.566003)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942130, 77.565549)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941246, 77.566703)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
 
                 /* FOOD */
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.940435, 77.565830)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942581, 77.566466)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941485, 77.566267)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.939931, 77.565313)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Hostel Mess")).showInfoWindow();
 
                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
 
                 try {
                     KmlLayer layer = new KmlLayer(mMap, R.raw.bmsce, getActivity());
