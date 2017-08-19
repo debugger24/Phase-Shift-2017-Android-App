@@ -144,6 +144,7 @@ public class MapFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942289, 77.566662)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_library))).title("Library Auditorium")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941089, 77.566137)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Department & Company Stalls")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.940917, 77.565415)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_danger))).title("Danger : Construction Area")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940694, 77.565899)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Indoor Stadium")).showInfoWindow();
 
                 /* PARKING */
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941946, 77.566838)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
