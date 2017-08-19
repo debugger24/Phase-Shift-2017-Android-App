@@ -9,6 +9,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -63,12 +66,36 @@ public class EventFragment extends Fragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Toast.makeText(getContext(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
+                if (isNetworkAvailable()) {
+                    refreshData();
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            default:
+                break;
+        }
+        return false;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.event_list, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -97,9 +124,9 @@ public class EventFragment extends Fragment {
         }
     }
 
-
+    @Override
     public void onAttach(Context context) {
-        super.onAttach(getActivity());
+        super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -130,13 +157,11 @@ public class EventFragment extends Fragment {
     }
 
     private void refreshData() {
-        Toast.makeText(getActivity(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
         if (isNetworkAvailable()) {
             new FetchEventTask(getActivity()).execute();
         } else {
             Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private boolean isNetworkAvailable() {
