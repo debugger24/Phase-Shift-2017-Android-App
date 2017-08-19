@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,9 @@ import me.rahulk.phaseshift2017.About.AboutCoreCommitteeFragment;
 import me.rahulk.phaseshift2017.About.AboutFragment;
 import me.rahulk.phaseshift2017.About.AboutPhaseShiftFragment;
 import me.rahulk.phaseshift2017.Event.EventFragment;
+import me.rahulk.phaseshift2017.Event.EventsCategoryFragment;
+import me.rahulk.phaseshift2017.Event.EventsFragment;
+import me.rahulk.phaseshift2017.Event.WorkshopsFragment;
 import me.rahulk.phaseshift2017.Map.MapFragment;
 import me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment;
 import me.rahulk.phaseshift2017.Schedule.ScheduleFragment;
@@ -28,7 +32,9 @@ import me.rahulk.phaseshift2017.Schedule.ScheduleFragment;
 public class MainActivity extends AppCompatActivity implements NewsfeedFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener, AboutPhaseShiftFragment.OnFragmentInteractionListener,
         AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener,
-        ScheduleFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener {
+        ScheduleFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener,
+        EventsCategoryFragment.OnFragmentInteractionListener, WorkshopsFragment.OnFragmentInteractionListener,
+        EventsFragment.OnFragmentInteractionListener {
 
     Fragment fragment = null;
     Class fragmentClass = null;
@@ -70,6 +76,27 @@ public class MainActivity extends AppCompatActivity implements NewsfeedFragment.
         }
 
     };
+
+    public void loadEventsFragment(String category) {
+        Bundle bundle = new Bundle();
+        bundle.putString("category", category);
+
+        fragmentClass = EventsFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        fragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack("abc");
+        fragmentTransaction.replace(R.id.mainContainer, fragment).commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

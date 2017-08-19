@@ -1,13 +1,22 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.Arrays;
+
+import me.rahulk.phaseshift2017.Data.FetchEventTask;
 import me.rahulk.phaseshift2017.R;
 
 
@@ -66,7 +75,19 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event, container, false);
+
+        getActivity().setTitle("Events and Workshops");
+
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getActivity()));
+
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        refreshData();
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,9 +97,9 @@ public class EventFragment extends Fragment {
         }
     }
 
-    @Override
+
     public void onAttach(Context context) {
-        super.onAttach(context);
+        super.onAttach(getActivity());
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -106,5 +127,21 @@ public class EventFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void refreshData() {
+        Toast.makeText(getActivity(), "Downloading Latest Information", Toast.LENGTH_SHORT).show();
+        if (isNetworkAvailable()) {
+            new FetchEventTask(getActivity()).execute();
+        } else {
+            Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

@@ -69,6 +69,9 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+
+        getActivity().setTitle("PhaseShift 2017");
+
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPager.setAdapter(new AboutPageAdapter(getChildFragmentManager(), getContext()));
 
