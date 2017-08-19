@@ -74,7 +74,7 @@ public class FeedListAdapter extends BaseAdapter {
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
         ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
 
-        ImageView feedImageView = (ImageView) convertView.findViewById(R.id.feedImage1);
+        FeedImageView feedImageView = (FeedImageView) convertView.findViewById(R.id.feedImage1);
 
         FeedItem item = feedItems.get(position);
 
@@ -107,31 +107,26 @@ public class FeedListAdapter extends BaseAdapter {
         }
 
         // user profile pic
-        Glide.with(activity).load(item.getProfilePic())
+        Glide.with(activity)
+                .load(item.getProfilePic())
                 .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profilePic);
 
         // Feed image
+        Log.v("FEED", item.getUrl() + item.getImge());
         if (item.getImge() != null) {
-            Glide.with(activity).load(item.getImge())
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(feedImageView);
-//            feedImageView.setImageUrl(item.getImge(), imageLoader);
-//            feedImageView.setVisibility(View.VISIBLE);
-//            feedImageView
-//                    .setResponseObserver(new FeedImageView.ResponseObserver() {
-//                        @Override
-//                        public void onError() {
-//                        }
-//
-//                        @Override
-//                        public void onSuccess() {
-//                        }
-//                    });
+            feedImageView.setImageUrl(item.getImge(), imageLoader);
+            feedImageView.setVisibility(View.VISIBLE);
+            feedImageView
+                    .setResponseObserver(new FeedImageView.ResponseObserver() {
+                        @Override
+                        public void onError() {
+                        }
+
+                        @Override
+                        public void onSuccess() {
+                        }
+                    });
         } else {
             feedImageView.setVisibility(View.GONE);
         }
