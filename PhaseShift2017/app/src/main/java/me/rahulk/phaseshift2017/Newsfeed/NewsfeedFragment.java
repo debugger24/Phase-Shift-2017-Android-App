@@ -168,6 +168,7 @@ public class NewsfeedFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                swipeContainer.setRefreshing(false);
             }
         });
 
@@ -219,8 +220,7 @@ public class NewsfeedFragment extends Fragment {
     }
 
     private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
@@ -232,8 +232,9 @@ public class NewsfeedFragment extends Fragment {
         }
     }
 
+    @Override
     public void onAttach(Context context) {
-        super.onAttach((Activity) context);
+        super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
