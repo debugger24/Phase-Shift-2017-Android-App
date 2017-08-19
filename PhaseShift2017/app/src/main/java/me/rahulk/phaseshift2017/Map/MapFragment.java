@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -31,6 +33,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
+import me.rahulk.phaseshift2017.MainActivity;
 import me.rahulk.phaseshift2017.R;
 
 
@@ -109,15 +112,18 @@ public class MapFragment extends Fragment {
 
                 mMap = googleMap;
 
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
+                LocationManager lm = (LocationManager) getActivity().getSystemService(getActivity().LOCATION_SERVICE);
+                boolean gps_enabled = false;
+                boolean network_enabled = false;
+
+                try {
+                    gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                } catch (Exception ex) {
+                }
+
+
+                if (!gps_enabled) {
+                    Toast.makeText(getActivity(), "Please switch on GPS for better experience", Toast.LENGTH_SHORT).show();
                 }
 
                 // Add a marker in Sydney, Australia, and move the camera.
@@ -127,8 +133,18 @@ public class MapFragment extends Fragment {
 
                 mMap.getUiSettings().setZoomControlsEnabled(true);
                 mMap.getUiSettings().setCompassEnabled(true);
-                mMap.setMyLocationEnabled(true);
 
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
+                    // Permission is not granted
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                    }
+                } else {
+                    mMap.setMyLocationEnabled(true);
+                }
 
 
                 /* BUILDINGS */
