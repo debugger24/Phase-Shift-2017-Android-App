@@ -1,6 +1,7 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -49,6 +50,10 @@ public class EventFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     Toolbar toolbar;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    Context context;
 
     public EventFragment() {
         // Required empty public constructor
@@ -115,6 +120,9 @@ public class EventFragment extends Fragment {
 
         getActivity().setTitle("Events and Workshops");
 
+        sharedPreferences = getContext().getSharedPreferences("PhaseShift2017", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getActivity()));
 
@@ -136,13 +144,27 @@ public class EventFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ShowcaseView showcaseView = new ShowcaseView.Builder(getActivity())
-                .setTarget(new ToolbarActionItemTarget(toolbar, R.id.action_refresh))
-                .setContentTitle("Download Latest Information")
-                .hideOnTouchOutside()
-                .setStyle(R.style.CustomShowcaseTheme)
-                .build();
-        showcaseView.show();
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+            ShowcaseView showcaseView = new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ToolbarActionItemTarget(toolbar, R.id.action_refresh))
+                    .setContentTitle("Download Latest Information")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+            showcaseView.show();
+        }
+
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Event", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Event", true);
     }
 
     @Override
