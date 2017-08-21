@@ -12,6 +12,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation;
     private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
     private String shareMessage = "Shared using PhaseShift App";
+    Toolbar toolbar;
 
     private static final int DETAIL_LOADER = 0;
     private static final String[] EVENT_COLUMNS = {
@@ -75,6 +77,9 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_event_details);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

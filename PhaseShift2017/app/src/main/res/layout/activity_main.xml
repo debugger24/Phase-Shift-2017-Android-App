@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context="me.rahulk.phaseshift2017.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white" />
+
     <FrameLayout
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
