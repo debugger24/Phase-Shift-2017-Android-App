@@ -20,7 +20,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.R;
@@ -246,6 +247,14 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
                 data.getString(COL_EVENT_DESCRIPTION) + "\n\n" +
                 "Contact : " + data.getString(COL_EVENT_PERSON) + " (" + data.getString(COL_EVENT_PERSON_NUMBER) + ")\n\n" +
                 "Shared using PhaseShift App\n#PhaseShift2017";
+
+        ShowcaseView showcaseView = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(txtCoordinator.getId(), this))
+                .setContentTitle("Tap to Call Event Coordinator")
+                .hideOnTouchOutside()
+                .setStyle(R.style.CustomShowcaseTheme)
+                .build();
+
     }
 
     @Override
