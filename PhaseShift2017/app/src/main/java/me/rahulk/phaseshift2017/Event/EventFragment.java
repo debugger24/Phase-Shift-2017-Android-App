@@ -53,7 +53,6 @@ public class EventFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    Context context;
 
     public EventFragment() {
         // Required empty public constructor

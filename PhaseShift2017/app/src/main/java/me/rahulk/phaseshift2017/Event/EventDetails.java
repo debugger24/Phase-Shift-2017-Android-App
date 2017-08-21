@@ -1,6 +1,7 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -32,6 +33,9 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
     private String shareMessage = "Shared using PhaseShift App";
     Toolbar toolbar;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     private static final int DETAIL_LOADER = 0;
     private static final String[] EVENT_COLUMNS = {
@@ -86,6 +90,9 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportLoaderManager().initLoader(DETAIL_LOADER, null, this);
+
+        sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
 
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -248,13 +255,27 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
                 "Contact : " + data.getString(COL_EVENT_PERSON) + " (" + data.getString(COL_EVENT_PERSON_NUMBER) + ")\n\n" +
                 "Shared using PhaseShift App\n#PhaseShift2017";
 
-        ShowcaseView showcaseView = new ShowcaseView.Builder(this)
-                .setTarget(new ViewTarget(txtCoordinator.getId(), this))
-                .setContentTitle("Tap to Call Event Coordinator")
-                .hideOnTouchOutside()
-                .setStyle(R.style.CustomShowcaseTheme)
-                .build();
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
 
+            new ShowcaseView.Builder(this)
+                    .setTarget(new ViewTarget(txtCoordinator.getId(), this))
+                    .setContentTitle("Tap to Call Event Coordinator")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+        }
+
+
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Event_Details", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Event_Details", true);
     }
 
     @Override
