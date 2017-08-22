@@ -171,12 +171,6 @@ public class MapFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942130, 77.565549)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941246, 77.566703)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
 
-                /* FOOD */
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.940435, 77.565830)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.942581, 77.566466)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941485, 77.566267)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Canteen")).showInfoWindow();
-                mMap.addMarker(new MarkerOptions().position(new LatLng(12.939931, 77.565313)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_food))).title("Hostel Mess")).showInfoWindow();
-
                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
