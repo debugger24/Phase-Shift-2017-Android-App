@@ -1,6 +1,7 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +21,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.R;
@@ -29,6 +32,10 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation;
     private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
     private String shareMessage = "Shared using PhaseShift App";
+    Toolbar toolbar;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     private static final int DETAIL_LOADER = 0;
     private static final String[] EVENT_COLUMNS = {
@@ -76,10 +83,16 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportLoaderManager().initLoader(DETAIL_LOADER, null, this);
+
+        sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
 
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -241,6 +254,28 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
                 data.getString(COL_EVENT_DESCRIPTION) + "\n\n" +
                 "Contact : " + data.getString(COL_EVENT_PERSON) + " (" + data.getString(COL_EVENT_PERSON_NUMBER) + ")\n\n" +
                 "Shared using PhaseShift App\n#PhaseShift2017";
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+
+            new ShowcaseView.Builder(this)
+                    .setTarget(new ViewTarget(txtCoordinator.getId(), this))
+                    .setContentTitle("Tap to Call Event Coordinator")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+        }
+
+
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Event_Details", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Event_Details", true);
     }
 
     @Override
