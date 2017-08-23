@@ -80,7 +80,7 @@ public class ScheduleFragment extends Fragment {
         getActivity().setTitle("Schedule");
         View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-        getActivity().setTitle("PhaseShift 2017");
+        getActivity().setTitle("Schedule");
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPager.setAdapter(new SchedulePageAdapter(getChildFragmentManager(), getContext()));
