@@ -5,6 +5,8 @@
     android:orientation="vertical"
     tools:context="me.rahulk.phaseshift2017.Schedule.Day2">
 
+    <!--Header-->
+
     <me.rahulk.phaseshift2017.Schedule.CustomScrollView
         android:id="@+id/horizontalViewHeader"
         android:layout_width="wrap_content"
@@ -18,14 +20,14 @@
 
             <TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:background="@color/colorPrimary"
-                    android:padding="4dp"
-                    android:text="Venue"
-                    android:textColor="@color/white" />
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_margin="1dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:padding="4dp"-->
+                <!--android:text="Venue"-->
+                <!--android:textColor="@color/white" />-->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -104,6 +106,7 @@
     </me.rahulk.phaseshift2017.Schedule.CustomScrollView>
 
 
+    <!--Body-->
     <ScrollView
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -123,16 +126,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableRow android:visibility="visible">
+                <TableRow>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_margin="1dp"
-                        android:background="@color/colorAccent"
-                        android:padding="4dp"
-
-                        android:text="Venu rg re gre gere" />
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="1dp"-->
+                    <!--android:background="@color/colorAccent"-->
+                    <!--android:padding="4dp"-->
+                    <!--android:text="Venu rg re gre gere" />-->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -206,7 +208,6 @@
                         android:text="4 PM to 5 PM"
                         android:textColor="@color/white" />
                 </TableRow>
-
 
             </TableLayout>
 
