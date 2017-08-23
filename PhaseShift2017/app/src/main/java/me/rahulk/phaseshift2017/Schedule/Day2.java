@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -58,6 +61,8 @@ public class Day2 extends Fragment implements ScrollViewListener {
     CustomScrollView horizontalViewHeader;
     CustomScrollView horizontalViewBody;
 
+    View rootView;
+
     public Day2() {
         // Required empty public constructor
     }
@@ -81,19 +86,37 @@ public class Day2 extends Fragment implements ScrollViewListener {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_refresh:
+                Toast.makeText(getContext(), "Downloading Latest Schedule", Toast.LENGTH_SHORT).show();
+                if (isNetworkAvailable()) {
+                    refreshData(rootView);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            default:
+                break;
+        }
+        return false;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_day2, container, false);
+        rootView = inflater.inflate(R.layout.fragment_day2, container, false);
 
         horizontalViewHeader = (CustomScrollView) rootView.findViewById(R.id.horizontalViewHeader);
         horizontalViewBody = (CustomScrollView) rootView.findViewById(R.id.horizontalViewBody);
@@ -167,6 +190,9 @@ public class Day2 extends Fragment implements ScrollViewListener {
     private void generateUI(JSONObject jsonString, View rootView) {
 
         TableLayout tableLayout = (TableLayout) rootView.findViewById(R.id.scheduleTable);
+
+        while (tableLayout.getChildCount() > 1)
+            tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
 
         try {
             JSONArray venueArray = jsonString.getJSONArray("day2");
@@ -245,6 +271,12 @@ public class Day2 extends Fragment implements ScrollViewListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.schedule, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
