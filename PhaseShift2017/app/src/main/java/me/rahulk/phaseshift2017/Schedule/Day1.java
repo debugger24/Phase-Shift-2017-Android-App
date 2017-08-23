@@ -115,6 +115,12 @@ public class Day1 extends Fragment implements ScrollViewListener {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        setHasOptionsMenu(false);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
