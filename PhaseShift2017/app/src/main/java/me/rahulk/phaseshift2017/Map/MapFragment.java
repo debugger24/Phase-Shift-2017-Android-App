@@ -158,6 +158,7 @@ public class MapFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.942637, 77.566075)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Telecom Block")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.940679, 77.564932)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Science Block")).showInfoWindow();
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.940187, 77.565375)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Multipurpose Hall")).showInfoWindow();
+                mMap.addMarker(new MarkerOptions().position(new LatLng(12.941495, 77.566346)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Administrative Block")).showInfoWindow();
 
                 /* PARKING */
                 mMap.addMarker(new MarkerOptions().position(new LatLng(12.941946, 77.566838)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_parking))).title("Parking")).showInfoWindow();
