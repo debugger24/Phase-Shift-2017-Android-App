@@ -1,6 +1,8 @@
 package me.rahulk.phaseshift2017.Schedule;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,12 +14,27 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Cache;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+
+import me.rahulk.phaseshift2017.AppController;
 import me.rahulk.phaseshift2017.R;
+
+import static me.rahulk.phaseshift2017.AppConfig.URL_EVENTS;
+import static me.rahulk.phaseshift2017.AppConfig.URL_SCHEDULE;
 
 
 /**
@@ -86,16 +103,67 @@ public class Day1 extends Fragment implements ScrollViewListener {
         horizontalViewHeader.setScrollViewListener(this);
         horizontalViewBody.setScrollViewListener(this);
 
-        // Load JSON
-        String jsonString = "{\"day1\":[{\"Venue\":\"Indoor Stadium\",\"Events\":[{\"Title\":\"Inauguration\",\"Col\":1,\"Span\":3,\"Icon\":\"ps_logo_outline\",\"Color\":\"#f23a3a\"}]},{\"Venue\":\"Advanced RF lab, EC Block\",\"Events\":[{\"Title\":\"Arduino - Basics and Interfacing Workshop\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_arduino\",\"Color\":\"#9b5836\"}]},{\"Venue\":\"Architecture Studio 8\",\"Events\":[{\"Title\":\"Lensation\",\"Col\":3,\"Span\":6,\"Icon\":\"event_camera_2\",\"Color\":\"#447025\"}]},{\"Venue\":\"Architecture Studio 9\",\"Events\":[{\"Title\":\"Divide and Sculpt\",\"Col\":3,\"Span\":6,\"Icon\":\"ps_logo_outline\",\"Color\":\"#253570\"}]},{\"Venue\":\"Colab - Mechanical\",\"Events\":[{\"Title\":\"Botwars\",\"Col\":2,\"Span\":7,\"Icon\":\"event_bot\",\"Color\":\"#5f2570\"}]},{\"Venue\":\"Communication lab(TCE), EC Block\",\"Events\":[{\"Title\":\"Project J\",\"Col\":2,\"Span\":7,\"Icon\":\"event_processor\",\"Color\":\"#256e70\"}]},{\"Venue\":\"Computer Lab, 3rd floor, PG block(Chem)\",\"Events\":[{\"Title\":\"Workshop on CFD\",\"Col\":1,\"Span\":8,\"Icon\":\"ps_logo_outline\",\"Color\":\"#9b5836\"}]},{\"Venue\":\"Computer lab(EI)\",\"Events\":[{\"Title\":\"Hackathon TCP IP Based on Real Time Data Processing\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_network\",\"Color\":\"color5\"}]},{\"Venue\":\"Computer Simulation/Synthesis Lab(TCE), EC Block\",\"Events\":[{\"Title\":\"MATLAB GUI Development Workshop\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_matlab_2\",\"Color\":\"color1\"}]},{\"Venue\":\"Concrete Lab (Civil)\",\"Events\":[{\"Title\":\"Non - Destructive Testing\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_compass\",\"Color\":\"color1\"}]},{\"Venue\":\"CS-5002 and CS-5003\",\"Events\":[{\"Title\":\"Confoundo\",\"Col\":2,\"Span\":3,\"Icon\":\"event_math\",\"Color\":\"color9\"},{\"Title\":\"Game Of Strategies\",\"Col\":6,\"Span\":3,\"Icon\":\"event_strategy\",\"Color\":\"color10\"}]},{\"Venue\":\"CS-Lab, section 1\",\"Events\":[{\"Title\":\"Android Senses: A Workshop on Multimedia\",\"Col\":1,\"Span\":8,\"Icon\":\"workshop_android\",\"Color\":\"color1\"}]},{\"Venue\":\"CS-Lab, section 2\",\"Events\":[{\"Title\":\"Tech-Hunt 2.0\",\"Col\":6,\"Span\":3,\"Icon\":\"event_treasure_map\",\"Color\":\"color5\"}]},{\"Venue\":\"Drawing hall 1 and CADD lab\",\"Events\":[{\"Title\":\"Encase It\",\"Col\":2,\"Span\":6,\"Icon\":\"event_design\",\"Color\":\"color8\"}]},{\"Venue\":\"EC 201, VHDL lab, AME lab\",\"Events\":[{\"Title\":\"Bidding Wars-An Auction Ecstasy\",\"Col\":1,\"Span\":7,\"Icon\":\"event_auction\",\"Color\":\"color4\"}]},{\"Venue\":\"EC 201,202,203, DEC lab\",\"Events\":[{\"Title\":\"Geekatron\",\"Col\":1,\"Span\":7,\"Icon\":\"event_quiz_3\",\"Color\":\"color4\"}]},{\"Venue\":\"EC 206\",\"Events\":[{\"Title\":\"Networking Workshop\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_router\",\"Color\":\"color1\"}]},{\"Venue\":\"EC 207\",\"Events\":[{\"Title\":\"Walk-In Mock\",\"Col\":2,\"Span\":7,\"Icon\":\"event_resume\",\"Color\":\"color3\"}]},{\"Venue\":\"EC 209\",\"Events\":[{\"Title\":\"T-REX Hunt\",\"Col\":2,\"Span\":7,\"Icon\":\"event_antenna\",\"Color\":\"color6\"}]},{\"Venue\":\"ERP LAB, TAYLOR HALL, IE Lab\",\"Events\":[{\"Title\":\"The Fourth Monkey\",\"Col\":4,\"Span\":3,\"Icon\":\"event_laser\",\"Color\":\"color4\"}]},{\"Venue\":\"FDC hall and ML Lab\",\"Events\":[{\"Title\":\"Cimethon\",\"Col\":2,\"Span\":7,\"Icon\":\"event_health\",\"Color\":\"color10\"}]},{\"Venue\":\"Gopi wall/Mechanical parking lot\",\"Events\":[{\"Title\":\"EZ Rider\",\"Col\":2,\"Span\":7,\"Icon\":\"event_bike\",\"Color\":\"color8\"}]},{\"Venue\":\"IEM CR1 (Mech block 1st floor)\",\"Events\":[{\"Title\":\"Sensive\",\"Col\":2,\"Span\":7,\"Icon\":\"event_race_car_2\",\"Color\":\"colorNone\"}]},{\"Venue\":\"IEM CR2 (Mech block 1st floor)\",\"Events\":[{\"Title\":\"Survival of the Cyborgs\",\"Col\":2,\"Span\":7,\"Icon\":\"ps_logo_outline\",\"Color\":\"colorNone\"}]},{\"Venue\":\"Internet Lab\",\"Events\":[{\"Title\":\"Code-A-Thon 2.0\",\"Col\":3,\"Span\":3,\"Icon\":\"event_code\",\"Color\":\"colorNone\"}]},{\"Venue\":\"MBA computer lab\",\"Events\":[{\"Title\":\"Sensor to Cloud Analytics\",\"Col\":1,\"Span\":8,\"Icon\":\"workshop_cloud_computing\",\"Color\":\"color\"}]},{\"Venue\":\"MC lab, TCE department\",\"Events\":[{\"Title\":\"IoT Workshop\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_iot\",\"Color\":\"color\"}]},{\"Venue\":\"MCA Classroom 1\",\"Events\":[{\"Title\":\"Technicolor\",\"Col\":6,\"Span\":3,\"Icon\":\"ps_logo_outline\",\"Color\":\"color\"}]},{\"Venue\":\"MCA Classroom 2\",\"Events\":[{\"Title\":\"Les Quizerables\",\"Col\":1,\"Span\":8,\"Icon\":\"event_quiz_4\",\"Color\":\"color\"}]},{\"Venue\":\"Measurements Lab , 1st floor\",\"Events\":[{\"Title\":\"Make-A-Thon\",\"Col\":3,\"Span\":6,\"Icon\":\"event_infrared_sensor\",\"Color\":\"color\"}]},{\"Venue\":\"MESH\",\"Events\":[{\"Title\":\"BMSCE IEEE Paper Presentation Competition\",\"Col\":2,\"Span\":3,\"Icon\":\"event_presentation\",\"Color\":\"color\"}]},{\"Venue\":\"ML-1, Mech block\",\"Events\":[{\"Title\":\"Non - Destructive Testing\",\"Col\":2,\"Span\":7,\"Icon\":\"workshop_compass\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 1st floor IT Classroom 1\",\"Events\":[{\"Title\":\"Sensearch\",\"Col\":1,\"Span\":4,\"Icon\":\"ps_logo_outline\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 3rd floor  BT classroom 2\",\"Events\":[{\"Title\":\"Start-Up Wars\",\"Col\":4,\"Span\":4,\"Icon\":\"event_client_company\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 3rd floor  BT classroom 3\",\"Events\":[{\"Title\":\"Gen-Ethics\",\"Col\":1,\"Span\":2,\"Icon\":\"event_speak\",\"Color\":\"color\"},{\"Title\":\"Bio-Race\",\"Col\":4,\"Span\":5,\"Icon\":\"event_treasure_hunt\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 3rd floor MBA classroom 3\",\"Events\":[{\"Title\":\"Business Plan Competition\",\"Col\":3,\"Span\":2,\"Icon\":\"event_business\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 3rd floor MBA classroom 4\",\"Events\":[{\"Title\":\"Ad Making\",\"Col\":6,\"Span\":2,\"Icon\":\"event_camera\",\"Color\":\"color\"}]},{\"Venue\":\"PG block 3rd floor MBA classroom 5\",\"Events\":[{\"Title\":\"Workshop on Design Thinking\",\"Col\":3,\"Span\":2,\"Icon\":\"ps_logo_outline\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CH-3001\",\"Events\":[{\"Title\":\"It's Elementary, Watson\",\"Col\":2,\"Span\":2,\"Icon\":\"event_quiz_4\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CH-3002\",\"Events\":[{\"Title\":\"The Marauders' Maze\",\"Col\":4,\"Span\":2,\"Icon\":\"event_treasure_map\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CS-5001\",\"Events\":[{\"Title\":\"SnS-Techvita\",\"Col\":3,\"Span\":6,\"Icon\":\"event_quiz\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CS-5004\",\"Events\":[{\"Title\":\"SnS-Technical Writing\",\"Col\":4,\"Span\":5,\"Icon\":\"event_paper\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CV-7003\",\"Events\":[{\"Title\":\"Presensortation\",\"Col\":1,\"Span\":8,\"Icon\":\"event_presentation\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block CV-7010\",\"Events\":[{\"Title\":\"Potpourri\",\"Col\":1,\"Span\":8,\"Icon\":\"event_quiz_5\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block EC-6001\",\"Events\":[{\"Title\":\"Sensor Of Humour - The Mad-Ads\",\"Col\":2,\"Span\":7,\"Icon\":\"event_reel\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block EE-6003\",\"Events\":[{\"Title\":\"Tardis 2.0\",\"Col\":2,\"Span\":2,\"Icon\":\"ps_logo_outline\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block IS-4003\",\"Events\":[{\"Title\":\"Knock Some Sense\",\"Col\":6,\"Span\":3,\"Icon\":\"workshop_sensor\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block ML-5001\",\"Events\":[{\"Title\":\"LabVIEW & myDAQ\",\"Col\":1,\"Span\":8,\"Icon\":\"event_health\",\"Color\":\"colorNone\"}]},{\"Venue\":\"PG block ML-5002 and AIC Lab(ML)\",\"Events\":[{\"Title\":\"Triple-Decker\",\"Col\":3,\"Span\":3,\"Icon\":\"event_ear\",\"Color\":\"colorNone\"}]},{\"Venue\":\"Power Electroics Lab\",\"Events\":[{\"Title\":\"Circuit Challenge\",\"Col\":1,\"Span\":6,\"Icon\":\"workshop_circuit\",\"Color\":\"colorNone\"}]}]}";
-
-        try {
-            generateUI(new JSONObject(jsonString), rootView);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // Load Table
+        loadTable(rootView);
 
         return rootView;
+    }
+
+    private void loadTable(View rootView) {
+        Cache cache = AppController.getInstance().getRequestQueue().getCache();
+        Cache.Entry entry = cache.get(URL_SCHEDULE);
+
+        if (entry != null) {
+            // fetch the data from cache
+            try {
+                String data = new String(entry.data, "UTF-8");
+                try {
+                    generateUI(new JSONObject(data), rootView);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // making fresh volley request and getting json
+            if (isNetworkAvailable()) {
+                Toast.makeText(getActivity(), "Downloading new Schedule", Toast.LENGTH_SHORT).show();
+                refreshData(rootView);
+            } else {
+                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    private void refreshData(final View rootView) {
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET, URL_SCHEDULE, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                VolleyLog.d("SCHEDULE RESPONSE", "Response: " + response.toString());
+                if (response != null) {
+                    generateUI(response, rootView);
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("SCHEDULE ERROR", "Error: " + error.getMessage());
+                // swipeContainer.setRefreshing(false);
+            }
+        });
+
+        // Adding request to volley request queue
+        AppController.getInstance().addToRequestQueue(jsonReq);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void generateUI(JSONObject jsonString, View rootView) {
