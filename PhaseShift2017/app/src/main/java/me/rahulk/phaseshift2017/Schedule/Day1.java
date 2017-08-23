@@ -1,11 +1,14 @@
 package me.rahulk.phaseshift2017.Schedule;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.github.amlcurran.showcaseview.ShowcaseView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +38,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.Event.ToolbarActionItemTarget;
 import me.rahulk.phaseshift2017.R;
 
 import static me.rahulk.phaseshift2017.AppConfig.URL_EVENTS;
@@ -62,6 +67,11 @@ public class Day1 extends Fragment implements ScrollViewListener {
 
     CustomScrollView horizontalViewHeader;
     CustomScrollView horizontalViewBody;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    Toolbar toolbar;
 
     View rootView;
 
@@ -119,6 +129,11 @@ public class Day1 extends Fragment implements ScrollViewListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_day1, container, false);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        sharedPreferences = getContext().getSharedPreferences("PhaseShift2017", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         horizontalViewHeader = (CustomScrollView) rootView.findViewById(R.id.horizontalViewHeader);
         horizontalViewBody = (CustomScrollView) rootView.findViewById(R.id.horizontalViewBody);
@@ -188,6 +203,31 @@ public class Day1 extends Fragment implements ScrollViewListener {
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+            ShowcaseView showcaseView = new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ToolbarActionItemTarget(toolbar, R.id.action_refresh))
+                    .setContentTitle("Download Latest Schedule")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+            showcaseView.show();
+        }
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Schedule", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Schedule", true);
     }
 
     private void generateUI(JSONObject jsonString, View rootView) {
