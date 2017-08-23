@@ -182,11 +182,11 @@ public class Day1 extends Fragment implements ScrollViewListener {
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
 
                 // For the Venue Title
-                View viewVenue = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_venue, null);
-                TextView txtVenueTitle = (TextView) viewVenue.findViewById(R.id.txtVenueTitle);
-                txtVenueTitle.setText(venueTitle);
-
-                tableRow.addView(viewVenue);
+//                View viewVenue = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_venue, null);
+//                TextView txtVenueTitle = (TextView) viewVenue.findViewById(R.id.txtVenueTitle);
+//                txtVenueTitle.setText(venueTitle);
+//
+//                tableRow.addView(viewVenue);
 
                 // For each event
                 JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
@@ -211,7 +211,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
                     params.span = eventJSONObject.getInt("Span");
-                    params.column = eventJSONObject.getInt("Col");
+                    params.column = eventJSONObject.getInt("Col")-1;
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
                     tableRow.addView(viewEvent, params);

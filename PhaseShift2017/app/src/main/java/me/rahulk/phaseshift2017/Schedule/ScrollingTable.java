@@ -29,7 +29,7 @@ public class ScrollingTable extends LinearLayout {
         TableLayout header = (TableLayout) findViewById(R.id.scheduleHeader);
         TableLayout body = (TableLayout) findViewById(R.id.scheduleTable);
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 8; i++) {
             TableRow bodyRow = (TableRow) body.getChildAt(0);
             TableRow headerRow = (TableRow) header.getChildAt(0);
 
