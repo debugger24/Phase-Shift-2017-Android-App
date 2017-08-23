@@ -1,0 +1,217 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="me.rahulk.phaseshift2017.Schedule.Day2">
+
+    <!--Header-->
+
+    <me.rahulk.phaseshift2017.Schedule.CustomScrollView
+        android:id="@+id/horizontalViewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal|vertical">
+
+        <TableLayout
+            android:id="@+id/scheduleHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_margin="1dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:padding="4dp"-->
+                <!--android:text="Venue"-->
+                <!--android:textColor="@color/white" />-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="9 AM to 10 AM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="10 AM to 11 AM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="11 AM to 12 PM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="12 AM to 1 PM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="1 PM to 2 PM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="2 PM to 3 PM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="3 PM to 4 PM"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="4dp"
+                    android:text="4 PM to 5 PM"
+                    android:textColor="@color/white" />
+            </TableRow>
+
+        </TableLayout>
+    </me.rahulk.phaseshift2017.Schedule.CustomScrollView>
+
+
+    <!--Body-->
+    <ScrollView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbars="horizontal|vertical">
+
+        <me.rahulk.phaseshift2017.Schedule.CustomScrollView
+            android:id="@+id/horizontalViewBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical">
+
+            <TableLayout
+                android:id="@+id/scheduleTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="1dp"-->
+                    <!--android:background="@color/colorAccent"-->
+                    <!--android:padding="4dp"-->
+                    <!--android:text="Venu rg re gre gere" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="9 AM to 10 AM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="10 AM to 11 AM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="11 AM to 12 PM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="12 AM to 1 PM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="1 PM to 2 PM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="2 PM to 3 PM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="3 PM to 4 PM"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_margin="1dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="4dp"
+                        android:text="4 PM to 5 PM"
+                        android:textColor="@color/white" />
+                </TableRow>
+
+            </TableLayout>
+
+        </me.rahulk.phaseshift2017.Schedule.CustomScrollView>
+    </ScrollView>
+
+</LinearLayout>

@@ -3,11 +3,22 @@ package me.rahulk.phaseshift2017.Schedule;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import me.rahulk.phaseshift2017.About.AboutPageAdapter;
 import me.rahulk.phaseshift2017.R;
 
 
@@ -67,14 +78,17 @@ public class ScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getActivity().setTitle("Schedule");
-        return inflater.inflate(R.layout.fragment_schedule, container, false);
-    }
+        View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        getActivity().setTitle("Schedule");
+
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        viewPager.setAdapter(new SchedulePageAdapter(getChildFragmentManager(), getContext()));
+
+        TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        return rootView;
     }
 
     @Override
