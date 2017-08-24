@@ -172,10 +172,10 @@ public class Day1 extends Fragment implements ScrollViewListener {
         } else {
             // making fresh volley request and getting json
             if (isNetworkAvailable()) {
-                Toast.makeText(getActivity(), "Downloading new Schedule", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Downloading new Schedule", Toast.LENGTH_SHORT).show();
                 refreshData(rootView);
             } else {
-                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -196,7 +196,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("SCHEDULE ERROR", "Error: " + error.getMessage());
-                Toast.makeText(getActivity(), "Failed to download schedule", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Failed to download schedule", Toast.LENGTH_SHORT).show();
                 // swipeContainer.setRefreshing(false);
             }
         });
