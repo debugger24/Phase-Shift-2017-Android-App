@@ -203,15 +203,8 @@ public class Day2 extends Fragment implements ScrollViewListener {
                 String venueTitle = venueJSONObject.getString("Venue");
 
                 // Cretae a venue row
-                TableRow tableRow = new TableRow(getActivity());
+                TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-
-                // For the Venue Title
-//                View viewVenue = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_venue, null);
-//                TextView txtVenueTitle = (TextView) viewVenue.findViewById(R.id.txtVenueTitle);
-//                txtVenueTitle.setText(venueTitle);
-//
-//                tableRow.addView(viewVenue);
 
                 // For each event
                 JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
@@ -223,16 +216,27 @@ public class Day2 extends Fragment implements ScrollViewListener {
                     Log.v("EVENT", eventTitle);
 
                     // For the Event
-                    View viewEvent = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_event, null);
+                    View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
                     TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
                     TextView txtEventVenue = (TextView) viewEvent.findViewById(R.id.txtEventVenue);
                     txtEventTitle.setText(eventTitle);
                     txtEventVenue.setText(venueTitle);
 
-
-                    ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
-                    Context imageContext = eventIcon.getContext();
-                    eventIcon.setImageResource(imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName()));
+                    try {
+                        ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
+                        Context imageContext = eventIcon.getContext();
+                        int resCode = imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName());
+                        int defaultResCode = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", getContext().getPackageName());
+                        if (resCode == 0) {
+                            // Load Default
+                            eventIcon.setImageResource(defaultResCode);
+                        } else {
+                            // Logo Image
+                            eventIcon.setImageResource(resCode);
+                        }
+                    } catch (Exception e) {
+                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule");
+                    }
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
                     params.span = eventJSONObject.getInt("Span");
