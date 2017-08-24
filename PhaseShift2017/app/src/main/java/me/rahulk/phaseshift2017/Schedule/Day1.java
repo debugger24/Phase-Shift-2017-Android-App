@@ -270,10 +270,21 @@ public class Day1 extends Fragment implements ScrollViewListener {
                     txtEventTitle.setText(eventTitle);
                     txtEventVenue.setText(venueTitle);
 
-
-                    ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
-                    Context imageContext = eventIcon.getContext();
-                    eventIcon.setImageResource(imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName()));
+                    try {
+                        ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
+                        Context imageContext = eventIcon.getContext();
+                        int resCode = imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName());
+                        int defaultResCode = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", getContext().getPackageName());
+                        if (resCode == 0) {
+                            // Load Default
+                            eventIcon.setImageResource(defaultResCode);
+                        } else {
+                            // Logo Image
+                            eventIcon.setImageResource(resCode);
+                        }
+                    } catch (Exception e) {
+                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule");
+                    }
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
                     params.span = eventJSONObject.getInt("Span");
