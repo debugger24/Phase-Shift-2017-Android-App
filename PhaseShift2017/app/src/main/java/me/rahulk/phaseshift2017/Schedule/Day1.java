@@ -251,7 +251,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
                 String venueTitle = venueJSONObject.getString("Venue");
 
                 // Cretae a venue row
-                TableRow tableRow = new TableRow(getActivity());
+                TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
 
                 // For each event
@@ -264,7 +264,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
                     Log.v("EVENT", eventTitle);
 
                     // For the Event
-                    View viewEvent = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_event, null);
+                    View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
                     TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
                     TextView txtEventVenue = (TextView) viewEvent.findViewById(R.id.txtEventVenue);
                     txtEventTitle.setText(eventTitle);
