@@ -254,13 +254,6 @@ public class Day1 extends Fragment implements ScrollViewListener {
                 TableRow tableRow = new TableRow(getActivity());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
 
-                // For the Venue Title
-//                View viewVenue = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_venue, null);
-//                TextView txtVenueTitle = (TextView) viewVenue.findViewById(R.id.txtVenueTitle);
-//                txtVenueTitle.setText(venueTitle);
-//
-//                tableRow.addView(viewVenue);
-
                 // For each event
                 JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
                 for (int j = 0; j < venueEvents.length(); j++) {
