@@ -7,8 +7,8 @@ android {
         applicationId "me.rahulk.phaseshift2017"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 12
-        versionName "2"
+        versionCode 14
+        versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
