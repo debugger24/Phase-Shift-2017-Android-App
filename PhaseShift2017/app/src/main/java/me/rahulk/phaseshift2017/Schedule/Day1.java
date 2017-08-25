@@ -266,8 +266,6 @@ public class Day1 extends Fragment implements ScrollViewListener {
                     String eventTitle = eventJSONObject.getString("Title");
                     String imageResource = eventJSONObject.getString("Icon");
 
-                    Log.v("EVENT", eventTitle);
-
                     // For the Event
                     View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
                     TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
@@ -288,7 +286,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
                             eventIcon.setImageResource(resCode);
                         }
                     } catch (Exception e) {
-                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule");
+                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule image" + eventTitle + imageResource);
                     }
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
@@ -304,6 +302,8 @@ public class Day1 extends Fragment implements ScrollViewListener {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            Log.v("SCHEDULE ERROR", e.toString());
         }
     }
 
