@@ -240,8 +240,13 @@ public class Day1 extends Fragment implements ScrollViewListener {
 
         TableLayout tableLayout = (TableLayout) rootView.findViewById(R.id.scheduleTable);
 
-        while (tableLayout.getChildCount() > 1)
-            tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
+        try {
+            while (tableLayout.getChildCount() > 1)
+                tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
+        } catch (Exception e) {
+            // Do nothing
+        }
+
 
         try {
             JSONArray venueArray = jsonString.getJSONArray("day1");
