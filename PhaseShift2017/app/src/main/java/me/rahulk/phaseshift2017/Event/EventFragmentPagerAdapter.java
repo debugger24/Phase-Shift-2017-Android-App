@@ -11,8 +11,8 @@ import android.util.Log;
  */
 
 public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"Events", "Workshops"};
+    final int PAGE_COUNT = 3;
+    private String tabTitles[] = new String[]{"Events", "Workshops", "Flagship"};
     private Context context;
 
     public EventFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -23,11 +23,11 @@ public class EventFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            Log.v("Changing Fragment", "Event Fragment");
             return new EventsCategoryFragment();
-        } else {
-            Log.v("Changing Fragment", "Workshop Fragment");
+        } else if (position == 1) {
             return new WorkshopsFragment();
+        } else {
+            return new FlagshipsFragment();
         }
     }
 
