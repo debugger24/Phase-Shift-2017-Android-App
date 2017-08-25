@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +92,18 @@ public class MapFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        changeGPS(false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        changeGPS(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -126,7 +139,6 @@ public class MapFragment extends Fragment {
                             e.printStackTrace();
                         }
 
-
                         if (!gps_enabled) {
                             Toast.makeText(getContext(), "Please switch on GPS for better experience", Toast.LENGTH_SHORT).show();
                         }
@@ -138,17 +150,7 @@ public class MapFragment extends Fragment {
                         mMap.getUiSettings().setZoomControlsEnabled(true);
                         mMap.getUiSettings().setCompassEnabled(true);
 
-                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            Toast.makeText(getContext(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
-                            // Permission is not granted
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                            } else {
-                                ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                            }
-                        } else {
-                            mMap.setMyLocationEnabled(true);
-                        }
+                        changeGPS(true);
 
 
                         /* BUILDINGS */
@@ -207,6 +209,31 @@ public class MapFragment extends Fragment {
         } catch (Exception e) {
             // Will load default icon
             return null;
+        }
+    }
+
+    public void changeGPS(Boolean status) {
+        if (getContext() != null) {
+            try {
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
+                    // Permission is not granted
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                    }
+                } else {
+                    mMap.setMyLocationEnabled(status);
+                    if (status) {
+                        Log.v("GPS CHANGE", "GPS Enabled");
+                    } else {
+                        Log.v("GPS CHANGE", "GPS Disabled");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
