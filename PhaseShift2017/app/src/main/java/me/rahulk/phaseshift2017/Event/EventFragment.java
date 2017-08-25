@@ -1,13 +1,17 @@
 package me.rahulk.phaseshift2017.Event;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.github.amlcurran.showcaseview.ShowcaseView;
 
 import java.util.Arrays;
 
@@ -42,6 +48,11 @@ public class EventFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    Toolbar toolbar;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public EventFragment() {
         // Required empty public constructor
@@ -104,7 +115,12 @@ public class EventFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_event, container, false);
 
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
         getActivity().setTitle("Events and Workshops");
+
+        sharedPreferences = getContext().getSharedPreferences("PhaseShift2017", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         viewPager.setAdapter(new EventFragmentPagerAdapter(getChildFragmentManager(), getActivity()));
@@ -122,6 +138,32 @@ public class EventFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+            ShowcaseView showcaseView = new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ToolbarActionItemTarget(toolbar, R.id.action_refresh))
+                    .setContentTitle("Download Latest Information")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+            showcaseView.show();
+        }
+
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Event", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Event", true);
     }
 
     @Override

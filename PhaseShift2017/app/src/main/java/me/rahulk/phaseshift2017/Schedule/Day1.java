@@ -1,11 +1,14 @@
 package me.rahulk.phaseshift2017.Schedule;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.github.amlcurran.showcaseview.ShowcaseView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +38,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.Event.ToolbarActionItemTarget;
 import me.rahulk.phaseshift2017.R;
 
 import static me.rahulk.phaseshift2017.AppConfig.URL_EVENTS;
@@ -62,6 +67,11 @@ public class Day1 extends Fragment implements ScrollViewListener {
 
     CustomScrollView horizontalViewHeader;
     CustomScrollView horizontalViewBody;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    Toolbar toolbar;
 
     View rootView;
 
@@ -105,6 +115,12 @@ public class Day1 extends Fragment implements ScrollViewListener {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        setHasOptionsMenu(false);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -119,6 +135,11 @@ public class Day1 extends Fragment implements ScrollViewListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_day1, container, false);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        sharedPreferences = getContext().getSharedPreferences("PhaseShift2017", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         horizontalViewHeader = (CustomScrollView) rootView.findViewById(R.id.horizontalViewHeader);
         horizontalViewBody = (CustomScrollView) rootView.findViewById(R.id.horizontalViewBody);
@@ -151,10 +172,10 @@ public class Day1 extends Fragment implements ScrollViewListener {
         } else {
             // making fresh volley request and getting json
             if (isNetworkAvailable()) {
-                Toast.makeText(getActivity(), "Downloading new Schedule", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Downloading new Schedule", Toast.LENGTH_SHORT).show();
                 refreshData(rootView);
             } else {
-                Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -175,6 +196,7 @@ public class Day1 extends Fragment implements ScrollViewListener {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("SCHEDULE ERROR", "Error: " + error.getMessage());
+                Toast.makeText(getContext(), "Failed to download schedule", Toast.LENGTH_SHORT).show();
                 // swipeContainer.setRefreshing(false);
             }
         });
@@ -189,12 +211,42 @@ public class Day1 extends Fragment implements ScrollViewListener {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+            ShowcaseView showcaseView = new ShowcaseView.Builder(getActivity())
+                    .setTarget(new ToolbarActionItemTarget(toolbar, R.id.action_refresh))
+                    .setContentTitle("Download Latest Schedule")
+                    .hideOnTouchOutside()
+                    .setStyle(R.style.CustomShowcaseTheme)
+                    .build();
+            showcaseView.show();
+        }
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_Schedule", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_Schedule", true);
+    }
+
     private void generateUI(JSONObject jsonString, View rootView) {
 
         TableLayout tableLayout = (TableLayout) rootView.findViewById(R.id.scheduleTable);
 
-        while (tableLayout.getChildCount() > 1)
-            tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
+        try {
+            while (tableLayout.getChildCount() > 1)
+                tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
+        } catch (Exception e) {
+            // Do nothing
+        }
+
 
         try {
             JSONArray venueArray = jsonString.getJSONArray("day1");
@@ -204,15 +256,8 @@ public class Day1 extends Fragment implements ScrollViewListener {
                 String venueTitle = venueJSONObject.getString("Venue");
 
                 // Cretae a venue row
-                TableRow tableRow = new TableRow(getActivity());
+                TableRow tableRow = new TableRow(getContext());
                 tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-
-                // For the Venue Title
-//                View viewVenue = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_venue, null);
-//                TextView txtVenueTitle = (TextView) viewVenue.findViewById(R.id.txtVenueTitle);
-//                txtVenueTitle.setText(venueTitle);
-//
-//                tableRow.addView(viewVenue);
 
                 // For each event
                 JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
@@ -221,19 +266,28 @@ public class Day1 extends Fragment implements ScrollViewListener {
                     String eventTitle = eventJSONObject.getString("Title");
                     String imageResource = eventJSONObject.getString("Icon");
 
-                    Log.v("EVENT", eventTitle);
-
                     // For the Event
-                    View viewEvent = LayoutInflater.from(getActivity()).inflate(R.layout.item_schedule_event, null);
+                    View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
                     TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
                     TextView txtEventVenue = (TextView) viewEvent.findViewById(R.id.txtEventVenue);
                     txtEventTitle.setText(eventTitle);
                     txtEventVenue.setText(venueTitle);
 
-
-                    ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
-                    Context imageContext = eventIcon.getContext();
-                    eventIcon.setImageResource(imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName()));
+                    try {
+                        ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
+                        Context imageContext = eventIcon.getContext();
+                        int resCode = imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName());
+                        int defaultResCode = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", getContext().getPackageName());
+                        if (resCode == 0) {
+                            // Load Default
+                            eventIcon.setImageResource(defaultResCode);
+                        } else {
+                            // Logo Image
+                            eventIcon.setImageResource(resCode);
+                        }
+                    } catch (Exception e) {
+                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule image" + eventTitle + imageResource);
+                    }
 
                     TableRow.LayoutParams params = new TableRow.LayoutParams();
                     params.span = eventJSONObject.getInt("Span");
@@ -248,6 +302,8 @@ public class Day1 extends Fragment implements ScrollViewListener {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            Log.v("SCHEDULE ERROR", e.toString());
         }
     }
 

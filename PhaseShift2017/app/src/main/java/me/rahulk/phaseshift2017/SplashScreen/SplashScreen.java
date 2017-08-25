@@ -65,9 +65,9 @@ public class SplashScreen extends Activity {
             public void run() {
                 handler.postDelayed(this, 1000);
                 try {
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     // Here Set your Event Date
-                    Date eventDate = dateFormat.parse("2017-09-15");
+                    Date eventDate = dateFormat.parse("2017-09-15 10:00:00");
                     Date currentDate = new Date();
                     if (!currentDate.after(eventDate)) {
                         long diff = eventDate.getTime()

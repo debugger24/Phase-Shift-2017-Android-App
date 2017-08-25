@@ -38,7 +38,7 @@ public class EventCursorAdapter extends CursorAdapter {
 
         if (cursor.getString(cursor.getColumnIndexOrThrow("icon")).equals("") || cursor.getString(cursor.getColumnIndexOrThrow("icon")) == null
                 || cursor.getString(cursor.getColumnIndexOrThrow("icon")).equals("null")) {
-            id = imageContext.getResources().getIdentifier("ps_logo_outline_2", "drawable", context.getPackageName());
+            id = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", context.getPackageName());
         } else {
             id = imageContext.getResources().getIdentifier(cursor.getString(cursor.getColumnIndexOrThrow("icon")), "drawable", context.getPackageName());
         }

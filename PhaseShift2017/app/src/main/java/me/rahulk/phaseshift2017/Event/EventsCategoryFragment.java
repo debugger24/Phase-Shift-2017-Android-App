@@ -112,8 +112,9 @@ public class EventsCategoryFragment extends Fragment {
         }
     }
 
+    @Override
     public void onAttach(Context context) {
-        super.onAttach(getActivity());
+        super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

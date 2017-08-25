@@ -124,8 +124,9 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
         }
     }
 
+    @Override
     public void onAttach(Context context) {
-        super.onAttach((Activity) context);
+        super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {

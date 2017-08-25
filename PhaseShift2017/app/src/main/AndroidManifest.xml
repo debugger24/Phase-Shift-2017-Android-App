@@ -10,18 +10,21 @@
     <application
         android:name=".AppController"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="" />
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +35,9 @@
             android:name=".Data.PhaseShiftProvider"
             android:authorities="me.rahulk.phaseshift2017.app" />
 
-        <activity android:name=".Event.EventDetails" />
+        <activity
+            android:name=".Event.EventDetails"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashScreen.SplashScreen"
             android:configChanges="orientation|keyboardHidden|screenSize"
