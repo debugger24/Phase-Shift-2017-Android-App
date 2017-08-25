@@ -122,11 +122,12 @@ public class MapFragment extends Fragment {
                 try {
                     gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
                 } catch (Exception ex) {
+                    // Do Nothing
                 }
 
 
                 if (!gps_enabled) {
-                    Toast.makeText(getActivity(), "Please switch on GPS for better experience", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Please switch on GPS for better experience", Toast.LENGTH_SHORT).show();
                 }
 
                 // Add a marker in Sydney, Australia, and move the camera.
@@ -137,8 +138,8 @@ public class MapFragment extends Fragment {
                 mMap.getUiSettings().setZoomControlsEnabled(true);
                 mMap.getUiSettings().setCompassEnabled(true);
 
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getActivity(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
                     // Permission is not granted
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION)) {
 
@@ -175,10 +176,10 @@ public class MapFragment extends Fragment {
 
                 mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.style_json));
+                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.style_json));
 
                 try {
-                    KmlLayer layer = new KmlLayer(mMap, R.raw.bmsce, getActivity());
+                    KmlLayer layer = new KmlLayer(mMap, R.raw.bmsce, getContext());
                     layer.addLayerToMap();
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
