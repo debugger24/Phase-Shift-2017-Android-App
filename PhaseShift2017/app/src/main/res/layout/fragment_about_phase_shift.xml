@@ -49,6 +49,14 @@
 
                 <include layout="@layout/item_social" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="@string/appVersion"
+                    android:textSize="9sp" />
+
             </LinearLayout>
 
         </LinearLayout>
