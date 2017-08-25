@@ -262,8 +262,7 @@
                         android:id="@+id/txtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/aboutBMSCE" />
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
@@ -284,8 +283,7 @@
                         android:id="@+id/txtRules"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/aboutBMSCE" />
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
 
