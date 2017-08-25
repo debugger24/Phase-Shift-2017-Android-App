@@ -24,12 +24,14 @@ import android.widget.Toast;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
+import org.w3c.dom.Text;
+
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.R;
 
 public class EventDetails extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation;
+    private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation, txtFlagship, txtAlertEventFull;
     private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
     private String shareMessage = "Shared using PhaseShift App";
     Toolbar toolbar;
@@ -45,7 +47,7 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE1,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE2,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE3,
-            PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_FLAGSHIP,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_DATE,
@@ -64,7 +66,7 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     static final int COL_EVENT_PRIZE1 = 3;
     static final int COL_EVENT_PRIZE2 = 4;
     static final int COL_EVENT_PRIZE3 = 5;
-    static final int COL_EVENT_BMSCE = 6;
+    static final int COL_EVENT_FLAGSHIP = 6;
     static final int COL_EVENT_FULL = 7;
     static final int COL_EVENT_VENUE = 8;
     static final int COL_EVENT_DATE = 9;
@@ -119,8 +121,8 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
         viewDescription = (View) findViewById(R.id.viewDescription);
         viewRules = (View) findViewById(R.id.viewRules);
 
-        viewForBMSCE = (View) findViewById(R.id.viewForBMSCE);
-        viewFullEvent = (View) findViewById(R.id.viewFullEvent);
+        txtFlagship = (TextView) findViewById(R.id.txtFlagship);
+        txtAlertEventFull = (TextView) findViewById(R.id.txtAlertEventFull);
 
         if (ContextCompat.checkSelfPermission(EventDetails.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -214,21 +216,18 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             txtRules.setText(data.getString(COL_EVENT_RULES));
         }
 
-        /* BMSCE Exclusive Event */
-        if (data.getInt(COL_EVENT_BMSCE) == 1) {
-            Log.v("DATA BMSCE", String.valueOf(data.getInt(COL_EVENT_BMSCE)));
-            viewForBMSCE.setVisibility(View.VISIBLE);
-        } else {
-            Log.v("DATA BMSCE", String.valueOf(data.getInt(COL_EVENT_BMSCE)));
-            viewForBMSCE.setVisibility(View.GONE);
-        }
-
         /* Event is Full */
         if (data.getInt(COL_EVENT_FULL) == 1) {
-            viewFullEvent.setVisibility(View.VISIBLE);
-            Log.v("EVENT FULL", "EVENT FULL");
+            txtAlertEventFull.setVisibility(View.VISIBLE);
         } else {
-            viewFullEvent.setVisibility(View.GONE);
+            txtAlertEventFull.setVisibility(View.GONE);
+        }
+
+        /* Flagship Event */
+        if (data.getInt(COL_EVENT_FLAGSHIP) == 1) {
+            txtFlagship.setVisibility(View.VISIBLE);
+        } else {
+            txtFlagship.setVisibility(View.GONE);
         }
 
         /* Coordinator Call */
