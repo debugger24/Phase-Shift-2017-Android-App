@@ -128,8 +128,9 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         }
     }
 
+    @Override
     public void onAttach(Context context) {
-        super.onAttach((Activity) context);
+        super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
