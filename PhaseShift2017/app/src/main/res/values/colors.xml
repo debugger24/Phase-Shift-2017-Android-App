@@ -15,4 +15,7 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="event_Logo">#004d40</color>
+
+    <color name="flagshipEventColor">#00796b</color>
+    <color name="fullEventColor">#ef3001</color>
 </resources>

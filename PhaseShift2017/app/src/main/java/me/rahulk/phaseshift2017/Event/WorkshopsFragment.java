@@ -51,6 +51,7 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_ICON,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_FLAGSHIP
     };
 
     static final int COL_EVENT_ID = 0;
@@ -59,6 +60,7 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
     static final int COL_EVENT_BMSCE = 3;
     static final int COL_EVENT_FULL = 4;
     static final int COL_EVENT_ICON = 5;
+    static final int COL_EVENT_FLAGSHIP = 6;
 
     public WorkshopsFragment() {
         // Required empty public constructor

@@ -1,6 +1,5 @@
 package me.rahulk.phaseshift2017.Event;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,11 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -24,12 +24,12 @@ import me.rahulk.phaseshift2017.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link EventsFragment.OnFragmentInteractionListener} interface
+ * {@link FlagshipsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link EventsFragment#newInstance} factory method to
+ * Use the {@link FlagshipsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class FlagshipsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,9 +62,7 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     static final int COL_EVENT_ICON = 5;
     static final int COL_EVENT_FLAGSHIP = 6;
 
-    private String eventCategory = "";
-
-    public EventsFragment() {
+    public FlagshipsFragment() {
         // Required empty public constructor
     }
 
@@ -74,11 +72,11 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment EventsFragment.
+     * @return A new instance of fragment FlagshipsEvent.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventsFragment newInstance(String param1, String param2) {
-        EventsFragment fragment = new EventsFragment();
+    public static FlagshipsFragment newInstance(String param1, String param2) {
+        FlagshipsFragment fragment = new FlagshipsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -99,10 +97,9 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.lstEvent);
+        View rootView = inflater.inflate(R.layout.fragment_flagships_event, container, false);
 
-        getActivity().setTitle(getArguments().getString("category"));
+        ListView listView = (ListView) rootView.findViewById(R.id.lstEvent);
 
         eventCursorAdapter = new EventCursorAdapter(getActivity(), null, 0);
 
@@ -121,6 +118,12 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        getLoaderManager().initLoader(1, null, this);
+        super.onActivityCreated(savedInstanceState);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -142,12 +145,6 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        getLoaderManager().initLoader(1, null, this);
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -157,8 +154,8 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " ASC";
         Uri allEvents = PhaseShiftContract.EventEntry.buildEventUri();
-        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?" + " AND " + PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY + " = ?";
-        String[] selectionArgs = {"Event", getArguments().getString("category")};
+        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_FLAGSHIP + " = ?";
+        String[] selectionArgs = {"1"};
         return new CursorLoader(getActivity(), allEvents, EVENT_COLUMNS, selection, selectionArgs, sortOrder);
     }
 

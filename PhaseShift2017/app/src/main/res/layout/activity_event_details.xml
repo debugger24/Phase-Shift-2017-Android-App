@@ -223,28 +223,60 @@
                         </LinearLayout>
                     </LinearLayout>
 
+                    <!--Coordinator-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/account" />
+
+                        <TextView
+                            android:id="@+id/txtCoordinator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="Coordinator\nRahul Kumar\n9066533802"
+                            android:textColor="@color/colorPrimary" />
+                    </LinearLayout>
+
+                    <!--Labels-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/txtFlagship"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:background="@color/colorPrimary"
+                            android:padding="4dp"
+                            android:text="Flagship Event"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtAlertEventFull"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:background="@color/fullEventColor"
+                            android:padding="4dp"
+                            android:text="Registration Closed"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center_vertical">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/account" />
-
-                    <TextView
-                        android:id="@+id/txtCoordinator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="8dp"
-                        android:text="Coordinator\nRahul Kumar\n9066533802"
-                        android:textColor="@color/colorPrimary" />
-                </LinearLayout>
-
+                <!--Description-->
                 <LinearLayout
                     android:id="@+id/viewDescription"
                     android:layout_width="match_parent"
@@ -266,6 +298,7 @@
 
                 </LinearLayout>
 
+                <!--Rules-->
                 <LinearLayout
                     android:id="@+id/viewRules"
                     android:layout_width="match_parent"
@@ -285,44 +318,6 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="4dp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/viewForBMSCE"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@drawable/bmsce" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="This is BMSCE Exclusive Event" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/viewFullEvent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="15dp"
-                        app:srcCompat="@drawable/close_circle" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Registration for this event is closed" />
                 </LinearLayout>
 
             </LinearLayout>

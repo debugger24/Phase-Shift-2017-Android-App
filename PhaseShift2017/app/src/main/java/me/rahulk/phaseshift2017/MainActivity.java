@@ -25,6 +25,7 @@ import me.rahulk.phaseshift2017.About.AboutPhaseShiftFragment;
 import me.rahulk.phaseshift2017.Event.EventFragment;
 import me.rahulk.phaseshift2017.Event.EventsCategoryFragment;
 import me.rahulk.phaseshift2017.Event.EventsFragment;
+import me.rahulk.phaseshift2017.Event.FlagshipsFragment;
 import me.rahulk.phaseshift2017.Event.WorkshopsFragment;
 import me.rahulk.phaseshift2017.Map.MapFragment;
 import me.rahulk.phaseshift2017.Newsfeed.NewsfeedFragment;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements NewsfeedFragment.
         AboutCoreCommitteeFragment.OnFragmentInteractionListener, AboutAppWebTeamFragment.OnFragmentInteractionListener,
         ScheduleFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener,
         EventsCategoryFragment.OnFragmentInteractionListener, WorkshopsFragment.OnFragmentInteractionListener,
-        EventsFragment.OnFragmentInteractionListener, Day1.OnFragmentInteractionListener, Day2.OnFragmentInteractionListener {
+        EventsFragment.OnFragmentInteractionListener, Day1.OnFragmentInteractionListener, Day2.OnFragmentInteractionListener,
+        FlagshipsFragment.OnFragmentInteractionListener {
 
     Toolbar toolbar;
     Fragment fragment = null;

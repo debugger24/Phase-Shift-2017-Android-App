@@ -17,7 +17,8 @@ import me.rahulk.phaseshift2017.R;
  */
 
 public class EventCursorAdapter extends CursorAdapter {
-    private int bmsce;
+    private int full;
+    private int flagship;
 
     public EventCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
@@ -51,15 +52,22 @@ public class EventCursorAdapter extends CursorAdapter {
         TextView eventDepartment = (TextView) view.findViewById(R.id.department);
         eventDepartment.setText(cursor.getString(cursor.getColumnIndexOrThrow("department")));
 
+        TextView flagshipEvent = (TextView) view.findViewById(R.id.flagship);
+        TextView alertEventFull = (TextView) view.findViewById(R.id.alertEventFull);
 
-        bmsce = cursor.getInt(cursor.getColumnIndexOrThrow("bmsce"));
+        full = cursor.getInt(cursor.getColumnIndexOrThrow("full"));
+        flagship = cursor.getInt(cursor.getColumnIndexOrThrow("flagship"));
 
-        ImageView alert1 = (ImageView) view.findViewById(R.id.alert1);
-
-        if (bmsce == 1) {
-            alert1.setVisibility(View.VISIBLE);
+        if (full == 1) {
+            alertEventFull.setVisibility(View.VISIBLE);
         } else {
-            alert1.setVisibility(View.GONE);
+            alertEventFull.setVisibility(View.GONE);
+        }
+
+        if (flagship == 1) {
+            flagshipEvent.setVisibility(View.VISIBLE);
+        } else {
+            flagshipEvent.setVisibility(View.GONE);
         }
     }
 }
