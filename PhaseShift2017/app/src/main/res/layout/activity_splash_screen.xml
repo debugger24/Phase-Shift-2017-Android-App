@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010405"
+    android:id="@+id/mainLayout"
     tools:context="me.rahulk.phaseshift2017.SplashScreen.SplashScreen">
 
     <ImageView

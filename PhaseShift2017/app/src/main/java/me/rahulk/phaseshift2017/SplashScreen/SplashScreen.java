@@ -3,6 +3,7 @@ package me.rahulk.phaseshift2017.SplashScreen;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,11 +27,14 @@ import me.rahulk.phaseshift2017.R;
 public class SplashScreen extends Activity {
 
     private TextView txtRemDays, txtRemHours, txtRemMins, txtRemSeconds;
-    private View viewCountdown;
+    private View viewCountdown, mainLayout;
     private Handler handler;
     private Runnable runnable;
 
     private int SPLASH_TIME_OUT = 1500;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +50,40 @@ public class SplashScreen extends Activity {
 
         viewCountdown = findViewById(R.id.viewCountdown);
 
+        mainLayout = findViewById(R.id.mainLayout);
+
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchMainActivity();
+            }
+        });
+
+        sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        if (isFirstTimeLaunch()) {
+            setFirstTimeLaunch(false);
+            SPLASH_TIME_OUT = 3500;
+        }
+
         countDownStart();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                launchMainActivity();
             }
         }, SPLASH_TIME_OUT);
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean("IsFirstTimeLaunch_App", isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPreferences.getBoolean("IsFirstTimeLaunch_App", true);
     }
 
     public void countDownStart() {
@@ -94,5 +122,11 @@ public class SplashScreen extends Activity {
             }
         };
         handler.postDelayed(runnable, 0);
+    }
+
+    public void launchMainActivity() {
+        Intent i = new Intent(SplashScreen.this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }
