@@ -151,7 +151,7 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " ASC";
+        String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " ASC";
         Uri allEvents = PhaseShiftContract.EventEntry.buildEventUri();
         String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?";
         String[] selectionArgs = {"Workshop"};
