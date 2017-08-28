@@ -153,8 +153,9 @@ public class WorkshopsFragment extends Fragment implements LoaderManager.LoaderC
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " ASC";
         Uri allEvents = PhaseShiftContract.EventEntry.buildEventUri();
-        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?";
-        String[] selectionArgs = {"Workshop"};
+        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?" + " AND " +
+                PhaseShiftContract.EventEntry.COLUMNS_EVENT_ACTIVE + " = ?";
+        String[] selectionArgs = {"Workshop", "1"};
         return new CursorLoader(getActivity(), allEvents, EVENT_COLUMNS, selection, selectionArgs, sortOrder);
     }
 

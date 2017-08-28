@@ -157,8 +157,10 @@ public class EventsFragment extends Fragment implements LoaderManager.LoaderCall
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " ASC";
         Uri allEvents = PhaseShiftContract.EventEntry.buildEventUri();
-        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?" + " AND " + PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY + " = ?";
-        String[] selectionArgs = {"Event", getArguments().getString("category")};
+        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TYPE + " = ?" + " AND " +
+                PhaseShiftContract.EventEntry.COLUMNS_EVENT_CATEGORY + " = ?" + " AND " +
+                PhaseShiftContract.EventEntry.COLUMNS_EVENT_ACTIVE + " = ?";
+        String[] selectionArgs = {"Event", getArguments().getString("category"), "1"};
         return new CursorLoader(getActivity(), allEvents, EVENT_COLUMNS, selection, selectionArgs, sortOrder);
     }
 
