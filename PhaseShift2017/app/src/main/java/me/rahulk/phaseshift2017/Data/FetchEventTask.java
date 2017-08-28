@@ -61,6 +61,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
         final String OWM_BMSCE = "BMSCE";
         final String OWM_Full = "Full";
         final String OWM_Flagship = "Flagship";
+        final String OWM_Active = "Active";
         final String OWM_Participation = "Participation";
         final String OWM_Prize1 = "Prize1";
         final String OWM_Prize2 = "Prize2";
@@ -92,6 +93,7 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_BMSCE, event.getString(OWM_BMSCE));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL, event.getString(OWM_Full));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_FLAGSHIP, event.getString(OWM_Flagship));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_ACTIVE, event.getString(OWM_Active));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION, event.getString(OWM_Participation));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE1, event.getString(OWM_Prize1));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PRIZE2, event.getString(OWM_Prize2));
