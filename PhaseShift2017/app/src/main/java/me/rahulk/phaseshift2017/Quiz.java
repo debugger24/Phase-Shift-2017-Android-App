@@ -34,9 +34,9 @@ import static me.rahulk.phaseshift2017.AppConfig.URL_QUIZ_SUBMIT;
 import static me.rahulk.phaseshift2017.AppConfig.URL_SCHEDULE;
 
 public class Quiz extends AppCompatActivity {
-    TextView txtQuestion1, txtQuestion2, txtQuestion3, txtQuestion4, txtQuestion5;
+    TextView txtQuestion1, txtQuestion2, txtQuestion3, txtQuestion4, txtQuestion5, txtQuestion6, txtQuestion7, txtQuestion8, txtQuestion9, txtQuestion10;
     TextView txtWinners, txtWinnersTitle, txtNoQuiz;
-    EditText editAnswer1, editAnswer2, editAnswer3, editAnswer4, editAnswer5;
+    EditText editAnswer1, editAnswer2, editAnswer3, editAnswer4, editAnswer5, editAnswer6, editAnswer7, editAnswer8, editAnswer9, editAnswer10;
     EditText editName, editEmail, editPhone;
     Button btnSubmit, btnRefresh;
     View viewQuestions, viewNoQuiz, viewSuccess;
@@ -57,12 +57,22 @@ public class Quiz extends AppCompatActivity {
         txtQuestion3 = (TextView) findViewById(R.id.txtQuestion3);
         txtQuestion4 = (TextView) findViewById(R.id.txtQuestion4);
         txtQuestion5 = (TextView) findViewById(R.id.txtQuestion5);
+        txtQuestion6 = (TextView) findViewById(R.id.txtQuestion6);
+        txtQuestion7 = (TextView) findViewById(R.id.txtQuestion7);
+        txtQuestion8 = (TextView) findViewById(R.id.txtQuestion8);
+        txtQuestion9 = (TextView) findViewById(R.id.txtQuestion9);
+        txtQuestion10 = (TextView) findViewById(R.id.txtQuestion10);
 
         editAnswer1 = (EditText) findViewById(R.id.editAnswer1);
         editAnswer2 = (EditText) findViewById(R.id.editAnswer2);
         editAnswer3 = (EditText) findViewById(R.id.editAnswer3);
         editAnswer4 = (EditText) findViewById(R.id.editAnswer4);
         editAnswer5 = (EditText) findViewById(R.id.editAnswer5);
+        editAnswer6 = (EditText) findViewById(R.id.editAnswer6);
+        editAnswer7 = (EditText) findViewById(R.id.editAnswer7);
+        editAnswer8 = (EditText) findViewById(R.id.editAnswer8);
+        editAnswer9 = (EditText) findViewById(R.id.editAnswer9);
+        editAnswer10 = (EditText) findViewById(R.id.editAnswer10);
 
         editName = (EditText) findViewById(R.id.editUsername);
         editEmail = (EditText) findViewById(R.id.editEmailID);
@@ -144,11 +154,11 @@ public class Quiz extends AppCompatActivity {
                 params.put("a3", editAnswer3.getText().toString());
                 params.put("a4", editAnswer4.getText().toString());
                 params.put("a5", editAnswer5.getText().toString());
-                params.put("a6", editAnswer5.getText().toString());
-                params.put("a7", editAnswer5.getText().toString());
-                params.put("a8", editAnswer5.getText().toString());
-                params.put("a9", editAnswer5.getText().toString());
-                params.put("a10", editAnswer5.getText().toString());
+                params.put("a6", editAnswer6.getText().toString());
+                params.put("a7", editAnswer7.getText().toString());
+                params.put("a8", editAnswer8.getText().toString());
+                params.put("a9", editAnswer9.getText().toString());
+                params.put("a10", editAnswer10.getText().toString());
 
                 return params;
             }
@@ -220,6 +230,11 @@ public class Quiz extends AppCompatActivity {
                 txtQuestion3.setText(questionsArray.get(2).toString());
                 txtQuestion4.setText(questionsArray.get(3).toString());
                 txtQuestion5.setText(questionsArray.get(4).toString());
+                txtQuestion6.setText(questionsArray.get(5).toString());
+                txtQuestion7.setText(questionsArray.get(6).toString());
+                txtQuestion8.setText(questionsArray.get(7).toString());
+                txtQuestion9.setText(questionsArray.get(8).toString());
+                txtQuestion10.setText(questionsArray.get(9).toString());
             }
         } catch (JSONException e) {
             e.printStackTrace();

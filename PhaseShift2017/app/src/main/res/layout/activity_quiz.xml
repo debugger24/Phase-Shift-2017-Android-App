@@ -21,14 +21,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/viewQuestions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtQuestion1"
@@ -111,6 +111,86 @@
                     android:hint="Enter your answer here" />
 
                 <TextView
+                    android:id="@+id/txtQuestion6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+
+                <EditText
+                    android:id="@+id/editAnswer6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Enter your answer here" />
+
+                <TextView
+                    android:id="@+id/txtQuestion7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+
+                <EditText
+                    android:id="@+id/editAnswer7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Enter your answer here" />
+
+                <TextView
+                    android:id="@+id/txtQuestion8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+
+                <EditText
+                    android:id="@+id/editAnswer8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Enter your answer here" />
+
+                <TextView
+                    android:id="@+id/txtQuestion9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+
+                <EditText
+                    android:id="@+id/editAnswer9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Enter your answer here" />
+
+                <TextView
+                    android:id="@+id/txtQuestion10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+
+                <EditText
+                    android:id="@+id/editAnswer10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="Enter your answer here" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -146,7 +226,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:text="SUBMIT" />
+                    android:background="@color/colorAccent"
+                    android:text="SUBMIT"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -154,7 +237,8 @@
                 android:id="@+id/viewNoQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/txtNoQuiz"
@@ -199,7 +283,8 @@
             <LinearLayout
                 android:id="@+id/viewSuccess"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
