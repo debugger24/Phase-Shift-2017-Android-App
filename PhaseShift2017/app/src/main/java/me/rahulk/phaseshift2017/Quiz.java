@@ -31,7 +31,6 @@ import java.util.Map;
 
 import static me.rahulk.phaseshift2017.AppConfig.URL_QUIZ;
 import static me.rahulk.phaseshift2017.AppConfig.URL_QUIZ_SUBMIT;
-import static me.rahulk.phaseshift2017.AppConfig.URL_SCHEDULE;
 
 public class Quiz extends AppCompatActivity {
     TextView txtQuestion1, txtQuestion2, txtQuestion3, txtQuestion4, txtQuestion5, txtQuestion6, txtQuestion7, txtQuestion8, txtQuestion9, txtQuestion10;
