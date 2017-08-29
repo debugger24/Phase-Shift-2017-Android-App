@@ -8,7 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
+import me.rahulk.phaseshift2017.Event.EventDetails;
+import me.rahulk.phaseshift2017.Quiz;
 import me.rahulk.phaseshift2017.R;
 
 
@@ -116,6 +120,16 @@ public class AboutPhaseShiftFragment extends Fragment {
                 if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                     getContext().startActivity(intent);
                 }
+            }
+        });
+
+        Button btnQuiz = (Button) rootView.findViewById(R.id.btnLaunchQuiz);
+        btnQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Launch Quiz Activity
+                Intent intent = new Intent(getActivity(), Quiz.class);
+                startActivity(intent);
             }
         });
 
