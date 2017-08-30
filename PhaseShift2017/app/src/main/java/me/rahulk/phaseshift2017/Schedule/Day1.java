@@ -252,54 +252,54 @@ public class Day1 extends Fragment implements ScrollViewListener {
         try {
             JSONArray venueArray = jsonString.getJSONArray("day1");
             for (int i = 0; i < venueArray.length(); i++) {
-                JSONObject venueJSONObject = (JSONObject) venueArray.get(i);
+                if (getContext() != null) {
+                    JSONObject venueJSONObject = (JSONObject) venueArray.get(i);
 
-                String venueTitle = venueJSONObject.getString("Venue");
+                    String venueTitle = venueJSONObject.getString("Venue");
 
-                // Cretae a venue row
-                TableRow tableRow = new TableRow(getContext());
-                tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+                    // Cretae a venue row
+                    TableRow tableRow = new TableRow(getContext());
+                    tableRow.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
 
-                // For each event
-                JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
-                for (int j = 0; j < venueEvents.length(); j++) {
-                    JSONObject eventJSONObject = (JSONObject) venueEvents.get(j);
-                    String eventTitle = eventJSONObject.getString("Title");
-                    String imageResource = eventJSONObject.getString("Icon");
+                    // For each event
+                    JSONArray venueEvents = venueJSONObject.getJSONArray("Events");
+                    for (int j = 0; j < venueEvents.length(); j++) {
+                        JSONObject eventJSONObject = (JSONObject) venueEvents.get(j);
+                        String eventTitle = eventJSONObject.getString("Title");
+                        String imageResource = eventJSONObject.getString("Icon");
 
-                    // For the Event
-                    View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
-                    TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
-                    TextView txtEventVenue = (TextView) viewEvent.findViewById(R.id.txtEventVenue);
-                    txtEventTitle.setText(eventTitle);
-                    txtEventVenue.setText(venueTitle);
+                        // For the Event
+                        View viewEvent = LayoutInflater.from(getContext()).inflate(R.layout.item_schedule_event, null);
+                        TextView txtEventTitle = (TextView) viewEvent.findViewById(R.id.txtEventTitle);
+                        TextView txtEventVenue = (TextView) viewEvent.findViewById(R.id.txtEventVenue);
+                        txtEventTitle.setText(eventTitle);
+                        txtEventVenue.setText(venueTitle);
 
-                    try {
-                        ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
-                        Context imageContext = eventIcon.getContext();
-                        int resCode = imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName());
-                        int defaultResCode = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", getContext().getPackageName());
-                        if (resCode == 0) {
-                            // Load Default
-                            eventIcon.setImageResource(defaultResCode);
-                        } else {
-                            // Logo Image
-                            eventIcon.setImageResource(resCode);
+                        try {
+                            ImageView eventIcon = (ImageView) viewEvent.findViewById(R.id.eventIcon);
+                            Context imageContext = eventIcon.getContext();
+                            int resCode = imageContext.getResources().getIdentifier(imageResource, "drawable", getContext().getPackageName());
+                            int defaultResCode = imageContext.getResources().getIdentifier("ps_logo_outline", "drawable", getContext().getPackageName());
+                            if (resCode == 0) {
+                                // Load Default
+                                eventIcon.setImageResource(defaultResCode);
+                            } else {
+                                // Logo Image
+                                eventIcon.setImageResource(resCode);
+                            }
+                        } catch (Exception e) {
+                            Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule image" + eventTitle + imageResource);
                         }
-                    } catch (Exception e) {
-                        Log.v("SCHEDULE ERROR", "Something went wrong in loading schedule image" + eventTitle + imageResource);
+
+                        TableRow.LayoutParams params = new TableRow.LayoutParams();
+                        params.span = eventJSONObject.getInt("Span");
+                        params.column = eventJSONObject.getInt("Col") - 1;
+                        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+                        tableRow.addView(viewEvent, params);
                     }
-
-                    TableRow.LayoutParams params = new TableRow.LayoutParams();
-                    params.span = eventJSONObject.getInt("Span");
-                    params.column = eventJSONObject.getInt("Col") - 1;
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-
-                    tableRow.addView(viewEvent, params);
+                    tableLayout.addView(tableRow);
                 }
-
-
-                tableLayout.addView(tableRow);
             }
         } catch (JSONException e) {
             e.printStackTrace();
