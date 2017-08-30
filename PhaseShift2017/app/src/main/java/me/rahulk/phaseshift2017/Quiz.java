@@ -136,7 +136,9 @@ public class Quiz extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
+                if (getApplicationContext() != null) {
+                    Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
+                }
             }
         }) {
             @Override
