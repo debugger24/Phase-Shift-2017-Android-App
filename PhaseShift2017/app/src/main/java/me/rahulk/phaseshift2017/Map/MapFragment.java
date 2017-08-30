@@ -220,7 +220,7 @@ public class MapFragment extends Fragment {
     }
 
     public void changeGPS(Boolean status) {
-        if (getContext() != null) {
+        if (getContext() != null && getActivity() != null) {
             try {
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getContext(), "Location Access Denied\nEnable Location Access for better experience", Toast.LENGTH_LONG).show();
