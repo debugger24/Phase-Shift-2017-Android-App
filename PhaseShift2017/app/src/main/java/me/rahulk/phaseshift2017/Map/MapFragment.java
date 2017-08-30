@@ -112,7 +112,14 @@ public class MapFragment extends Fragment {
         getActivity().setTitle("Map");
 
         mMapView = (MapView) rootView.findViewById(R.id.mapView);
-        mMapView.onCreate(savedInstanceState);
+
+        try {
+            mMapView.onCreate(savedInstanceState);
+        } catch (Exception e) {
+            if (getContext() != null) {
+                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         mMapView.onResume(); // needed to get the map to display immediately
 
