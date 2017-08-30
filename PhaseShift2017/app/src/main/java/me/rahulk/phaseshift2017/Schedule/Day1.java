@@ -196,8 +196,9 @@ public class Day1 extends Fragment implements ScrollViewListener {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("SCHEDULE ERROR", "Error: " + error.getMessage());
-                Toast.makeText(getContext(), "Failed to download schedule", Toast.LENGTH_SHORT).show();
-                // swipeContainer.setRefreshing(false);
+                if (getContext() != null) {
+                    Toast.makeText(getContext(), "Failed to download schedule", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
