@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--Questions View-->
             <LinearLayout
                 android:id="@+id/viewQuestions"
                 android:layout_width="match_parent"
@@ -474,6 +475,7 @@
 
             </LinearLayout>
 
+            <!--No Quiz View-->
             <LinearLayout
                 android:id="@+id/viewNoQuiz"
                 android:layout_width="match_parent"
@@ -521,6 +523,7 @@
 
             </LinearLayout>
 
+            <!--Quiz Submitted View-->
             <LinearLayout
                 android:id="@+id/viewSuccess"
                 android:layout_width="match_parent"
