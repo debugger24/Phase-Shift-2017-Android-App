@@ -27,8 +27,47 @@
                 android:id="@+id/viewQuestions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtQuestion0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="1. This is the first question." />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer0_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer0_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer0_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer0_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion1"
@@ -37,14 +76,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="1. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer1"
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer1_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer1_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer1_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer1_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion2"
@@ -53,14 +116,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the second question." />
 
-                <EditText
-                    android:id="@+id/editAnswer2"
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer2_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer2_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer2_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer2_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion3"
@@ -69,14 +156,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer3"
+                <RadioGroup
+                    android:id="@+id/radioGroup3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer3_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer3_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer3_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer3_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion4"
@@ -85,14 +196,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer4"
+                <RadioGroup
+                    android:id="@+id/radioGroup4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer4_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer4_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer4_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer4_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion5"
@@ -101,14 +236,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer5"
+                <RadioGroup
+                    android:id="@+id/radioGroup5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer5_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer5_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer5_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer5_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion6"
@@ -117,14 +276,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer6"
+                <RadioGroup
+                    android:id="@+id/radioGroup6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer6_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer6_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer6_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer6_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion7"
@@ -133,14 +316,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer7"
+                <RadioGroup
+                    android:id="@+id/radioGroup7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer7_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer7_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer7_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer7_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion8"
@@ -149,14 +356,38 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer8"
+                <RadioGroup
+                    android:id="@+id/radioGroup8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
+
+                    <RadioButton
+                        android:id="@+id/answer8_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
+
+                    <RadioButton
+                        android:id="@+id/answer8_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer8_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer8_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/txtQuestion9"
@@ -165,30 +396,40 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    android:text="1. This is the first question." />
 
-                <EditText
-                    android:id="@+id/editAnswer9"
+                <RadioGroup
+                    android:id="@+id/radioGroup9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    android:layout_margin="8dp">
 
-                <TextView
-                    android:id="@+id/txtQuestion10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="16dp"
-                    android:text="2. This is the first question and the options are \nA) One\nB) Two\nC) Three\nD) Four\nE) Five " />
+                    <RadioButton
+                        android:id="@+id/answer9_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One" />
 
-                <EditText
-                    android:id="@+id/editAnswer10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:hint="Enter your answer here" />
+                    <RadioButton
+                        android:id="@+id/answer9_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Two" />
+
+                    <RadioButton
+                        android:id="@+id/answer9_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Three" />
+
+                    <RadioButton
+                        android:id="@+id/answer9_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Four" />
+                </RadioGroup>
+
+                <!--Participant Details-->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -226,7 +467,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="@color/colorAccent"
+                    android:background="@drawable/bg_parent_round_corner_border"
                     android:text="SUBMIT"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textStyle="bold" />
@@ -237,7 +478,8 @@
                 android:id="@+id/viewNoQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/txtNoQuiz"
