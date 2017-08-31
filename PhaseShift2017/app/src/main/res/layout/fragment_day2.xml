@@ -62,7 +62,7 @@
                     android:layout_margin="1dp"
                     android:background="@color/colorPrimary"
                     android:padding="4dp"
-                    android:text="12 AM to 1 PM"
+                    android:text="12 PM to 1 PM"
                     android:textColor="@color/white" />
 
                 <TextView
