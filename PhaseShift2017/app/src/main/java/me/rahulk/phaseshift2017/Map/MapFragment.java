@@ -121,7 +121,13 @@ public class MapFragment extends Fragment {
             }
         }
 
-        mMapView.onResume(); // needed to get the map to display immediately
+        try {
+            mMapView.onResume(); // needed to get the map to display immediately
+        } catch (Exception e) {
+            if (getContext() != null) {
+                Toast.makeText(getContext(), "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+            }
+        }
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
