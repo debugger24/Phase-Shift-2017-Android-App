@@ -31,6 +31,8 @@ public class PhaseShiftContract {
         public static final String COLUMNS_EVENT_BMSCE = "bmsce";
         public static final String COLUMNS_EVENT_FULL = "full";
         public static final String COLUMNS_EVENT_FLAGSHIP = "flagship";
+        public static final String COLUMNS_EVENT_CUR_REG = "current";
+        public static final String COLUMNS_EVENT_MAX_REG = "maximum";
         public static final String COLUMNS_EVENT_ACTIVE = "active";
         public static final String COLUMNS_EVENT_PARTICIPATION = "participation";
         public static final String COLUMNS_EVENT_PRIZE1 = "prize1";
