@@ -1,10 +1,12 @@
-package me.rahulk.phaseshift2017;
+package me.rahulk.phaseshift2017.Admin;
 
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import me.rahulk.phaseshift2017.R;
 
 public class Admin extends AppCompatActivity {
     private View viewTshirt, viewApp, viewRegistration, viewEvents;
@@ -33,6 +35,6 @@ public class Admin extends AppCompatActivity {
         eventsCounter = (TextView) findViewById(R.id.eventsCounter);
 
         // Check Access Level and Load Views
-        
+
     }
 }

@@ -1,7 +1,9 @@
-package me.rahulk.phaseshift2017;
+package me.rahulk.phaseshift2017.Admin;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import me.rahulk.phaseshift2017.R;
 
 public class Stats extends AppCompatActivity {
 

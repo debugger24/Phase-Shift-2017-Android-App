@@ -49,8 +49,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Quiz"></activity>
-        <activity android:name=".Stats"></activity>
-        <activity android:name=".Admin"></activity>
+        <activity android:name=".Admin.Stats"></activity>
+        <activity android:name=".Admin.Admin"></activity>
     </application>
 
 </manifest>
