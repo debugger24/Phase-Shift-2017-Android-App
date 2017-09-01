@@ -50,6 +50,7 @@
         </activity>
         <activity android:name=".Quiz"></activity>
         <activity android:name=".Stats"></activity>
+        <activity android:name=".Admin"></activity>
     </application>
 
 </manifest>
