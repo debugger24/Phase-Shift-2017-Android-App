@@ -49,6 +49,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Quiz"></activity>
+        <activity android:name=".Stats"></activity>
     </application>
 
 </manifest>
