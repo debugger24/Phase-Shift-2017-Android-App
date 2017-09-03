@@ -7,136 +7,158 @@
     android:orientation="vertical"
     tools:context="me.rahulk.phaseshift2017.Admin.Admin">
 
-    <RelativeLayout
-        android:id="@+id/viewTshirt"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="4dp"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="T-Shirt Sales"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-        <TextView
-            android:id="@+id/tshirtLastUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Last Update : 1 Sep 6:32 PM" />
-
-        <TextView
-            android:id="@+id/tshirtCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="72"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/viewApp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="4dp"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Android App Downloads"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/appLastUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Last Update : 1 Sep 6:32 PM" />
+            <RelativeLayout
+                android:id="@+id/viewTshirt"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_parent_rounded_corner"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-        <TextView
-            android:id="@+id/appCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="645"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="T-Shirt Sales"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/tshirtLastUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Last Update : 1 Sep 6:32 PM" />
 
-    <RelativeLayout
-        android:id="@+id/viewRegistration"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:orientation="vertical"
-        android:padding="8dp">
+                <TextView
+                    android:id="@+id/tshirtCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="72"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrations"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/registrationLastUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Last Update : 1 Sep 6:32 PM" />
+            <RelativeLayout
+                android:id="@+id/viewApp"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_parent_rounded_corner"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-        <TextView
-            android:id="@+id/registrationCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="8765"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Android App Downloads"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/appLastUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Last Update : 1 Sep 6:32 PM" />
 
-    <RelativeLayout
-        android:id="@+id/viewEvents"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:orientation="vertical"
-        android:padding="8dp">
+                <TextView
+                    android:id="@+id/appCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="645"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Events and Workshops"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/eventsLastUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Last Update : 1 Sep 6:32 PM" />
+            <RelativeLayout
+                android:id="@+id/viewRegistration"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_parent_rounded_corner"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-        <TextView
-            android:id="@+id/eventsCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="76"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Registrations"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/registrationLastUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Last Update : 1 Sep 6:32 PM" />
+
+                <TextView
+                    android:id="@+id/registrationCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="8765"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/viewEvents"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_parent_rounded_corner"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Events and Workshops"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/eventsLastUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Last Update : 1 Sep 6:32 PM" />
+
+                <TextView
+                    android:id="@+id/eventsCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="76"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
