@@ -4,10 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="me.rahulk.phaseshift2017.Admin.Stats">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search"
+            android:textColor="@color/white"
+            android:theme="@style/AppTheme.AppBarOverlay" />
+
+    </android.support.v7.widget.Toolbar>
+
+
     <ListView
-        android:id="@+id/statsList"
+        android:id="@+id/lstEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
