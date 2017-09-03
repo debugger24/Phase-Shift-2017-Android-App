@@ -100,6 +100,8 @@ public class Admin extends AppCompatActivity {
                 finish();
         }
 
+        refreshContent();
+
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
