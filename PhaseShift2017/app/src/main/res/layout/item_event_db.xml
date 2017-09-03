@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_marginTop="8dp"
             android:orientation="vertical">
 
             <TextView
@@ -36,12 +36,20 @@
 
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/regProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:max="32"
+            android:progress="28" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_above="@id/regProgress"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="2dp"
             android:layout_marginRight="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -140,5 +148,6 @@
 
 
     </RelativeLayout>
+
 
 </LinearLayout>

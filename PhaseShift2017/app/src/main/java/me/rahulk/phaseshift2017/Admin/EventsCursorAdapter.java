@@ -3,6 +3,7 @@ package me.rahulk.phaseshift2017.Admin;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.CursorAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -52,6 +54,7 @@ public class EventsCursorAdapter extends CursorAdapter implements Filterable {
         TextView currentReg = (TextView) view.findViewById(R.id.currentReg);
         TextView type = (TextView) view.findViewById(R.id.type);
         TextView cancel = (TextView) view.findViewById(R.id.alertEventCancel);
+        ProgressBar regProgress = (ProgressBar) view.findViewById(R.id.regProgress);
 
         flagship = cursor.getInt(cursor.getColumnIndexOrThrow("flagship"));
         full = cursor.getInt(cursor.getColumnIndexOrThrow("full"));
@@ -72,6 +75,9 @@ public class EventsCursorAdapter extends CursorAdapter implements Filterable {
 
         maxLimit.setText("Max : " + maxLimitValue);
         currentReg.setText("Current : " + currentRegValue);
+
+        regProgress.setMax(maxLimitValue);
+        regProgress.setProgress(currentRegValue);
 
         if (cursor.getString(cursor.getColumnIndexOrThrow("type")).equals("Event")) {
             type.setText("E");
