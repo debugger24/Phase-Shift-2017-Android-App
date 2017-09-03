@@ -2,9 +2,11 @@ package me.rahulk.phaseshift2017.Admin;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -23,14 +25,20 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.Admin.EventsCursorAdapter;
 import me.rahulk.phaseshift2017.Event.EventDetails;
 import me.rahulk.phaseshift2017.R;
 
 public class Stats extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private SharedPreferences sharedPreferences;
+
     SearchView searchView;
     String search = "";
+    String department = "";
 
     private EventsCursorAdapter eventsCursorAdapter;
     private static final int FORECAST_LOADER = 1;
@@ -55,6 +63,25 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+
+        sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
+
+        switch (getAccessCode().substring(0, 4)) {
+            case "":
+                finish();
+                break;
+            case "DEPT":
+                department = getAccessCode().substring(12);
+                break;
+            case "DATA":
+                department = "";
+                break;
+            case "ADMN":
+                department = "";
+                break;
+            default:
+                finish();
+        }
 
         ListView listView = (ListView) findViewById(R.id.lstEvent);
         searchView = (SearchView) findViewById(R.id.editSearch);
@@ -100,10 +127,17 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
         String sortOrder = PhaseShiftContract.EventEntry.COLUMNS_EVENT_ACTIVE + " DESC, " +
                 PhaseShiftContract.EventEntry.COLUMNS_EVENT_FULL + " ASC, " +
                 PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " ASC";
-        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " LIKE ?";
-        String[] selectionArgs = {"%" + search + "%"};
+        String selection = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " LIKE ? ";
+        ArrayList<String> selectionArgs = new ArrayList<String>();
+        selectionArgs.add("%" + search + "%");
+
+        if (!department.equals("")) {
+            selection += " AND " + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " LIKE ?";
+            selectionArgs.add("%" + getAccessCode().substring(12) + "%");
+        }
+
         Uri allEvents = PhaseShiftContract.EventEntry.buildEventUri();
-        return new CursorLoader(getApplicationContext(), allEvents, EVENT_COLUMNS, selection, selectionArgs, sortOrder);
+        return new CursorLoader(getApplicationContext(), allEvents, EVENT_COLUMNS, selection, selectionArgs.toArray(new String[selectionArgs.size()]), sortOrder);
     }
 
     @Override
@@ -114,5 +148,9 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         eventsCursorAdapter.swapCursor(null);
+    }
+
+    private String getAccessCode() {
+        return sharedPreferences.getString("AdminCode", "");
     }
 }

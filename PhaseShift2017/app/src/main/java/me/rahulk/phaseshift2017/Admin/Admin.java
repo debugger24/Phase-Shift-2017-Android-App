@@ -36,7 +36,6 @@ public class Admin extends AppCompatActivity {
     private TextView tshirtLastUpdate, tshirtCounter, appLastUpdate, appCounter, registrationLastUpdate, registrationCounter, eventsLastUpdate, eventsCounter;
     private SwipeRefreshLayout swipeContainer;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
     private Toolbar toolbar;
 
     @Override
@@ -51,7 +50,6 @@ public class Admin extends AppCompatActivity {
         this.setTitle("PhaseShift Admin Panel");
 
         sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         viewTshirt = findViewById(R.id.viewTshirt);
         viewApp = findViewById(R.id.viewApp);
@@ -79,18 +77,18 @@ public class Admin extends AppCompatActivity {
         });
 
         // Check Access Level and Load Views
-        switch (getAccessCode()) {
+        switch (getAccessCode().substring(0, 4)) {
             case "":
                 finish();
                 break;
-            case "RULE_BOOK":
+            case "DEPT":
                 viewEvents.setVisibility(View.VISIBLE);
                 break;
-            case "DATABASE":
+            case "DATA":
                 viewEvents.setVisibility(View.VISIBLE);
                 viewRegistration.setVisibility(View.VISIBLE);
                 break;
-            case "ADMIN":
+            case "ADMN":
                 viewTshirt.setVisibility(View.VISIBLE);
                 viewApp.setVisibility(View.VISIBLE);
                 viewRegistration.setVisibility(View.VISIBLE);
@@ -196,7 +194,6 @@ public class Admin extends AppCompatActivity {
 
     private String getAccessCode() {
         hideAll();
-        return ("ADMIN");
-        //return sharedPreferences.getString("ACCESS_CODE", "");
+        return sharedPreferences.getString("AdminCode", "");
     }
 }
