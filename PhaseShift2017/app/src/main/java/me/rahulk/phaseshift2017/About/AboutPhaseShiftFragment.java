@@ -1,15 +1,23 @@
 package me.rahulk.phaseshift2017.About;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import me.rahulk.phaseshift2017.Admin.Admin;
 import me.rahulk.phaseshift2017.Data.PhaseShiftContract;
 import me.rahulk.phaseshift2017.Event.EventDetails;
 import me.rahulk.phaseshift2017.Quiz;
@@ -35,6 +43,9 @@ public class AboutPhaseShiftFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public AboutPhaseShiftFragment() {
         // Required empty public constructor
@@ -72,6 +83,11 @@ public class AboutPhaseShiftFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_about_phase_shift, container, false);
+
+        sharedPreferences = getContext().getSharedPreferences("PhaseShift2017", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        TextView txtPhaseShiftVersion = (TextView) rootView.findViewById(R.id.txtPhaseShiftVersion);
 
         View emailButton = rootView.findViewById(R.id.emailButton);
         emailButton.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +149,98 @@ public class AboutPhaseShiftFragment extends Fragment {
             }
         });
 
+        Button btnAdmin = (Button) rootView.findViewById(R.id.btnLaunchAdmin);
+
+        // Verify Admin Activated or Not
+        if (isAdmin()) {
+            btnAdmin.setVisibility(View.VISIBLE);
+        } else {
+            btnAdmin.setVisibility(View.GONE);
+        }
+
+        btnAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Launch Admin Activity
+                Intent intent = new Intent(getActivity(), Admin.class);
+                startActivity(intent);
+            }
+        });
+
+        txtPhaseShiftVersion.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                alert.setTitle("Admin Mode Unlocking");
+                alert.setMessage("Enter Code to unlock Admin Features :");
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(getContext());
+                alert.setView(input);
+
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String value = input.getText().toString();
+                        if (setAdminCode(value)) {
+                            Toast.makeText(getContext(), "Admin Mode Unlocked", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Invalid Unlock Code", Toast.LENGTH_SHORT).show();
+                        }
+                        return;
+                    }
+                });
+
+                alert.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO Auto-generated method stub
+                                return;
+                            }
+                        });
+                alert.show();
+                return true;
+            }
+        });
+
         return rootView;
+    }
+
+    private boolean setAdminCode(String code) {
+        if (code.equals("ADMN_765056") ||
+                code.equals("DEPT_701121_Bio-Technology") ||
+                code.equals("DEPT_946402_Civil Engineering") ||
+                code.equals("DEPT_557457_Chemical Engineering") ||
+                code.equals("DEPT_932794_Computer Science and Engineering") ||
+                code.equals("DEPT_776689_Electrical and Electronics Engineering") ||
+                code.equals("DEPT_983432_Electronics and Communication Engineering") ||
+                code.equals("DEPT_653552_Electronics and Instrumentation Engineering") ||
+                code.equals("DEPT_111288_Industrial Engineering and Management") ||
+                code.equals("DEPT_253132_Information Science and Engineering") ||
+                code.equals("DEPT_567146_Master of Computer Application") ||
+                code.equals("DEPT_912905_Mechanical Engineering") ||
+                code.equals("DEPT_865526_Medical Electronics") ||
+                code.equals("DEPT_247099_Telecommunication Engineering") ||
+                code.equals("DEPT_407684_BMSCE IEEE") ||
+                code.equals("DEPT_196403_Architecture") ||
+                code.equals("DEPT_832570_Master of Business Administration") ||
+                code.equals("DEPT_165169_Pentagram") ||
+                code.equals("DEPT_964018_Alternate Universe") ||
+                code.equals("DEPT_136047_Qcaine - Quiz club") ||
+                code.equals("DATA_370250_Database Team")) {
+
+            editor.putString("AdminCode", code);
+            editor.putBoolean("IsAdmin", true);
+            editor.commit();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    private boolean isAdmin() {
+        return sharedPreferences.getBoolean("IsAdmin", false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

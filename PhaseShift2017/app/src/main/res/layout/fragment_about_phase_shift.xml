@@ -33,20 +33,6 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/aboutPS" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="24dp"
-                    android:text="ORGANIZATIONAL FRAMEWORK"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/aboutOrganizationalFramework" />
-
                 <include layout="@layout/item_social" />
 
                 <Button
@@ -60,7 +46,20 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/btnLaunchAdmin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@color/colorPrimary"
+                    android:text="Access Admin Panel"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <TextView
+                    android:id="@+id/txtPhaseShiftVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

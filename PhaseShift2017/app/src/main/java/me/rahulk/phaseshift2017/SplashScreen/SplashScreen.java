@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import me.rahulk.phaseshift2017.Admin.Admin;
 import me.rahulk.phaseshift2017.MainActivity;
 import me.rahulk.phaseshift2017.R;
 
@@ -30,6 +31,7 @@ public class SplashScreen extends Activity {
     private View viewCountdown, mainLayout;
     private Handler handler;
     private Runnable runnable;
+    private boolean activityLaunched = false;
 
     private int SPLASH_TIME_OUT = 1500;
 
@@ -125,8 +127,11 @@ public class SplashScreen extends Activity {
     }
 
     public void launchMainActivity() {
-        Intent i = new Intent(SplashScreen.this, MainActivity.class);
-        startActivity(i);
-        finish();
+        if (!activityLaunched) {
+            activityLaunched = true;
+            Intent i = new Intent(SplashScreen.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 }

@@ -14,4 +14,5 @@ public class AppConfig {
     public static String URL_EVENTS = HOST_NAME + "ps2017/events.php";
     public static String URL_QUIZ = HOST_NAME + "ps2017/quiz.json";
     public static String URL_QUIZ_SUBMIT = HOST_NAME + "ps2017/getAnswers.php";
+    public static String URL_ADMIN = HOST_NAME + "ps2017/counters.json";
 }
