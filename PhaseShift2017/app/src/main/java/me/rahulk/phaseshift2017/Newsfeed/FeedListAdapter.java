@@ -2,6 +2,7 @@ package me.rahulk.phaseshift2017.Newsfeed;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -21,9 +22,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
+import me.rahulk.phaseshift2017.Admin.Admin;
 import me.rahulk.phaseshift2017.AppController;
 import me.rahulk.phaseshift2017.Newsfeed.FeedImageView;
 import me.rahulk.phaseshift2017.Newsfeed.FeedItem;
+import me.rahulk.phaseshift2017.Quiz;
 import me.rahulk.phaseshift2017.R;
 
 /**
@@ -72,6 +75,7 @@ public class FeedListAdapter extends BaseAdapter {
         TextView timestamp = (TextView) convertView.findViewById(R.id.timestamp);
         TextView statusMsg = (TextView) convertView.findViewById(R.id.txtStatusMsg);
         TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
+        TextView customURL = (TextView) convertView.findViewById(R.id.txtUrlCustom);
         ImageView profilePic = (ImageView) convertView.findViewById(R.id.profilePic);
 
         FeedImageView feedImageView = (FeedImageView) convertView.findViewById(R.id.feedImage1);
@@ -104,6 +108,33 @@ public class FeedListAdapter extends BaseAdapter {
         } else {
             // url is null, remove from the view
             url.setVisibility(View.GONE);
+        }
+
+        // Checking for null feed Custom URL
+        if (item.getCustomURL() != null) {
+            customURL.setText(item.getCustomURL());
+            if (item.getCustomURL().equals("Click here to Launch Quiz")) {
+                customURL.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(activity, Quiz.class);
+                        activity.startActivity(intent);
+                    }
+                });
+            } else if (item.getCustomURL().equals("Click here to Launch Webinar")) {
+                customURL.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+//                        Intent intent = new Intent(activity, Webinar.class);
+//                        activity.startActivity(intent);
+                    }
+                });
+            }
+
+            customURL.setVisibility(View.VISIBLE);
+        } else {
+            // url is null, remove from the view
+            customURL.setVisibility(View.GONE);
         }
 
         // user profile pic

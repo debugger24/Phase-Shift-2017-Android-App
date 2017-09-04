@@ -85,6 +85,6 @@ public class FeedItem {
     }
 
     public void setCustomURL(String customURL) {
-        this.customURL = url;
+        this.customURL = customURL;
     }
 }
