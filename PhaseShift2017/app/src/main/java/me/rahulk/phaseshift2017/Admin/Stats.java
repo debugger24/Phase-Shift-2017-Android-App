@@ -74,14 +74,14 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.editSearch:
-                // Do Nothing Here
-                break;
             case R.id.menuSortTitle:
                 order = PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + " ASC ";
                 break;
             case R.id.menuSortDepartment:
                 order = PhaseShiftContract.EventEntry.COLUMNS_EVENT_DEPARTMENT + " ASC ";
+                break;
+            case R.id.menuSortRegistrations:
+                order = "(" + PhaseShiftContract.EventEntry.TABLE_NAME + "." + PhaseShiftContract.EventEntry.COLUMNS_EVENT_CUR_REG + " * 1.0)/(" + PhaseShiftContract.EventEntry.TABLE_NAME + "." + PhaseShiftContract.EventEntry.COLUMNS_EVENT_MAX_REG + " * 1.0) ASC";
                 break;
             case R.id.menuFilterAll:
                 department = "";
