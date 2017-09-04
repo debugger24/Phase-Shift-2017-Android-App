@@ -208,6 +208,9 @@ public class NewsfeedFragment extends Fragment {
                 String feedUrl = (feedObj.isNull("URL") || feedObj.getString("URL").equals("")) ? null : feedObj.getString("URL");
                 item.setUrl(feedUrl);
 
+                String customFeedUrl = (feedObj.isNull("CustomURL") || feedObj.getString("CustomURL").equals("")) ? null : feedObj.getString("CustomURL");
+                item.setCustomURL(customFeedUrl);
+
                 feedItems.add(item);
             }
 
