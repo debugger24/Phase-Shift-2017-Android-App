@@ -1,4 +1,4 @@
-package me.rahulk.phaseshift2017;
+package me.rahulk.phaseshift2017.Quiz;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,10 @@ import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import me.rahulk.phaseshift2017.AppConfig;
+import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.R;
 
 import static me.rahulk.phaseshift2017.AppConfig.URL_QUIZ;
 import static me.rahulk.phaseshift2017.AppConfig.URL_QUIZ_SUBMIT;
@@ -54,6 +59,9 @@ public class Quiz extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         this.setTitle("PhaseShift Quiz");
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         txtQuestions[0] = (TextView) findViewById(R.id.txtQuestion0);
         txtQuestions[1] = (TextView) findViewById(R.id.txtQuestion1);
@@ -318,6 +326,19 @@ public class Quiz extends AppCompatActivity {
 
         btnRefresh.callOnClick();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void submitAnswer() {

@@ -16,17 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
-import me.rahulk.phaseshift2017.Admin.Admin;
 import me.rahulk.phaseshift2017.AppController;
-import me.rahulk.phaseshift2017.Newsfeed.FeedImageView;
-import me.rahulk.phaseshift2017.Newsfeed.FeedItem;
-import me.rahulk.phaseshift2017.Quiz;
+import me.rahulk.phaseshift2017.Quiz.Quiz;
 import me.rahulk.phaseshift2017.R;
 
 /**
