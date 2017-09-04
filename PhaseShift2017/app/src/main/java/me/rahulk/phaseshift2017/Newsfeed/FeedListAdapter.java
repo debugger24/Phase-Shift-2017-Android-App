@@ -121,16 +121,7 @@ public class FeedListAdapter extends BaseAdapter {
                         activity.startActivity(intent);
                     }
                 });
-            } else if (item.getCustomURL().equals("Click here to Launch Webinar")) {
-                customURL.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                        Intent intent = new Intent(activity, Webinar.class);
-//                        activity.startActivity(intent);
-                    }
-                });
             }
-
             customURL.setVisibility(View.VISIBLE);
         } else {
             // url is null, remove from the view
