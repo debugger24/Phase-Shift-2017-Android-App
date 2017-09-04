@@ -143,6 +143,9 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
             case R.id.menuFilterQUIZ:
                 department = "Qcaine - Quiz club";
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
         getSupportLoaderManager().restartLoader(1, null, Stats.this);
         return super.onOptionsItemSelected(item);
@@ -155,8 +158,11 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         sharedPreferences = this.getSharedPreferences("PhaseShift2017", this.MODE_PRIVATE);
 
