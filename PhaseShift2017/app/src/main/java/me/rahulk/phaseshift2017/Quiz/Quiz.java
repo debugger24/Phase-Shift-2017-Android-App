@@ -3,6 +3,7 @@ package me.rahulk.phaseshift2017.Quiz;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class Quiz extends AppCompatActivity {
     Button btnSubmit, btnRefresh;
     View viewQuestions, viewNoQuiz, viewSuccess;
     Toolbar toolbar;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,27 @@ public class Quiz extends AppCompatActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                if (isNetworkAvailable()) {
+                    refresh();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    swipeContainer.setRefreshing(false);
+                }
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         txtQuestions[0] = (TextView) findViewById(R.id.txtQuestion0);
         txtQuestions[1] = (TextView) findViewById(R.id.txtQuestion1);
@@ -313,6 +336,7 @@ public class Quiz extends AppCompatActivity {
                     default:
                         answersArray[9] = "";
                 }
+                swipeContainer.setRefreshing(true);
                 submitAnswer();
             }
         });
@@ -320,6 +344,7 @@ public class Quiz extends AppCompatActivity {
         btnRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                swipeContainer.setRefreshing(true);
                 refresh();
             }
         });
@@ -348,22 +373,26 @@ public class Quiz extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                try {
-                    Log.v("SUB JSON RESPONSE", response);
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getString("status").equals("success")) {
-                        Toast.makeText(getApplicationContext(), "SUCCESSFULLY SUBMITTED. Result will be announced soon", Toast.LENGTH_LONG).show();
+                if (getApplicationContext() != null) {
+                    try {
+                        Log.v("SUB JSON RESPONSE", response);
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (jsonObject.getString("status").equals("success")) {
+                            Toast.makeText(getApplicationContext(), "SUCCESSFULLY SUBMITTED. Result will be announced soon", Toast.LENGTH_LONG).show();
 
-                        // Hide Questions
-                        resetViews();
-                        viewSuccess.setVisibility(View.VISIBLE);
+                            // Hide Questions
+                            resetViews();
+                            viewSuccess.setVisibility(View.VISIBLE);
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Something went wrong. Try Again", Toast.LENGTH_LONG).show();
+                    } finally {
+                        swipeContainer.setRefreshing(false);
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Something went wrong. Try Again", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -373,6 +402,7 @@ public class Quiz extends AppCompatActivity {
                 if (getApplicationContext() != null) {
                     Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
                 }
+                swipeContainer.setRefreshing(false);
             }
         }) {
             @Override
@@ -412,6 +442,7 @@ public class Quiz extends AppCompatActivity {
                     VolleyLog.d("QUIZ RESPONSE", "Response: " + response.toString());
                     if (response != null) {
                         checkStatus(response);
+                        swipeContainer.setRefreshing(false);
                     }
                 }
             }, new Response.ErrorListener() {
@@ -419,7 +450,7 @@ public class Quiz extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d("QUIZ ERROR", "Error: " + error.getMessage());
-                    // swipeContainer.setRefreshing(false);
+                    swipeContainer.setRefreshing(false);
                 }
             });
 
@@ -427,6 +458,7 @@ public class Quiz extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(jsonReq);
         } else {
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            swipeContainer.setRefreshing(false);
         }
 
     }
