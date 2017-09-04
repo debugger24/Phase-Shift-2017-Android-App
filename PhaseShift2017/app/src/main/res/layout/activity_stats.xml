@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
         app:titleTextColor="@color/white">
+
 
         <android.support.v7.widget.SearchView
             android:id="@+id/editSearch"
