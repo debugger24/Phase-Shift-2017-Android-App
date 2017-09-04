@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/sort"
+        android:orderInCategory="10"
+        android:title="Sort"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menuSortTitle"
+                android:title="Sort by Title" />
+            <item
+                android:id="@+id/menuSortDepartment"
+                android:title="Sort by Department" />
+            <item
+                android:id="@+id/menuSortRegistrations"
+                android:title="Sort by Registrations" />
+        </menu>
+    </item>
+    <item
+        android:icon="@drawable/filter"
+        android:orderInCategory="10"
+        android:title="Department"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menuFilterAll"
+                android:title="All" />
+            <item
+                android:id="@+id/menuFilterBT"
+                android:title="Bio-Technology" />
+            <item
+                android:id="@+id/menuFilterCV"
+                android:title="Civil Engineering" />
+            <item
+                android:id="@+id/menuFilterCH"
+                android:title="Chemical Engineering" />
+            <item
+                android:id="@+id/menuFilterCS"
+                android:title="Computer Science and Engineering" />
+            <item
+                android:id="@+id/menuFilterEE"
+                android:title="Electrical and Electronics Engineering" />
+            <item
+                android:id="@+id/menuFilterEC"
+                android:title="Electronics and Communication Engineering" />
+            <item
+                android:id="@+id/menuFilterEIE"
+                android:title="Electronics and Instrumentation Engineering" />
+            <item
+                android:id="@+id/menuFilterIEM"
+                android:title="Industrial Engineering and Management" />
+            <item
+                android:id="@+id/menuFilterIS"
+                android:title="Information Science and Engineering" />
+            <item
+                android:id="@+id/menuFilterMCA"
+                android:title="Master of Computer Application" />
+            <item
+                android:id="@+id/menuFilterME"
+                android:title="Mechanical Engineering" />
+            <item
+                android:id="@+id/menuFilterML"
+                android:title="Medical Electronics" />
+            <item
+                android:id="@+id/menuFilterTC"
+                android:title="Telecommunication Engineering" />
+            <item
+                android:id="@+id/menuFilterIEEE"
+                android:title="BMSCE IEEE" />
+            <item
+                android:id="@+id/menuFilterARC"
+                android:title="Architecture" />
+            <item
+                android:id="@+id/menuFilterMBA"
+                android:title="Master of Business Administration" />
+            <item
+                android:id="@+id/menuFilterPENT"
+                android:title="Pentagram" />
+            <item
+                android:id="@+id/menuFilterAU"
+                android:title="Alternate Universe" />
+            <item
+                android:id="@+id/menuFilterQUIZ"
+                android:title="Qcaine - Quiz club" />
+
+        </menu>
+    </item>
+</menu>
