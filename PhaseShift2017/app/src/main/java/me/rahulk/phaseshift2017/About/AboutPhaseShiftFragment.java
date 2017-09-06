@@ -224,6 +224,7 @@ public class AboutPhaseShiftFragment extends Fragment {
                 code.equals("DEPT_165169_Pentagram") ||
                 code.equals("DEPT_964018_Alternate Universe") ||
                 code.equals("DEPT_136047_Qcaine - Quiz club") ||
+                code.equals("DEPT_716363_EDC") ||
                 code.equals("DATA_370250_Database Team")) {
 
             editor.putString("AdminCode", code);

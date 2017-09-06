@@ -143,6 +143,9 @@ public class Stats extends AppCompatActivity implements LoaderManager.LoaderCall
             case R.id.menuFilterQUIZ:
                 department = "Qcaine - Quiz club";
                 break;
+            case R.id.menuFilterEDC:
+                department = "EDC";
+                break;
             case android.R.id.home:
                 onBackPressed();
                 break;

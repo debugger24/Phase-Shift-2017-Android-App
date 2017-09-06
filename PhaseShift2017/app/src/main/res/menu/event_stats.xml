@@ -85,6 +85,9 @@
             <item
                 android:id="@+id/menuFilterQUIZ"
                 android:title="Qcaine - Quiz club" />
+            <item
+                android:id="@+id/menuFilterEDC"
+                android:title="EDC" />
 
         </menu>
     </item>
