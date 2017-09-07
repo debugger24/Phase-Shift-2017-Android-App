@@ -46,6 +46,9 @@ public class PhaseShiftContract {
         public static final String COLUMNS_EVENT_TIME = "time";
         public static final String COLUMNS_EVENT_DESCRIPTION = "description";
         public static final String COLUMNS_EVENT_RULES = "rules";
+        public static final String COLUMNS_EVENT_PAYMENT_ID = "payment_id";
+        public static final String COLUMNS_EVENT_PAYMENT_TID = "payment_tid";
+        public static final String COLUMNS_EVENT_PAYMENT_URL = "payment_url";
 
         public static Uri buildEventDetailUri(long id) {
             Uri myURI = CONTENT_URI.buildUpon().appendPath(Long.toString(id)).build();

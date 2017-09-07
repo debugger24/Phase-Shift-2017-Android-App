@@ -76,6 +76,9 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
         final String OWM_Description = "Description";
         final String OWM_Rules = "Rules";
         final String OWM_Venue = "Venue";
+        final String OWM_Payment_ID = "payment_id";
+        final String OWM_Payment_TID = "payment_tid";
+        final String OWM_Payment_URL = "payment_url";
 
         try {
             JSONObject jsonObject = new JSONObject(jsonResponse);
@@ -110,6 +113,10 @@ public class FetchEventTask extends AsyncTask<Void, Void, Void> {
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION, event.getString(OWM_Description));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES, event.getString(OWM_Rules));
                 eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_VENUE, event.getString(OWM_Venue));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_ID, event.getString(OWM_Payment_ID));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_TID, event.getString(OWM_Payment_TID));
+                eventValues.put(PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_URL, event.getString(OWM_Payment_URL));
+
                 cVVector.add(eventValues);
             }
 

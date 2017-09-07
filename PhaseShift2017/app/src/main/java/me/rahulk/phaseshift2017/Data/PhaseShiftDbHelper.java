@@ -13,7 +13,7 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
 
     public static final String LOG_TAG = PhaseShiftDbHelper.class.getSimpleName();
     private static final String DATABASE_NAME = "phaseshift.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     public PhaseShiftDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -46,6 +46,9 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TIME + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES + " TEXT NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_ID + " TEXT, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_TID + " TEXT, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_URL + " TEXT, "
                 + "UNIQUE (" + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + ") ON CONFLICT REPLACE);";
 
         Log.v("CREAET TABLE QUERY ", SQL_CREATE_EVENT_TABLE);

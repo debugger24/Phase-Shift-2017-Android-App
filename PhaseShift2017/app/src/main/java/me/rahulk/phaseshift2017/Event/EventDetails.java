@@ -13,11 +13,13 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
 
     private TextView txtTitle, txtDepartment, txtPrize1, txtPrize2, txtPrize3, txtVenue, txtSchedule, txtCoordinator, txtFees, txtDesctiption, txtRules, txtParticipation, txtFlagship, txtAlertEventFull;
     private View viewPrize1, viewPrize2, viewPrize3, viewDescription, viewRules, viewForBMSCE, viewFullEvent, viewVenue, viewSchedule;
+    private Button btnPayment;
     private String shareMessage = "Shared using PhaseShift App";
     Toolbar toolbar;
 
@@ -57,7 +60,10 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES,
             PhaseShiftContract.EventEntry.COLUMNS_EVENT_PARTICIPATION,
-            PhaseShiftContract.EventEntry.COLUMNS_EVENT_FEES
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_FEES,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_ID,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_TID,
+            PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_URL
     };
 
     static final int COL_EVENT_ID = 0;
@@ -77,6 +83,9 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
     static final int COL_EVENT_RULES = 14;
     static final int COL_EVENT_PARTICIPATION = 15;
     static final int COL_EVENT_FEES = 16;
+    static final int COL_EVENT_PAYMENT_ID = 17;
+    static final int COL_EVENT_PAYMENT_TID = 18;
+    static final int COL_EVENT_PAYMENT_URL = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +129,8 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
 
         viewDescription = (View) findViewById(R.id.viewDescription);
         viewRules = (View) findViewById(R.id.viewRules);
+
+        btnPayment = (Button) findViewById(R.id.btnBuyTickets);
 
         txtFlagship = (TextView) findViewById(R.id.txtFlagship);
         txtAlertEventFull = (TextView) findViewById(R.id.txtAlertEventFull);
@@ -244,6 +255,36 @@ public class EventDetails extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(callIntent);
             }
         });
+
+        /* Buy Tickets */
+        if (data.getInt(COL_EVENT_FULL) == 0 &&
+                data.getString(COL_EVENT_PAYMENT_ID) != null &&
+                data.getString(COL_EVENT_PAYMENT_ID) != "null" &&
+                data.getString(COL_EVENT_PAYMENT_TID) != null &&
+                data.getString(COL_EVENT_PAYMENT_TID) != "null" &&
+                data.getString(COL_EVENT_PAYMENT_URL) != null &&
+                data.getString(COL_EVENT_PAYMENT_URL) != "null") {
+            btnPayment.setVisibility(View.VISIBLE);
+            Log.v("PAYMENT", data.getString(COL_EVENT_PAYMENT_ID));
+            Log.v("PAYMENT", data.getString(COL_EVENT_PAYMENT_TID));
+            Log.v("PAYMENT", data.getString(COL_EVENT_PAYMENT_URL));
+            btnPayment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse("http://bmscephaseshift.com/buytickets.php")
+                            .buildUpon()
+                            .appendQueryParameter("id", data.getString(COL_EVENT_PAYMENT_ID))
+                            .appendQueryParameter("tid", data.getString(COL_EVENT_PAYMENT_TID))
+                            .appendQueryParameter("url", data.getString(COL_EVENT_PAYMENT_URL))
+                            .build();
+                    Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
+                    paymentIntent.setData(uri);
+                    startActivity(paymentIntent);
+                }
+            });
+        } else {
+            btnPayment.setVisibility(View.GONE);
+        }
 
         /* Set Activity Title */
         this.setTitle(data.getString(COL_EVENT_TITLE));
