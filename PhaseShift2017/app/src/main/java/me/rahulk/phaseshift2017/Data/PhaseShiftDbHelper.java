@@ -46,6 +46,9 @@ public class PhaseShiftDbHelper extends SQLiteOpenHelper {
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TIME + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_DESCRIPTION + " TEXT NOT NULL, "
                 + PhaseShiftContract.EventEntry.COLUMNS_EVENT_RULES + " TEXT NOT NULL, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_ID + " TEXT, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_TID + " TEXT, "
+                + PhaseShiftContract.EventEntry.COLUMNS_EVENT_PAYMENT_URL + " TEXT, "
                 + "UNIQUE (" + PhaseShiftContract.EventEntry.COLUMNS_EVENT_TITLE + ") ON CONFLICT REPLACE);";
 
         Log.v("CREAET TABLE QUERY ", SQL_CREATE_EVENT_TABLE);
