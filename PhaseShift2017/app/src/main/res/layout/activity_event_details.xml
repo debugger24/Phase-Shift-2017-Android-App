@@ -326,7 +326,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_parent_round_corner_border"
-                    android:text="Buy Tickets (6 Left)"
+                    android:text="Buy Tickets"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             </LinearLayout>
