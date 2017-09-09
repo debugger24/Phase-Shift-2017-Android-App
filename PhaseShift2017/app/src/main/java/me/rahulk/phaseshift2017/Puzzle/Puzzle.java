@@ -9,9 +9,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ButtonBarLayout;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -53,6 +55,7 @@ public class Puzzle extends AppCompatActivity {
     private EditText editUsername, editEmail, editPhone;
     private GridLayout puzzleGrid;
     private ProgressBar progressBar;
+    public Toolbar toolbar;
 
     float scale;
     int pixels;
@@ -62,7 +65,13 @@ public class Puzzle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puzzle);
 
-        this.setTitle("Crossword");
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        this.setTitle("PhaseShift Puzzle");
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         scale = getApplicationContext().getResources().getDisplayMetrics().density;
         pixels = (int) (34 * scale + 0.5f);
@@ -120,6 +129,19 @@ public class Puzzle extends AppCompatActivity {
         });
 
         refresh();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void submitPuzzle(final String stringAnswer) {
