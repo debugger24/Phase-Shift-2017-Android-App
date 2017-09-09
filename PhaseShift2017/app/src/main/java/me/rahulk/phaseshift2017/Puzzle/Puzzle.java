@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ public class Puzzle extends AppCompatActivity {
     private EditText[][] editTexts;
     private EditText editUsername, editEmail, editPhone;
     private GridLayout puzzleGrid;
-    private SwipeRefreshLayout swipeContainer;
+    private ProgressBar progressBar;
 
     float scale;
     int pixels;
@@ -69,6 +70,8 @@ public class Puzzle extends AppCompatActivity {
         viewPuzzle = findViewById(R.id.viewPuzzle);
         viewNoPuzzle = findViewById(R.id.viewNoPuzzle);
         viewSuccess = findViewById(R.id.viewSuccess);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         txtNoPuzzle = (TextView) findViewById(R.id.txtNoPuzzle);
         txtWinners = (TextView) findViewById(R.id.txtWinners);
@@ -111,6 +114,7 @@ public class Puzzle extends AppCompatActivity {
                     }
                     rowStr += "\n";
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 submitPuzzle(rowStr);
             }
         });
@@ -143,8 +147,10 @@ public class Puzzle extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Something went wrong. Try Again", Toast.LENGTH_LONG).show();
                     } finally {
-//                        swipeContainer.setRefreshing(false);
+                        progressBar.setVisibility(View.GONE);
                     }
+                } else {
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         }, new Response.ErrorListener() {
@@ -154,7 +160,7 @@ public class Puzzle extends AppCompatActivity {
                 if (getApplicationContext() != null) {
                     Toast.makeText(getApplicationContext(), "FAILED TO SUBMIT. Try Again", Toast.LENGTH_LONG).show();
                 }
-                //swipeContainer.setRefreshing(false);
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             @Override
@@ -176,6 +182,7 @@ public class Puzzle extends AppCompatActivity {
     }
 
     private void refresh() {
+        progressBar.setVisibility(View.VISIBLE);
         if (isNetworkAvailable()) {
             JsonObjectRequest jsonReq = new JsonObjectRequest(Request.Method.GET, URL_PUZZLE, null, new Response.Listener<JSONObject>() {
 
@@ -184,7 +191,7 @@ public class Puzzle extends AppCompatActivity {
                     VolleyLog.d("QUIZ RESPONSE", "Response: " + response.toString());
                     if (response != null) {
                         checkStatus(response);
-                        //swipeContainer.setRefreshing(false);
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             }, new Response.ErrorListener() {
@@ -192,7 +199,7 @@ public class Puzzle extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d("QUIZ ERROR", "Error: " + error.getMessage());
-                    //swipeContainer.setRefreshing(false);
+                    progressBar.setVisibility(View.GONE);
                 }
             });
 
@@ -200,7 +207,7 @@ public class Puzzle extends AppCompatActivity {
             AppController.getInstance().addToRequestQueue(jsonReq);
         } else {
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            //swipeContainer.setRefreshing(false);
+            progressBar.setVisibility(View.GONE);
         }
     }
 

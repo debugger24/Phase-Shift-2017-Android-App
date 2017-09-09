@@ -15,11 +15,66 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:titleTextColor="@color/white" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/viewNoPuzzle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNoPuzzle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="No puzzle open."
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <Button
+            android:id="@+id/btnReload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@color/colorPrimary"
+            android:text="Refresh"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtWinnersTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WINNERS"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtWinners"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_horizontal"
+            android:text="" />
+
+    </LinearLayout>
+
+    <!--Puzzle Submitted View-->
     <RelativeLayout
         android:id="@+id/viewPuzzle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btnSubmitPuzzle"
@@ -62,16 +117,15 @@
 
                         <TextView
                             android:id="@+id/txtHint1"
-                            android:layout_width="0dp"
+                            android:layout_width="300dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:textAlignment="center" />
 
                         <TextView
                             android:id="@+id/txtHint2"
-                            android:layout_width="0dp"
+                            android:layout_width="300dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_marginLeft="34dp"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -120,55 +174,6 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/viewNoPuzzle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/txtNoPuzzle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="No puzzle open."
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-        <Button
-            android:id="@+id/btnReload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@color/colorPrimary"
-            android:text="Refresh"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtWinnersTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="WINNERS"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtWinners"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:gravity="center_horizontal"
-            android:text="29th Sep 2017\nRahul Kumar\n\n30th Sep 2017\nRahul Kumar" />
-
-    </LinearLayout>
-
-    <!--Puzzle Submitted View-->
     <LinearLayout
         android:id="@+id/viewSuccess"
         android:layout_width="match_parent"
