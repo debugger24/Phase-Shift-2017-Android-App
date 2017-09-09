@@ -48,9 +48,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Quiz.Quiz"></activity>
-        <activity android:name=".Admin.Stats"></activity>
-        <activity android:name=".Admin.Admin"></activity>
+        <activity android:name=".Quiz.Quiz" />
+        <activity android:name=".Admin.Stats" />
+        <activity android:name=".Admin.Admin" />
+        <activity android:name=".Puzzle.Puzzle"></activity>
     </application>
 
 </manifest>
