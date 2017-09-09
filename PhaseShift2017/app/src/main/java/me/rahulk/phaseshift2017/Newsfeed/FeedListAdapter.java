@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import me.rahulk.phaseshift2017.AppController;
+import me.rahulk.phaseshift2017.Puzzle.Puzzle;
 import me.rahulk.phaseshift2017.Quiz.Quiz;
 import me.rahulk.phaseshift2017.R;
 
@@ -113,6 +114,14 @@ public class FeedListAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(activity, Quiz.class);
+                        activity.startActivity(intent);
+                    }
+                });
+            } else if (item.getCustomURL().equals("Click here to Launch Puzzle")) {
+                customURL.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(activity, Puzzle.class);
                         activity.startActivity(intent);
                     }
                 });
