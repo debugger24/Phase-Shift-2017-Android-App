@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context="me.rahulk.phaseshift2017.Sponsors.SponsorsActivity">
 
+    <ListView
+        android:id="@+id/sponsorsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null">
+
+    </ListView>
+
 </LinearLayout>
