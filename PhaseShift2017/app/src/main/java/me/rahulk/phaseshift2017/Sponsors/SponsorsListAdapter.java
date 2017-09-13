@@ -52,14 +52,12 @@ public class SponsorsListAdapter extends BaseAdapter {
         if (inflater == null)
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null) {
-            if (sponsorRows.get(position).getType().equals("col_2")) {
-                convertView = inflater.inflate(R.layout.item_sponsor_2, null);
-            } else if (sponsorRows.get(position).getType().equals("col_3")) {
-                convertView = inflater.inflate(R.layout.item_sponsor_3, null);
-            } else {
-                convertView = inflater.inflate(R.layout.item_sponsor_1, null);
-            }
+        if (sponsorRows.get(position).getType().equals("col_2")) {
+            convertView = inflater.inflate(R.layout.item_sponsor_2, null);
+        } else if (sponsorRows.get(position).getType().equals("col_3")) {
+            convertView = inflater.inflate(R.layout.item_sponsor_3, null);
+        } else {
+            convertView = inflater.inflate(R.layout.item_sponsor_1, null);
         }
 
         if (sponsorRows.get(position).getType().equals("col_2")) {
