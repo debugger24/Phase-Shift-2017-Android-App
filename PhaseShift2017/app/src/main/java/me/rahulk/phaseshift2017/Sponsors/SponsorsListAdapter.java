@@ -66,102 +66,133 @@ public class SponsorsListAdapter extends BaseAdapter {
 
         if (sponsorRows.get(position).getType().equals("col_2")) {
             View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
-            TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
-            ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
-
             View sponsorView2 = convertView.findViewById(R.id.sponsorView2);
-            TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
-            ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
+            if (sponsorRows.get(position).getSponsorRow().size() >= 1) {
+                sponsorView1.setVisibility(View.VISIBLE);
+                TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
+                ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
 
-            title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
-            title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
-            Glide.with(activity)
-                    .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
-                    .thumbnail(0.5f)
-                    .into(logo1);
-            Glide.with(activity)
-                    .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
-                    .thumbnail(0.5f)
-                    .into(logo2);
-            sponsorView1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                        activity.startActivity(intent);
+                title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
+
+                Glide.with(activity)
+                        .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
+                        .thumbnail(0.5f)
+                        .into(logo1);
+                sponsorView1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                        }
                     }
-                }
-            });
-            sponsorView2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                        activity.startActivity(intent);
+                });
+            }
+            if (sponsorRows.get(position).getSponsorRow().size() == 2) {
+                sponsorView2.setVisibility(View.VISIBLE);
+                TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
+                ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
+
+                title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
+
+                Glide.with(activity)
+                        .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
+                        .thumbnail(0.5f)
+                        .into(logo2);
+
+                sponsorView2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                sponsorView2.setVisibility(View.INVISIBLE);
+            }
 
         } else if (sponsorRows.get(position).getType().equals("col_3")) {
             View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
-            TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
-            ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
-
             View sponsorView2 = convertView.findViewById(R.id.sponsorView2);
-            TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
-            ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
-
             View sponsorView3 = convertView.findViewById(R.id.sponsorView3);
-            TextView title3 = (TextView) convertView.findViewById(R.id.sponsorTitle3);
-            ImageView logo3 = (ImageView) convertView.findViewById(R.id.sponsorImage3);
 
-            title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
-            title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
-            title3.setText(sponsorRows.get(position).getSponsorRow().get(2).getTitle());
-            Glide.with(activity)
-                    .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
-                    .thumbnail(0.5f)
-                    .into(logo1);
-            Glide.with(activity)
-                    .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
-                    .thumbnail(0.5f)
-                    .into(logo2);
-            Glide.with(activity)
-                    .load(sponsorRows.get(position).getSponsorRow().get(2).getLogo())
-                    .thumbnail(0.5f)
-                    .into(logo2);
-            sponsorView1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                        activity.startActivity(intent);
+            if (sponsorRows.get(position).getSponsorRow().size() >= 1) {
+                sponsorView1.setVisibility(View.VISIBLE);
+                TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
+                ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
+
+                title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
+
+                Glide.with(activity)
+                        .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
+                        .thumbnail(0.5f)
+                        .into(logo1);
+                sponsorView1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                        }
                     }
-                }
-            });
-            sponsorView2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                        activity.startActivity(intent);
+                });
+            }
+            if (sponsorRows.get(position).getSponsorRow().size() >= 2) {
+                sponsorView2.setVisibility(View.VISIBLE);
+                TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
+                ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
+
+                title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
+
+                Glide.with(activity)
+                        .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
+                        .thumbnail(0.5f)
+                        .into(logo2);
+
+                sponsorView2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                        }
                     }
-                }
-            });
-            sponsorView3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(2).getUrl());
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-                        activity.startActivity(intent);
+                });
+            } else {
+                sponsorView2.setVisibility(View.INVISIBLE);
+                sponsorView3.setVisibility(View.INVISIBLE);
+            }
+            if (sponsorRows.get(position).getSponsorRow().size() == 3) {
+                sponsorView3.setVisibility(View.VISIBLE);
+                TextView title3 = (TextView) convertView.findViewById(R.id.sponsorTitle3);
+                ImageView logo3 = (ImageView) convertView.findViewById(R.id.sponsorImage3);
+
+                title3.setText(sponsorRows.get(position).getSponsorRow().get(2).getTitle());
+
+                Glide.with(activity)
+                        .load(sponsorRows.get(position).getSponsorRow().get(2).getLogo())
+                        .thumbnail(0.5f)
+                        .into(logo3);
+
+                sponsorView3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(2).getUrl());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                            activity.startActivity(intent);
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                sponsorView3.setVisibility(View.INVISIBLE);
+            }
 
         } else {
             View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
