@@ -5,7 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,11 +39,20 @@ public class SponsorsActivity extends AppCompatActivity {
     private ListView listView;
     private List<SponsorRow> sponsorRows;
     private SponsorsListAdapter sponsorsListAdapter;
+    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponsors);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        this.setTitle("Phase Shift 2017 Sponsors");
+
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = (ListView) findViewById(R.id.sponsorsList);
         sponsorRows = new ArrayList<SponsorRow>();
@@ -50,6 +61,19 @@ public class SponsorsActivity extends AppCompatActivity {
         listView.setAdapter(sponsorsListAdapter);
 
         refreshData();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void updateSponsors() {
