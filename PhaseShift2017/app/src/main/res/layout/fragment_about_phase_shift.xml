@@ -36,17 +36,6 @@
                 <include layout="@layout/item_social" />
 
                 <Button
-                    android:id="@+id/btnLaunchQuiz"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@color/colorPrimary"
-                    android:text="Participate in PS Quiz"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-                <Button
                     android:id="@+id/btnLaunchAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

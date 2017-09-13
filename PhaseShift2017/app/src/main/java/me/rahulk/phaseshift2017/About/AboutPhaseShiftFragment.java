@@ -136,16 +136,6 @@ public class AboutPhaseShiftFragment extends Fragment {
             }
         });
 
-        Button btnQuiz = (Button) rootView.findViewById(R.id.btnLaunchQuiz);
-        btnQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Launch Quiz Activity
-                Intent intent = new Intent(getActivity(), Quiz.class);
-                startActivity(intent);
-            }
-        });
-
         Button btnAdmin = (Button) rootView.findViewById(R.id.btnLaunchAdmin);
 
         // Verify Admin Activated or Not
