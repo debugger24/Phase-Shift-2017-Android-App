@@ -19,6 +19,7 @@ import android.widget.Toast;
 import me.rahulk.phaseshift2017.Admin.Admin;
 import me.rahulk.phaseshift2017.Quiz.Quiz;
 import me.rahulk.phaseshift2017.R;
+import me.rahulk.phaseshift2017.Sponsors.SponsorsActivity;
 
 
 /**
@@ -133,6 +134,15 @@ public class AboutPhaseShiftFragment extends Fragment {
                 if (intent.resolveActivity(getContext().getPackageManager()) != null) {
                     getContext().startActivity(intent);
                 }
+            }
+        });
+
+        Button btnSponsors = (Button) rootView.findViewById(R.id.btnSponsors);
+        btnSponsors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SponsorsActivity.class);
+                startActivity(intent);
             }
         });
 

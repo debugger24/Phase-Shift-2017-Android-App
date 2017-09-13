@@ -36,6 +36,17 @@
                 <include layout="@layout/item_social" />
 
                 <Button
+                    android:id="@+id/btnSponsors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/bg_parent_round_corner_border"
+                    android:text="PhaseShift 2017 Sponsors"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <Button
                     android:id="@+id/btnLaunchAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
