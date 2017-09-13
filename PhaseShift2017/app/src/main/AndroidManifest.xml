@@ -51,7 +51,8 @@
         <activity android:name=".Quiz.Quiz" />
         <activity android:name=".Admin.Stats" />
         <activity android:name=".Admin.Admin" />
-        <activity android:name=".Puzzle.Puzzle"></activity>
+        <activity android:name=".Puzzle.Puzzle" />
+        <activity android:name=".Sponsors.SponsorsActivity"></activity>
     </application>
 
 </manifest>
