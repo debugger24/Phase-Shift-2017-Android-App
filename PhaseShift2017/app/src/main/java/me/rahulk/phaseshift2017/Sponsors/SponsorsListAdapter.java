@@ -2,6 +2,8 @@ package me.rahulk.phaseshift2017.Sponsors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,8 @@ public class SponsorsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
+
         if (inflater == null)
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -61,9 +65,11 @@ public class SponsorsListAdapter extends BaseAdapter {
         }
 
         if (sponsorRows.get(position).getType().equals("col_2")) {
+            View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
             TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
             ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
 
+            View sponsorView2 = convertView.findViewById(R.id.sponsorView2);
             TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
             ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
 
@@ -77,14 +83,37 @@ public class SponsorsListAdapter extends BaseAdapter {
                     .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
                     .thumbnail(0.5f)
                     .into(logo2);
+            sponsorView1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
+            sponsorView2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
 
         } else if (sponsorRows.get(position).getType().equals("col_3")) {
+            View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
             TextView title1 = (TextView) convertView.findViewById(R.id.sponsorTitle1);
             ImageView logo1 = (ImageView) convertView.findViewById(R.id.sponsorImage1);
 
+            View sponsorView2 = convertView.findViewById(R.id.sponsorView2);
             TextView title2 = (TextView) convertView.findViewById(R.id.sponsorTitle2);
             ImageView logo2 = (ImageView) convertView.findViewById(R.id.sponsorImage2);
 
+            View sponsorView3 = convertView.findViewById(R.id.sponsorView3);
             TextView title3 = (TextView) convertView.findViewById(R.id.sponsorTitle3);
             ImageView logo3 = (ImageView) convertView.findViewById(R.id.sponsorImage3);
 
@@ -103,8 +132,39 @@ public class SponsorsListAdapter extends BaseAdapter {
                     .load(sponsorRows.get(position).getSponsorRow().get(2).getLogo())
                     .thumbnail(0.5f)
                     .into(logo2);
+            sponsorView1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
+            sponsorView2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(1).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
+            sponsorView3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(2).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
 
         } else {
+            View sponsorView1 = convertView.findViewById(R.id.sponsorView1);
             TextView title = (TextView) convertView.findViewById(R.id.sponsorTitle1);
             ImageView logo = (ImageView) convertView.findViewById(R.id.sponsorImage1);
 
@@ -114,6 +174,16 @@ public class SponsorsListAdapter extends BaseAdapter {
                     .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
                     .thumbnail(0.5f)
                     .into(logo);
+            sponsorView1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri webpage = Uri.parse(sponsorRows.get(pos).getSponsorRow().get(0).getUrl());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(activity.getPackageManager()) != null) {
+                        activity.startActivity(intent);
+                    }
+                }
+            });
         }
 
         return convertView;
