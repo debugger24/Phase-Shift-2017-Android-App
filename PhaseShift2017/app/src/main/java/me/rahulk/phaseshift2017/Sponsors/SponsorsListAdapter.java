@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import me.rahulk.phaseshift2017.Newsfeed.FeedItem;
 import me.rahulk.phaseshift2017.R;
 
 /**
@@ -74,10 +73,12 @@ public class SponsorsListAdapter extends BaseAdapter {
 
                 title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
 
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
+                        .placeholder(R.drawable.loading)
                         .thumbnail(0.5f)
                         .into(logo1);
+
                 sponsorView1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -96,8 +97,9 @@ public class SponsorsListAdapter extends BaseAdapter {
 
                 title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
 
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
+                        .placeholder(R.drawable.loading)
                         .thumbnail(0.5f)
                         .into(logo2);
 
@@ -127,8 +129,9 @@ public class SponsorsListAdapter extends BaseAdapter {
 
                 title1.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
 
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
+                        .placeholder(R.drawable.loading)
                         .thumbnail(0.5f)
                         .into(logo1);
                 sponsorView1.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +152,9 @@ public class SponsorsListAdapter extends BaseAdapter {
 
                 title2.setText(sponsorRows.get(position).getSponsorRow().get(1).getTitle());
 
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(sponsorRows.get(position).getSponsorRow().get(1).getLogo())
+                        .placeholder(R.drawable.loading)
                         .thumbnail(0.5f)
                         .into(logo2);
 
@@ -175,8 +179,9 @@ public class SponsorsListAdapter extends BaseAdapter {
 
                 title3.setText(sponsorRows.get(position).getSponsorRow().get(2).getTitle());
 
-                Glide.with(activity)
+                GlideApp.with(activity)
                         .load(sponsorRows.get(position).getSponsorRow().get(2).getLogo())
+                        .placeholder(R.drawable.loading)
                         .thumbnail(0.5f)
                         .into(logo3);
 
@@ -201,10 +206,12 @@ public class SponsorsListAdapter extends BaseAdapter {
 
             title.setText(sponsorRows.get(position).getSponsorRow().get(0).getTitle());
 
-            Glide.with(activity)
+            GlideApp.with(activity)
                     .load(sponsorRows.get(position).getSponsorRow().get(0).getLogo())
+                    .placeholder(R.drawable.loading)
                     .thumbnail(0.5f)
                     .into(logo);
+
             sponsorView1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
