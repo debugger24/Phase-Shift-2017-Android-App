@@ -185,9 +185,9 @@ public class MapFragment extends Fragment {
 
                         /* SPECIAL AREAS */
                         mMap.addMarker(new MarkerOptions().position(new LatLng(12.942289, 77.566662)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_library))).title("Library Auditorium")).showInfoWindow();
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(12.941089, 77.566137)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Department & Company Stalls")).showInfoWindow();
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(12.940745, 77.565958)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_location))).title("Department & Company Stalls")).showInfoWindow();
                         mMap.addMarker(new MarkerOptions().position(new LatLng(12.940917, 77.565415)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.marker_danger))).title("Danger : Construction Area")).showInfoWindow();
-                        mMap.addMarker(new MarkerOptions().position(new LatLng(12.940694, 77.565899)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.ps_logo_outline_map))).title("Indoor Stadium")).showInfoWindow();
+                        mMap.addMarker(new MarkerOptions().position(new LatLng(12.940586, 77.565875)).icon(getMarkerIconFromDrawable(getResources().getDrawable(R.drawable.ps_logo_outline_map))).title("Indoor Stadium")).showInfoWindow();
 
                         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
