@@ -15,12 +15,21 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:titleTextColor="@color/white" />
 
-    <ListView
-        android:id="@+id/sponsorsList"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null">
+        android:paddingBottom="8dp">
 
-    </ListView>
+        <ListView
+            android:id="@+id/sponsorsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null">
+
+        </ListView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 </LinearLayout>

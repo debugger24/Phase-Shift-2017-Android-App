@@ -3,6 +3,7 @@ package me.rahulk.phaseshift2017.Sponsors;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,7 @@ public class SponsorsActivity extends AppCompatActivity {
     private List<SponsorRow> sponsorRows;
     private SponsorsListAdapter sponsorsListAdapter;
     public Toolbar toolbar;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +57,33 @@ public class SponsorsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listView = (ListView) findViewById(R.id.sponsorsList);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                if (isNetworkAvailable()) {
+                    refreshData();
+                } else {
+                    Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    swipeContainer.setRefreshing(false);
+                }
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         sponsorRows = new ArrayList<SponsorRow>();
 
         sponsorsListAdapter = new SponsorsListAdapter(SponsorsActivity.this, sponsorRows);
         listView.setAdapter(sponsorsListAdapter);
 
-        refreshData();
+        updateSponsors();
     }
 
     @Override
@@ -77,6 +100,7 @@ public class SponsorsActivity extends AppCompatActivity {
     }
 
     private void updateSponsors() {
+        swipeContainer.setRefreshing(true);
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Cache.Entry entry = cache.get(URL_SPONSORS);
 
@@ -92,13 +116,14 @@ public class SponsorsActivity extends AppCompatActivity {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
+        }
+
+        // Make a fresh request
+        if (isNetworkAvailable()) {
+            refreshData();
         } else {
-            // making fresh volley request and getting json
-            if (isNetworkAvailable()) {
-                refreshData();
-            } else {
-                Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+            swipeContainer.setRefreshing(false);
         }
 
 
@@ -119,7 +144,8 @@ public class SponsorsActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d("SPONSOR_TAG", "Error: " + error.getMessage());
-//                swipeContainer.setRefreshing(false);
+                Toast.makeText(getApplicationContext(), "Failed to download sponsors. Please check your internet connection and try again", Toast.LENGTH_SHORT).show();
+                swipeContainer.setRefreshing(false);
             }
         });
 
@@ -161,7 +187,7 @@ public class SponsorsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
-//            swipeContainer.setRefreshing(false);
+            swipeContainer.setRefreshing(false);
         }
     }
 }
