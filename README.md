@@ -2,6 +2,11 @@
 
 ### Developed by Rahul Kumar, CS Department, BMS College of Engineering
 
+* 2k+ downloads*
+* 4.9 Rating*
+
+\* On 16th Sep 2017, 7:00 PM
+
 ## PhaseShift
 <img src="Screenshots/Phase_Shift.jpg" width="40%">
 
