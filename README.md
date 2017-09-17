@@ -6,6 +6,7 @@
 * Quizzes and Crossword (Raspberry Pi Prizes sponsored by Silverline Electronics)
 * 2k+ downloads*
 * 4.9 Rating*
+* Google Play Store Link - https://play.google.com/store/apps/details?id=me.rahulk.phaseshift2017
 
 \* On 16th Sep 2017, 7:00 PM
 
