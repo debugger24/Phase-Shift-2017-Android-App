@@ -2,6 +2,8 @@
 
 ### Developed by Rahul Kumar, CS Department, BMS College of Engineering
 
+* Online Payment Integration (powered by Explara)
+* Quizzes and Crossword (Raspberry Pi Prizes sponsored by Silverline Electronics)
 * 2k+ downloads*
 * 4.9 Rating*
 
@@ -15,6 +17,9 @@
 
 ## Events
 <img src="Screenshots/Event_Categories.jpg" width="40%"> <img src="Screenshots/Event_Flagship.jpg" width="40%"> <img src="Screenshots/Event_Workshop.jpg" width="40%"> <img src="Screenshots/Hints_Overlay.jpg" width="40%"> <img src="Screenshots/Event_Details.jpg" width="40%"> 
+
+## Online Payment Integration
+<img src="Screenshots/Payment_Event.jpg" width="40%"> <img src="Screenshots/Payment_BuyTicket.jpg" width="40%">
 
 ## Schedule
 <img src="Screenshots/Schedule.jpg" width="40%">
